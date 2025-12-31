@@ -1,4 +1,4 @@
-// src/app/api/auth/verify-email/route.ts - COMPLETE VERSION WITH DEBUG
+// src/app/api/auth/verify-email/route.ts - FIXED VERSION
 
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma.server";
@@ -50,7 +50,8 @@ export async function GET(req: Request) {
           },
         });
       } catch (error) {
-        console.log("Decode failed:", error.message);
+        const err = error as Error;
+        console.log("Decode failed:", err.message);
       }
     }
 
@@ -88,7 +89,8 @@ export async function GET(req: Request) {
           },
         });
       } catch (error) {
-        console.log("Combined strategies failed:", error.message);
+        const err = error as Error;
+        console.log("Combined strategies failed:", err.message);
       }
     }
 
