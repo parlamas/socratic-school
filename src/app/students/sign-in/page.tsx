@@ -2,11 +2,12 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
-export default function StudentSignInPage() {
+// Create a separate component for the sign-in form that uses useSearchParams
+function StudentSignInForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const verified = searchParams.get("verified");
@@ -170,5 +171,25 @@ export default function StudentSignInPage() {
         </form>
       </div>
     </main>
+  );
+}
+
+// Main page component with Suspense wrapper
+export default function StudentSignInPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-gray-50 flex justify-center pt-16 pb-16">
+        <div className="w-full max-w-md border border-gray-300 rounded-lg p-8 shadow-md bg-white mt-8">
+          <h1 className="text-2xl font-semibold mb-6 text-gray-900 text-center">
+            Student Sign In
+          </h1>
+          <div className="flex justify-center items-center h-40">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          </div>
+        </div>
+      </main>
+    }>
+      <StudentSignInForm />
+    </Suspense>
   );
 }
