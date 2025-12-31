@@ -17,7 +17,7 @@ export default function StudentSignUpPage() {
     nationality: "",
     age: "",
     password: "",
-    confirmPassword: ""
+    passwordConfirm: "" // Changed from confirmPassword to passwordConfirm
   });
 
   const [error, setError] = useState<string | null>(null);
@@ -41,8 +41,8 @@ export default function StudentSignUpPage() {
     e.preventDefault();
     setError(null);
     
-    // Basic validation
-    if (formData.password !== formData.confirmPassword) {
+    // Basic validation - updated to use passwordConfirm
+    if (formData.password !== formData.passwordConfirm) {
       setError("Passwords do not match");
       return;
     }
@@ -72,7 +72,8 @@ export default function StudentSignUpPage() {
         email: formData.email.trim(),
         nationality: formData.nationality.trim(),
         age: ageNum,
-        password: formData.password
+        password: formData.password,
+        passwordConfirm: formData.passwordConfirm // Changed to match API
       }),
     });
 
@@ -218,8 +219,8 @@ export default function StudentSignUpPage() {
               </label>
               <input
                 type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
+                name="passwordConfirm" // Changed to match API
+                value={formData.passwordConfirm} // Changed to match state
                 required
                 onChange={handleChange}
                 className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
