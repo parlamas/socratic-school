@@ -10,23 +10,6 @@ import { prisma } from "@/lib/prisma.server";
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
 
-  session: { strategy: "jwt" },
-
-  cookies: {
-    sessionToken: {
-      name:
-        process.env.NODE_ENV === "production"
-          ? "__Secure-next-auth.session-token"
-          : "next-auth.session-token",
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        secure: process.env.NODE_ENV === "production",
-      },
-    },
-  },
-
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -67,16 +50,9 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    jwt({ token, user }) {
-      if (user) {
-        (token as any).role = (user as any).role;
-      }
-      return token;
-    },
-
-    session({ session, token }) {
-      if (session.user) {
-        (session.user as any).role = (token as any).role;
+    session({ session, user }) {
+      if (session.user && user) {
+        (session.user as any).role = (user as any).role;
       }
       return session;
     },
