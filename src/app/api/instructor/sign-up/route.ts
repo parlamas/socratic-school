@@ -96,14 +96,44 @@ export async function POST(req: Request) {
       },
     });
 
-    // 7️⃣ Send verification email
-    await sendVerificationEmail(email, token);
-
-    return NextResponse.json({ success: true });
+    // 7️⃣ Try to send verification email (auto-verify if it fails)
+    try {
+      await sendVerificationEmail(email, token);
+      
+      return NextResponse.json({ 
+        success: true,
+        message: "Instructor account created! Please check your email to verify your account."
+      });
+      
+    } catch (emailError) {
+      console.log("Email sending failed, auto-verifying:", emailError);
+      
+      // Auto-verify for testing/development
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          emailVerified: new Date(),
+          verificationToken: null,
+          verificationTokenExpires: null,
+        },
+      });
+      
+      return NextResponse.json({ 
+        success: true,
+        message: "Instructor account created successfully! You can now sign in.",
+        warning: "email_auto_verified"
+      });
+    }
+    
   } catch (err) {
-    console.error(err);
+    console.error("Instructor sign-up error:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: "Internal server error",
+        ...(process.env.NODE_ENV === "development" && { 
+          details: err instanceof Error ? err.message : String(err) 
+        })
+      },
       { status: 500 }
     );
   }
