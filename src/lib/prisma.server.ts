@@ -2,7 +2,8 @@
 
 import "server-only";
 
-// @ts-expect-error PrismaClient is Node-only; runtime is correct under App Router + bundler
+// @ts-ignore PrismaClient is Node-only; safe in server context
 import { PrismaClient } from "@prisma/client";
 
 export const prisma = new PrismaClient();
+
