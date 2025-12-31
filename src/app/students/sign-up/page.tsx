@@ -88,8 +88,8 @@ export default function StudentSignUpPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white flex justify-center pt-16 pb-16">
-      <div className="w-full max-w-2xl border border-gray-200 rounded-lg p-8 shadow-sm">
+    <main className="min-h-screen bg-gray-50 flex justify-center pt-16 pb-16">
+      <div className="w-full max-w-2xl border border-gray-300 rounded-lg p-8 shadow-md bg-white">
         <h1 className="text-2xl font-semibold mb-6 text-gray-900 text-center">
           Student Registration
         </h1>
@@ -98,7 +98,7 @@ export default function StudentSignUpPage() {
           {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 First Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -107,13 +107,13 @@ export default function StudentSignUpPage() {
                 value={formData.firstName}
                 required
                 onChange={handleChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Enter your first name"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 Last Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -122,7 +122,7 @@ export default function StudentSignUpPage() {
                 value={formData.lastName}
                 required
                 onChange={handleChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Enter your last name"
               />
             </div>
@@ -130,7 +130,7 @@ export default function StudentSignUpPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 Username <span className="text-red-500">*</span>
               </label>
               <input
@@ -139,14 +139,14 @@ export default function StudentSignUpPage() {
                 value={formData.username}
                 required
                 onChange={handleChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Choose a username"
               />
-              <p className="text-xs text-gray-500 mt-1">This will be your public display name</p>
+              <p className="text-xs text-gray-600 mt-1">This will be your public display name</p>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 Email <span className="text-red-500">*</span>
               </label>
               <input
@@ -155,16 +155,16 @@ export default function StudentSignUpPage() {
                 value={formData.email}
                 required
                 onChange={handleChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Enter your email address"
               />
-              <p className="text-xs text-gray-500 mt-1">Enter a valid email address</p>
+              <p className="text-xs text-gray-600 mt-1">Enter a valid email address</p>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 Nationality <span className="text-red-500">*</span>
               </label>
               <input
@@ -173,13 +173,13 @@ export default function StudentSignUpPage() {
                 value={formData.nationality}
                 required
                 onChange={handleChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Enter your nationality"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 Age <span className="text-red-500">*</span>
               </label>
               <input
@@ -190,7 +190,7 @@ export default function StudentSignUpPage() {
                 onChange={handleChange}
                 min="1"
                 max="120"
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Enter your age"
               />
             </div>
@@ -198,7 +198,7 @@ export default function StudentSignUpPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 Password <span className="text-red-500">*</span>
               </label>
               <input
@@ -207,13 +207,13 @@ export default function StudentSignUpPage() {
                 value={formData.password}
                 required
                 onChange={handleChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Create a password"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-gray-800 mb-1">
                 Confirm Password <span className="text-red-500">*</span>
               </label>
               <input
@@ -222,33 +222,33 @@ export default function StudentSignUpPage() {
                 value={formData.confirmPassword}
                 required
                 onChange={handleChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-black"
+                className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
                 placeholder="Confirm your password"
               />
             </div>
           </div>
 
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-sm text-red-600">{error}</p>
+            <div className="p-3 bg-red-50 border border-red-300 rounded-md">
+              <p className="text-sm text-red-700 font-medium">{error}</p>
             </div>
           )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-900 disabled:opacity-50 transition-colors font-medium"
+            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 disabled:opacity-50 transition-colors font-medium"
           >
             {loading ? "Creating account…" : "Create Student Account"}
           </button>
 
           {/* Already have an account link */}
           <div className="text-center pt-4">
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-700 text-sm">
               Already have an account?{" "}
               <Link 
                 href="/students/sign-in" 
-                className="text-black font-medium hover:underline"
+                className="text-blue-600 font-medium hover:underline"
               >
                 Sign in here
               </Link>
@@ -257,11 +257,11 @@ export default function StudentSignUpPage() {
 
           {/* Optional: Instructor sign up link */}
           <div className="text-center">
-            <p className="text-gray-600 text-sm">
+            <p className="text-gray-700 text-sm">
               Are you an instructor?{" "}
               <Link 
                 href="/instructor/sign-up" 
-                className="text-black font-medium hover:underline"
+                className="text-blue-600 font-medium hover:underline"
               >
                 Sign up as an instructor
               </Link>
