@@ -4,6 +4,7 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 
 // Create a separate component for the sign-in form that uses useSearchParams
@@ -12,7 +13,7 @@ function StudentSignInForm() {
   const searchParams = useSearchParams();
   const verified = searchParams.get("verified");
   
-  const [email, setEmail] = useState("");
+  const [identifier, setIdentifier] = useState(""); // Changed from "email" to "identifier"
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -22,9 +23,10 @@ function StudentSignInForm() {
     if (verified === "true") {
       setSuccess("🎉 Email verified successfully! You can now sign in.");
       // Clear the URL parameter
-      router.replace("/students/sign-in");
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, "", newUrl);
     }
-  }, [verified, router]);
+  }, [verified]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -32,21 +34,30 @@ function StudentSignInForm() {
     setSuccess(null);
     setLoading(true);
 
-    const res = await fetch("/api/students/sign-in", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+    // Use NextAuth's signIn function - it accepts both email and username
+    const result = await signIn("credentials", {
+      email: identifier, // This field accepts BOTH email and username (check auth.ts)
+      password: password,
+      redirect: false,
+      callbackUrl: "/",
     });
 
     setLoading(false);
 
-    if (!res.ok) {
-      const data = await res.json();
-      setError(data.error || "Invalid credentials");
-      return;
+    if (result?.error) {
+      // Check for specific error messages
+      if (result.error === "CredentialsSignin") {
+        setError("Invalid email/username or password");
+      } else if (result.error.includes("email") || result.error.includes("verify")) {
+        setError("Please verify your email first. Check your inbox.");
+      } else {
+        setError("Sign in failed. Please try again.");
+      }
+    } else {
+      // Redirect to home page on successful sign in
+      router.push("/");
+      router.refresh(); // Refresh to update session
     }
-
-    router.push("/");
   }
 
   return (
@@ -79,12 +90,15 @@ function StudentSignInForm() {
             </label>
             <input
               type="text"
-              value={email}
+              value={identifier}
               required
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setIdentifier(e.target.value)}
               className="w-full rounded-md border border-gray-400 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
               placeholder="Enter your email or username"
             />
+            <p className="text-xs text-gray-600 mt-1">
+              You can sign in with either your email address or username
+            </p>
           </div>
 
           <div>
