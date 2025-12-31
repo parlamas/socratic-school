@@ -2,75 +2,29 @@
 
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import crypto from "crypto";
 import { prisma } from "@/lib/prisma.server";
-import { sendVerificationEmail } from "@/lib/email";
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   try {
-    const {
-      email,
-      password,
-      passwordConfirm,
-      firstName,
-      lastName,
-      username,
-      nationality,
-      age,
-    } = await req.json();
+    const body = await request.json();
+    const { email, password, firstName, lastName, username, nationality, age } = body;
 
-    // 1️⃣ Validate required fields
-    if (
-      !email ||
-      !password ||
-      !passwordConfirm ||
-      !firstName ||
-      !lastName ||
-      !username ||
-      !nationality ||
-      !age
-    ) {
-      return NextResponse.json(
-        { error: "All fields are required" },
-        { status: 400 }
-      );
-    }
-
-    if (password !== passwordConfirm) {
-      return NextResponse.json(
-        { error: "Passwords do not match" },
-        { status: 400 }
-      );
-    }
-
-    // 2️⃣ Check email uniqueness
-    const existingEmail = await prisma.user.findUnique({
-      where: { email },
+    // Check if user exists
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
     });
 
-    if (existingEmail) {
+    if (existingUser) {
       return NextResponse.json(
-        { error: "Email already in use" },
+        { error: "User already exists" },
         { status: 400 }
       );
     }
 
-    // 3️⃣ Check username uniqueness
-    const existingUsername = await prisma.user.findUnique({
-      where: { username },
-    });
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    if (existingUsername) {
-      return NextResponse.json(
-        { error: "Username already taken" },
-        { status: 400 }
-      );
-    }
-
-    // 4️⃣ Hash password
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    // 5️⃣ Create instructor
+    // Create user - AUTO VERIFIED
     const user = await prisma.user.create({
       data: {
         email,
@@ -79,62 +33,23 @@ export async function POST(req: Request) {
         lastName,
         username,
         nationality,
-        age: Number(age),
+        age: parseInt(age),
         role: "instructor",
-      },
+        emailVerified: new Date() // AUTO VERIFIED - NO TOKEN NEEDED
+      }
     });
 
-    // 6️⃣ Generate verification token
-    const token = crypto.randomBytes(32).toString("hex");
-    const expires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
-
-    await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        verificationToken: token,
-        verificationTokenExpires: expires,
-      },
+    return NextResponse.json({
+      success: true,
+      message: "Instructor registered successfully. You can now log in."
     });
 
-    // 7️⃣ Try to send verification email (auto-verify if it fails)
-    try {
-      await sendVerificationEmail(email, token);
-      
-      return NextResponse.json({ 
-        success: true,
-        message: "Instructor account created! Please check your email to verify your account."
-      });
-      
-    } catch (emailError) {
-      console.log("Email sending failed, auto-verifying:", emailError);
-      
-      // Auto-verify for testing/development
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          emailVerified: new Date(),
-          verificationToken: null,
-          verificationTokenExpires: null,
-        },
-      });
-      
-      return NextResponse.json({ 
-        success: true,
-        message: "Instructor account created successfully! You can now sign in.",
-        warning: "email_auto_verified"
-      });
-    }
-    
-  } catch (err) {
-    console.error("Instructor sign-up error:", err);
+  } catch (error) {
+    console.error("Sign-up error:", error);
     return NextResponse.json(
-      { 
-        error: "Internal server error",
-        ...(process.env.NODE_ENV === "development" && { 
-          details: err instanceof Error ? err.message : String(err) 
-        })
-      },
+      { error: "Registration failed" },
       { status: 500 }
     );
   }
 }
+
