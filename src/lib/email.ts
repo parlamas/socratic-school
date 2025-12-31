@@ -41,16 +41,19 @@ try {
   console.error("Failed to create SMTP transporter:", error);
 }
 
+// Helper function to get transporter
+function getTransporter(): Transporter {
+  if (!transporter) {
+    throw new Error("SMTP transporter not initialized");
+  }
+  return transporter;
+}
+
 export async function sendVerificationEmail(
   email: string,
   token: string
 ) {
   try {
-    // Check if transporter was created
-    if (!transporter) {
-      throw new Error("SMTP transporter not initialized");
-    }
-
     // Check required environment variables
     if (!process.env.NEXTAUTH_URL) {
       throw new Error("NEXTAUTH_URL is not set");
@@ -68,7 +71,7 @@ export async function sendVerificationEmail(
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #2563eb;">Welcome to Socratic School!</h2>
-          <p>Thank you for registering as a student. Please verify your email address by clicking the button below:</p>
+          <p>Thank you for registering. Please verify your email address by clicking the button below:</p>
           <div style="margin: 30px 0;">
             <a href="${verificationUrl}" 
                style="background-color: #2563eb; color: white; padding: 12px 24px; 
@@ -90,7 +93,7 @@ export async function sendVerificationEmail(
       text: `Welcome to Socratic School!\n\nPlease verify your email by visiting: ${verificationUrl}\n\nThis link expires in 24 hours.`,
     };
 
-    const info = await transporter.sendMail(mailOptions);
+    const info = await getTransporter().sendMail(mailOptions);
     console.log("Verification email sent successfully:", info.messageId);
     return info;
   } catch (error) {
@@ -104,5 +107,61 @@ export async function sendVerificationEmail(
       errorStack: error instanceof Error ? error.stack : undefined,
     });
     throw new Error(`Failed to send verification email: ${error instanceof Error ? error.message : "Unknown error"}`);
+  }
+}
+
+// ADD THIS NEW FUNCTION:
+export async function sendPasswordResetEmail(email: string, token: string) {
+  try {
+    // Check required environment variables
+    if (!process.env.NEXTAUTH_URL) {
+      throw new Error("NEXTAUTH_URL is not set");
+    }
+
+    const resetUrl = `${process.env.NEXTAUTH_URL}/reset-password?token=${token}`;
+    
+    console.log("Sending password reset email to:", email);
+    console.log("Reset URL:", resetUrl);
+
+    const mailOptions = {
+      from: process.env.MAIL_FROM || '"Socratic School" <noreply@socratic-school.com>',
+      to: email,
+      subject: "Reset Your Password - Socratic School",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #2563eb;">Password Reset Request</h2>
+          <p>You requested to reset your password. Click the button below to create a new password:</p>
+          <div style="margin: 30px 0;">
+            <a href="${resetUrl}" 
+               style="background-color: #2563eb; color: white; padding: 12px 24px; 
+                      text-decoration: none; border-radius: 6px; font-weight: bold;">
+              Reset Password
+            </a>
+          </div>
+          <p>Or copy and paste this link into your browser:</p>
+          <p style="word-break: break-all; color: #666; font-size: 14px;">
+            ${resetUrl}
+          </p>
+          <p>This link expires in 1 hour.</p>
+          <p>If you didn't request a password reset, you can ignore this email.</p>
+        </div>
+      `,
+      text: `Reset your password: ${resetUrl}\n\nThis link expires in 1 hour.`,
+    };
+
+    const info = await getTransporter().sendMail(mailOptions);
+    console.log("Password reset email sent successfully:", info.messageId);
+    return info;
+  } catch (error) {
+    console.error("Failed to send password reset email:", error);
+    console.error("Error details:", {
+      email: email,
+      tokenLength: token?.length,
+      nextauthUrl: process.env.NEXTAUTH_URL,
+      smtpHost: process.env.SMTP_HOST,
+      errorMessage: error instanceof Error ? error.message : String(error),
+      errorStack: error instanceof Error ? error.stack : undefined,
+    });
+    throw new Error(`Failed to send password reset email: ${error instanceof Error ? error.message : "Unknown error"}`);
   }
 }

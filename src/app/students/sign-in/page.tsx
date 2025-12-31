@@ -62,7 +62,7 @@ function StudentSignInForm() {
 
   return (
     <main className="min-h-screen bg-gray-50 flex justify-center pt-16 pb-16">
-      <div className="w-full max-w-md border border-gray-300 rounded-lg p-8 shadow-md bg-white mt-8">
+      <div className="w-full max-w-md border border-gray-300 rounded-lg p-4 md:p-8 shadow-md bg-white mt-4 md:mt-8 mx-2 md:mx-0">
         <h1 className="text-2xl font-semibold mb-6 text-gray-900 text-center">
           Student Sign In
         </h1>
