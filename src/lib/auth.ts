@@ -1,14 +1,41 @@
 // src/lib/auth.ts
 
 import "server-only";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, Session, User } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import bcrypt from "bcrypt";
 import { prisma } from "@/lib/prisma.server";
 
+// Extend the session and token types
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      email: string;
+      role: string;
+    };
+  }
+  
+  interface User {
+    role: string;
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT {
+    role: string;
+  }
+}
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  
+  session: {
+    strategy: "jwt", // Use JWT strategy for credentials provider
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
 
   providers: [
     CredentialsProvider({
@@ -44,21 +71,34 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           role: user.role,
-        } as any;
+          name: user.name || user.username,
+        };
       },
     }),
   ],
 
   callbacks: {
-    session({ session, user }) {
-      if (session.user && user) {
-        (session.user as any).role = (user as any).role;
+    async jwt({ token, user }) {
+      // Initial sign in - add role to token
+      if (user) {
+        token.role = user.role;
+        token.id = user.id;
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      // Add role from token to session
+      if (session.user && token) {
+        session.user.role = token.role as string;
+        session.user.id = token.id as string;
       }
       return session;
     },
   },
 
   pages: {
-    signIn: "/students/sign-in",
+    // Remove the hardcoded signIn page since we have multiple
+    // The middleware will handle redirects appropriately
   },
 };
