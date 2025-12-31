@@ -84,26 +84,48 @@ export async function POST(req: Request) {
       },
     });
 
-    // 6️⃣ Generate verification token
-    const token = crypto.randomBytes(32).toString("hex");
-    const expires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
+    try {
+      // 6️⃣ Generate verification token
+      const token = crypto.randomBytes(32).toString("hex");
+      const expires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
 
-    await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        verificationToken: token,
-        verificationTokenExpires: expires,
-      },
-    });
+      await prisma.user.update({
+        where: { id: user.id },
+        data: {
+          verificationToken: token,
+          verificationTokenExpires: expires,
+        },
+      });
 
-    // 7️⃣ Send verification email
-    await sendVerificationEmail(email, token);
+      // 7️⃣ Send verification email
+      await sendVerificationEmail(email, token);
 
-    return NextResponse.json({ success: true });
+      return NextResponse.json({ 
+        success: true,
+        message: "Account created! Please check your email to verify your account."
+      });
+      
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+      
+      // Still return success, but notify user to contact support
+      return NextResponse.json({ 
+        success: true,
+        message: "Account created, but we couldn't send the verification email. Please contact support or try signing in to resend verification.",
+        warning: "email_not_sent"
+      });
+    }
+    
   } catch (err) {
-    console.error(err);
+    console.error("Sign-up error:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: "Internal server error",
+        // Include more details in development
+        ...(process.env.NODE_ENV === "development" && { 
+          details: err instanceof Error ? err.message : String(err) 
+        })
+      },
       { status: 500 }
     );
   }
