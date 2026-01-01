@@ -1,4 +1,4 @@
-// src/app/api/auth/verify-email/route.ts
+// src/app/api/auth/verify-email/route.ts - CORRECTED
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma.server'
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     if (!token) {
       console.log('No token provided')
       return NextResponse.redirect(
-        `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/sign-in?error=No+token+provided`
+        `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}/?error=No+token+provided`
       )
     }
 
@@ -31,6 +31,7 @@ export async function GET(request: NextRequest) {
     console.log('User found:', !!user)
     if (user) {
       console.log('User email:', user.email)
+      console.log('User role:', user.role)
       console.log('Token expires:', user.verificationTokenExpires)
     }
 
@@ -55,14 +56,21 @@ export async function GET(request: NextRequest) {
             verificationTokenExpires: null
           }
         })
+        // Redirect based on role
+        let redirectPath = '/'
+        if (expiredUser.role === 'instructor') {
+          redirectPath = '/instructor/sign-in'
+        } else if (expiredUser.role === 'student') {
+          redirectPath = '/students/sign-in'
+        }
         return NextResponse.redirect(
-          `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/sign-in?error=Token+expired`
+          `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}${redirectPath}?error=Token+expired`
         )
       }
       
       console.log('Invalid token - no user found')
       return NextResponse.redirect(
-        `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/sign-in?error=Invalid+token`
+        `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}/?error=Invalid+token`
       )
     }
 
@@ -78,9 +86,8 @@ export async function GET(request: NextRequest) {
 
     console.log('Email verified successfully for:', user.email)
 
-    // Redirect to sign-in with success message
-    // Adjust the redirect path based on user role if needed
-    let redirectPath = '/sign-in'
+    // Redirect to appropriate sign-in page based on role - FIXED!
+    let redirectPath = '/'
     if (user.role === 'instructor') {
       redirectPath = '/instructor/sign-in'
     } else if (user.role === 'student') {
@@ -88,13 +95,13 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.redirect(
-      `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}${redirectPath}?verified=true`
+      `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}${redirectPath}?verified=true`
     )
     
   } catch (error) {
     console.error('Verification error:', error)
     return NextResponse.redirect(
-      `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/sign-in?error=Verification+failed`
+      `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}/?error=Verification+failed`
     )
   }
 }
