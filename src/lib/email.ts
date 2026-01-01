@@ -1,54 +1,42 @@
-// src/lib/email.ts
-
+// src/lib/email.ts - FIXED VERSION
 import "server-only";
 import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
 
 // Helper function to get the correct base URL for emails
 function getBaseUrl() {
-  // If NEXTAUTH_URL is set, use it (should be your production URL in production)
   if (process.env.NEXTAUTH_URL) {
     return process.env.NEXTAUTH_URL;
   }
   
-  // For Vercel deployments
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
   
-  // For Vercel preview deployments
   if (process.env.VERCEL_BRANCH_URL) {
     return `https://${process.env.VERCEL_BRANCH_URL}`;
   }
   
-  // For Netlify deployments
   if (process.env.NETLIFY) {
     return process.env.URL || `https://${process.env.SITE_NAME}.netlify.app`;
   }
   
-  // For Railway deployments
   if (process.env.RAILWAY_STATIC_URL) {
     return `https://${process.env.RAILWAY_STATIC_URL}`;
   }
   
-  // For Render deployments
   if (process.env.RENDER_EXTERNAL_URL) {
     return process.env.RENDER_EXTERNAL_URL;
   }
   
-  // For Fly.io deployments
   if (process.env.FLY_APP_NAME) {
     return `https://${process.env.FLY_APP_NAME}.fly.dev`;
   }
   
-  // Check if we're in production but no URL is set (last resort)
   if (process.env.NODE_ENV === 'production') {
     console.warn("⚠️ NEXTAUTH_URL is not set in production! Emails will have localhost links.");
-    // You might want to hardcode your domain here temporarily:
-    // return 'https://your-actual-domain.com';
   }
   
-  // Default to localhost for development
   return 'http://localhost:3000';
 }
 
@@ -68,13 +56,13 @@ try {
   transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
     port: Number(process.env.SMTP_PORT) || 587,
-    secure: process.env.SMTP_PORT === "465", // true for 465, false for 587
+    secure: process.env.SMTP_PORT === "465",
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
     tls: {
-      rejectUnauthorized: false, // For self-signed certificates
+      rejectUnauthorized: false,
     },
   });
 
@@ -104,14 +92,21 @@ export async function sendVerificationEmail(
 ) {
   try {
     const baseUrl = getBaseUrl();
-    const verificationUrl = `${baseUrl}/api/auth/verify-email?token=${token}`;
+    
+    // FIX: PROPERLY ENCODE THE TOKEN for URL
+    const encodedToken = encodeURIComponent(token);
+    const verificationUrl = `${baseUrl}/api/auth/verify-email?token=${encodedToken}`;
     
     console.log("=== Sending Verification Email ===");
     console.log("To:", email);
     console.log("Base URL:", baseUrl);
-    console.log("Full Verification URL:", verificationUrl);
-    console.log("Environment:", process.env.NODE_ENV);
-
+    console.log("Token (raw first 20):", token.substring(0, 20));
+    console.log("Token (encoded first 20):", encodedToken.substring(0, 20));
+    console.log("Can decode back:", token === decodeURIComponent(encodedToken));
+    console.log("Token length:", token.length);
+    console.log("Encoded token length:", encodedToken.length);
+    console.log("URL:", verificationUrl);
+    
     const mailOptions = {
       from: process.env.MAIL_FROM || '"Socratic School" <noreply@socratic-school.com>',
       to: email,
@@ -162,13 +157,16 @@ export async function sendVerificationEmail(
 export async function sendPasswordResetEmail(email: string, token: string) {
   try {
     const baseUrl = getBaseUrl();
-    const resetUrl = `${baseUrl}/reset-password?token=${token}`;
+    
+    // FIX: Encode the token
+    const encodedToken = encodeURIComponent(token);
+    const resetUrl = `${baseUrl}/reset-password?token=${encodedToken}`;
     
     console.log("=== Sending Password Reset Email ===");
     console.log("To:", email);
     console.log("Base URL:", baseUrl);
-    console.log("Full Reset URL:", resetUrl);
-    console.log("Environment:", process.env.NODE_ENV);
+    console.log("Token (raw first 20):", token.substring(0, 20));
+    console.log("Token (encoded first 20):", encodedToken.substring(0, 20));
 
     const mailOptions = {
       from: process.env.MAIL_FROM || '"Socratic School" <noreply@socratic-school.com>',
@@ -191,9 +189,6 @@ export async function sendPasswordResetEmail(email: string, token: string) {
           </p>
           <p>This link expires in 1 hour.</p>
           <p>If you didn't request a password reset, you can ignore this email.</p>
-          <p style="color: #6b7280; font-size: 12px;">
-            If you didn't request this password reset, please contact support immediately.
-          </p>
         </div>
       `,
       text: `Password Reset Request\n\nClick here to reset your password: ${resetUrl}\n\nThis link expires in 1 hour.\n\nIf you didn't request this, please ignore this email.`,
@@ -204,20 +199,10 @@ export async function sendPasswordResetEmail(email: string, token: string) {
     return info;
   } catch (error) {
     console.error("❌ Failed to send password reset email:", error);
-    console.error("Error details:", {
-      email: email,
-      tokenLength: token?.length,
-      baseUrl: getBaseUrl(),
-      nodeEnv: process.env.NODE_ENV,
-      smtpHost: process.env.SMTP_HOST,
-      errorMessage: error instanceof Error ? error.message : String(error),
-      errorStack: error instanceof Error ? error.stack : undefined,
-    });
     throw new Error(`Failed to send password reset email: ${error instanceof Error ? error.message : "Unknown error"}`);
   }
 }
 
-// Optional: Add email for other purposes
 export async function sendWelcomeEmail(email: string, name: string) {
   try {
     const baseUrl = getBaseUrl();

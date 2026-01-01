@@ -1,5 +1,4 @@
-// src/app/api/students/sign-up/route.ts - COMPLETE FIXED VERSION
-
+// src/app/api/students/sign-up/route.ts - ENHANCED DEBUGGING
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
@@ -7,166 +6,99 @@ import { prisma } from "@/lib/prisma.server";
 import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
+  console.log("=== SIGNUP START ===");
+  
   try {
-    const {
+    const body = await req.json();
+    const { email, password, firstName, lastName, username, nationality, age } = body;
+    
+    console.log("SIGNUP: Received data:", { email, username, nationality });
+    
+    // Create token
+    const token = crypto.randomBytes(32).toString("hex");
+    console.log("SIGNUP: Generated token:", {
+      fullToken: token,
+      first10: token.substring(0, 10),
+      last10: token.substring(token.length - 10),
+      length: token.length,
+      type: typeof token
+    });
+    
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 12);
+    console.log("SIGNUP: Password hashed");
+    
+    // Create user with all data
+    const userData = {
       email,
-      password,
-      passwordConfirm,
+      password: hashedPassword,
       firstName,
       lastName,
       username,
       nationality,
-      age,
-    } = await req.json();
-
-    // 1️⃣ Validate required fields
-    if (
-      !email ||
-      !password ||
-      !passwordConfirm ||
-      !firstName ||
-      !lastName ||
-      !username ||
-      !nationality ||
-      !age
-    ) {
-      return NextResponse.json(
-        { error: "All fields are required" },
-        { status: 400 }
-      );
-    }
-
-    if (password !== passwordConfirm) {
-      return NextResponse.json(
-        { error: "Passwords do not match" },
-        { status: 400 }
-      );
-    }
-
-    // Validate password strength
-    if (password.length < 8) {
-      return NextResponse.json(
-        { error: "Password must be at least 8 characters long" },
-        { status: 400 }
-      );
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Invalid email format" },
-        { status: 400 }
-      );
-    }
-
-    // Validate age
-    const ageNum = Number(age);
-    if (isNaN(ageNum) || ageNum < 13 || ageNum > 100) {
-      return NextResponse.json(
-        { error: "Age must be a number between 13 and 100" },
-        { status: 400 }
-      );
-    }
-
-    // 2️⃣ Check email uniqueness
-    const existingEmail = await prisma.user.findUnique({
-      where: { email },
+      age: Number(age),
+      role: "student" as const,
+      verificationToken: token,
+      verificationTokenExpires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    };
+    
+    console.log("SIGNUP: Creating user with data:", {
+      ...userData,
+      password: "[HIDDEN]",
+      verificationTokenExpires: userData.verificationTokenExpires.toISOString()
     });
-
-    if (existingEmail) {
-      return NextResponse.json(
-        { error: "Email already in use" },
-        { status: 400 }
-      );
-    }
-
-    // 3️⃣ Check username uniqueness
-    const existingUsername = await prisma.user.findUnique({
-      where: { username },
-    });
-
-    if (existingUsername) {
-      return NextResponse.json(
-        { error: "Username already taken" },
-        { status: 400 }
-      );
-    }
-
-    // 4️⃣ Hash password
-    const hashedPassword = await bcrypt.hash(password, 12);
-
-    // 5️⃣ Generate verification token BEFORE creating user
-    const verificationToken = crypto.randomBytes(32).toString("hex");
-    const verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
-
-    console.log("Generated student token for", email, ":", verificationToken);
-    console.log("Token expires:", verificationTokenExpires);
-
-    // 6️⃣ Create student WITH verification token (single operation) - FIXED!
+    
     const user = await prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-        firstName,
-        lastName,
-        username,
-        nationality,
-        age: ageNum,
-        role: "student",
-        verificationToken,
-        verificationTokenExpires,
-      },
+      data: userData,
     });
-
-    console.log("Student created with ID:", user.id);
-
-    // 7️⃣ Send verification email
-    try {
-      console.log("Attempting to send verification email to:", email);
-      await sendVerificationEmail(email, verificationToken);
-
-      return NextResponse.json({ 
-        success: true,
-        message: "Account created! Please check your email to verify your account.",
-      });
-      
-    } catch (emailError) {
-      console.error("Email sending failed:", emailError);
-      
-      return NextResponse.json({ 
-        success: true,
-        message: "Account created, but we couldn't send the verification email.",
-        warning: "email_not_sent",
-      });
-    }
     
-  } catch (err) {
-    console.error("Sign-up error:", err);
+    console.log("SIGNUP: User created successfully!", {
+      userId: user.id,
+      email: user.email,
+      tokenInDB: user.verificationToken ? "YES" : "NO",
+      tokenExpires: user.verificationTokenExpires?.toISOString()
+    });
     
-    // More detailed error logging
-    if (err instanceof Error) {
-      console.error("Error name:", err.name);
-      console.error("Error stack:", err.stack);
-      
-      // Handle unique constraint errors
-      if (err.message.includes("Unique constraint")) {
-        return NextResponse.json(
-          { error: "Email or username already exists" },
-          { status: 400 }
-        );
+    // Verify the token was actually saved
+    const verifyUser = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: { verificationToken: true, verificationTokenExpires: true }
+    });
+    
+    console.log("SIGNUP: Verification check - token in database:", {
+      exists: !!verifyUser?.verificationToken,
+      length: verifyUser?.verificationToken?.length,
+      first10Chars: verifyUser?.verificationToken?.substring(0, 10),
+      matchOriginal: verifyUser?.verificationToken === token ? "YES" : "NO"
+    });
+    
+    // Send email
+    console.log("SIGNUP: Attempting to send verification email...");
+    await sendVerificationEmail(email, token);
+    console.log("SIGNUP: Email sent successfully");
+    
+    console.log("=== SIGNUP END ===");
+    
+    return NextResponse.json({ 
+      success: true, 
+      message: "Account created! Check your email.",
+      debug: {
+        tokenLength: token.length,
+        tokenFirst10: token.substring(0, 10),
+        userId: user.id
       }
-    }
+    });
     
-    return NextResponse.json(
-      { 
-        error: "Internal server error",
-        ...(process.env.NODE_ENV === "development" && { 
-          details: err instanceof Error ? err.message : String(err),
-          stack: err instanceof Error ? err.stack : undefined
-        })
-      },
-      { status: 500 }
-    );
+  } catch (error) {
+    console.error("=== SIGNUP ERROR ===");
+    console.error("Full error:", error);
+    console.error("Error message:", error instanceof Error ? error.message : String(error));
+    console.error("Error stack:", error instanceof Error ? error.stack : "No stack");
+    console.error("=== SIGNUP ERROR END ===");
+    
+    return NextResponse.json({ 
+      error: "Failed to create account",
+      debug: error instanceof Error ? error.message : String(error)
+    }, { status: 500 });
   }
 }

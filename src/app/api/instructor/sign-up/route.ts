@@ -1,4 +1,4 @@
-// src/app/api/instructor/sign-up/route.ts - COMPLETE FIXED VERSION
+// src/app/api/instructor/sign-up/route.ts - FIXED
 
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
@@ -98,14 +98,13 @@ export async function POST(req: Request) {
     // 4️⃣ Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // 5️⃣ Generate verification token BEFORE creating user
+    // 5️⃣ Generate verification token 
     const verificationToken = crypto.randomBytes(32).toString("hex");
-    const verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
+    const verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
-    console.log("Generated instructor token for", email, ":", verificationToken);
-    console.log("Token expires:", verificationTokenExpires);
+    console.log("INSTRUCTOR TOKEN DEBUG - Generated:", verificationToken.substring(0, 20) + "...");
 
-    // 6️⃣ Create instructor WITH verification token (single operation) - FIXED!
+    // 6️⃣ Create instructor WITH verification token
     const user = await prisma.user.create({
       data: {
         email,
@@ -123,11 +122,11 @@ export async function POST(req: Request) {
       },
     });
 
-    console.log("Instructor created with ID:", user.id);
+    console.log("INSTRUCTOR TOKEN DEBUG - User created:", user.id);
 
     // 7️⃣ Send verification email
     try {
-      console.log("Attempting to send verification email to:", email);
+      console.log("INSTRUCTOR TOKEN DEBUG - Sending email with token:", verificationToken.substring(0, 20) + "...");
       await sendVerificationEmail(email, verificationToken);
 
       return NextResponse.json({ 
@@ -136,7 +135,7 @@ export async function POST(req: Request) {
       });
       
     } catch (emailError) {
-      console.error("Email sending failed:", emailError);
+      console.error("INSTRUCTOR TOKEN DEBUG - Email failed:", emailError);
       
       return NextResponse.json({ 
         success: true,
@@ -147,29 +146,8 @@ export async function POST(req: Request) {
     
   } catch (err) {
     console.error("Instructor sign-up error:", err);
-    
-    // More detailed error logging
-    if (err instanceof Error) {
-      console.error("Error name:", err.name);
-      console.error("Error stack:", err.stack);
-      
-      // Handle unique constraint errors
-      if (err.message.includes("Unique constraint")) {
-        return NextResponse.json(
-          { error: "Email or username already exists" },
-          { status: 400 }
-        );
-      }
-    }
-    
     return NextResponse.json(
-      { 
-        error: "Internal server error",
-        ...(process.env.NODE_ENV === "development" && { 
-          details: err instanceof Error ? err.message : String(err),
-          stack: err instanceof Error ? err.stack : undefined
-        })
-      },
+      { error: "Internal server error" },
       { status: 500 }
     );
   }

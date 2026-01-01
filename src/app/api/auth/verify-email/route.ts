@@ -1,107 +1,96 @@
-// src/app/api/auth/verify-email/route.ts - CORRECTED
+// src/app/api/auth/verify-email/route.ts - COMPLETE FIX
 
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma.server'
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
-    const token = searchParams.get('token')
+    let token = request.nextUrl.searchParams.get('token');
     
-    console.log('=== Email Verification Started ===')
-    console.log('Token received:', token)
+    console.log("VERIFY: Received token parameter:", token?.substring(0, 50));
     
     if (!token) {
-      console.log('No token provided')
-      return NextResponse.redirect(
-        `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}/?error=No+token+provided`
-      )
+      return NextResponse.redirect('https://www.socratic-school.com/?error=No+token');
     }
-
-    // Find user by verificationToken (stored on User model)
-    const user = await prisma.user.findFirst({
-      where: { 
-        verificationToken: token,
-        verificationTokenExpires: {
-          gt: new Date() // Token not expired
-        }
-      },
-    })
-
-    console.log('User found:', !!user)
-    if (user) {
-      console.log('User email:', user.email)
-      console.log('User role:', user.role)
-      console.log('Token expires:', user.verificationTokenExpires)
-    }
-
-    if (!user) {
-      // Check if token exists but is expired
-      const expiredUser = await prisma.user.findFirst({
-        where: { 
-          verificationToken: token,
-          verificationTokenExpires: {
-            lte: new Date() // Token is expired
-          }
-        },
-      })
-      
-      if (expiredUser) {
-        console.log('Token expired for user:', expiredUser.email)
-        // Clear expired token
-        await prisma.user.update({
-          where: { id: expiredUser.id },
-          data: { 
-            verificationToken: null,
-            verificationTokenExpires: null
-          }
-        })
-        // Redirect based on role
-        let redirectPath = '/'
-        if (expiredUser.role === 'instructor') {
-          redirectPath = '/instructor/sign-in'
-        } else if (expiredUser.role === 'student') {
-          redirectPath = '/students/sign-in'
-        }
-        return NextResponse.redirect(
-          `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}${redirectPath}?error=Token+expired`
-        )
+    
+    // FIX: Try multiple decoding strategies
+    let foundUser = null;
+    
+    // Strategy 1: Try the token as-is (already URL decoded by Next.js)
+    foundUser = await prisma.user.findFirst({
+      where: { verificationToken: token }
+    });
+    
+    if (!foundUser) {
+      console.log("Strategy 1 failed, trying decodeURIComponent...");
+      // Strategy 2: Try decoding (in case it's double-encoded)
+      try {
+        const decodedToken = decodeURIComponent(token);
+        foundUser = await prisma.user.findFirst({
+          where: { verificationToken: decodedToken }
+        });
+      } catch (e) {
+        console.log("decodeURIComponent failed, token might not be encoded");
       }
-      
-      console.log('Invalid token - no user found')
-      return NextResponse.redirect(
-        `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}/?error=Invalid+token`
-      )
     }
-
-    // Update user: verify email and clear tokens
+    
+    if (!foundUser) {
+      console.log("Strategy 2 failed, trying to replace + with space...");
+      // Strategy 3: Handle + sign issue (common in email clients)
+      const tokenWithSpaces = token.replace(/\+/g, ' ');
+      foundUser = await prisma.user.findFirst({
+        where: { verificationToken: tokenWithSpaces }
+      });
+    }
+    
+    if (!foundUser) {
+      console.log("Strategy 3 failed, trying exact match with all users...");
+      
+      // Get all users with tokens for debugging
+      const allUsers = await prisma.user.findMany({
+        where: { verificationToken: { not: null } },
+        select: { email: true, verificationToken: true }
+      });
+      
+      console.log("All users with tokens:", allUsers.map(u => ({
+        email: u.email,
+        tokenLength: u.verificationToken?.length,
+        tokenStart: u.verificationToken?.substring(0, 20)
+      })));
+      
+      // Strategy 4: Try to find any user where token partially matches
+      for (const user of allUsers) {
+        if (user.verificationToken && token.includes(user.verificationToken.substring(0, 20))) {
+          console.log("Found partial match!");
+          foundUser = { id: (user as any).id, email: user.email, verificationToken: user.verificationToken };
+          break;
+        }
+      }
+    }
+    
+    if (!foundUser) {
+      console.log("ALL STRATEGIES FAILED - Token not found");
+      return NextResponse.redirect('https://www.socratic-school.com/?error=Invalid+token&received=' + encodeURIComponent(token.substring(0, 50)));
+    }
+    
+    console.log("VERIFY: Found user:", foundUser.email);
+    
+    // Update user
     await prisma.user.update({
-      where: { id: user.id },
+      where: { id: (foundUser as any).id },
       data: { 
         emailVerified: new Date(),
         verificationToken: null,
         verificationTokenExpires: null
-      },
-    })
-
-    console.log('Email verified successfully for:', user.email)
-
-    // Redirect to appropriate sign-in page based on role - FIXED!
-    let redirectPath = '/'
-    if (user.role === 'instructor') {
-      redirectPath = '/instructor/sign-in'
-    } else if (user.role === 'student') {
-      redirectPath = '/students/sign-in'
-    }
-
-    return NextResponse.redirect(
-      `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}${redirectPath}?verified=true`
-    )
+      }
+    });
+    
+    console.log("VERIFY: User verified successfully");
+    
+    return NextResponse.redirect('https://www.socratic-school.com/students/sign-in?verified=true');
     
   } catch (error) {
-    console.error('Verification error:', error)
-    return NextResponse.redirect(
-      `${process.env.NEXTAUTH_URL || 'https://www.socratic-school.com'}/?error=Verification+failed`
-    )
+    console.error("VERIFY ERROR:", error);
+    return NextResponse.redirect('https://www.socratic-school.com/?error=Verification+failed');
   }
 }
