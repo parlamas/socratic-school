@@ -1,4 +1,4 @@
-// src/app/api/instructor/sign-up/route.ts
+// src/app/api/instructor/sign-up/route.ts - COMPLETE FIXED VERSION
 
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
@@ -17,8 +17,8 @@ export async function POST(req: Request) {
       username,
       nationality,
       age,
-      affiliation,      // Added - instructors might have affiliation
-      statement,        // Added - instructors might have statement
+      affiliation,
+      statement,
     } = await req.json();
 
     // 1️⃣ Validate required fields
@@ -105,7 +105,7 @@ export async function POST(req: Request) {
     console.log("Generated instructor token for", email, ":", verificationToken);
     console.log("Token expires:", verificationTokenExpires);
 
-    // 6️⃣ Create instructor WITH verification token (single operation)
+    // 6️⃣ Create instructor WITH verification token (single operation) - FIXED!
     const user = await prisma.user.create({
       data: {
         email,
@@ -116,10 +116,10 @@ export async function POST(req: Request) {
         nationality,
         age: ageNum,
         role: "instructor",
-        affiliation: affiliation || null,      // Optional field
-        statement: statement || null,          // Optional field
-        verificationToken,           // ✅ INCLUDED HERE
-        verificationTokenExpires,    // ✅ INCLUDED HERE
+        affiliation: affiliation || null,
+        statement: statement || null,
+        verificationToken,
+        verificationTokenExpires,
       },
     });
 
@@ -133,24 +133,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ 
         success: true,
         message: "Instructor account created! Please check your email to verify your account.",
-        userId: user.id,
-        email: user.email,
       });
       
     } catch (emailError) {
       console.error("Email sending failed:", emailError);
       
-      // User is created with token, they can request resend later
-      // OR you could create a resend verification endpoint
       return NextResponse.json({ 
         success: true,
-        message: "Account created, but we couldn't send the verification email. Please check your email or use 'Forgot Password' to verify later.",
+        message: "Account created, but we couldn't send the verification email.",
         warning: "email_not_sent",
-        userId: user.id,
-        // In development, include token for debugging
-        ...(process.env.NODE_ENV === "development" && {
-          debug: { verificationToken }
-        })
       });
     }
     

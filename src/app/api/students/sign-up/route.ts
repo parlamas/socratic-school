@@ -1,4 +1,4 @@
-// src/app/api/students/sign-up/route.ts
+// src/app/api/students/sign-up/route.ts - COMPLETE FIXED VERSION
 
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
@@ -60,6 +60,15 @@ export async function POST(req: Request) {
       );
     }
 
+    // Validate age
+    const ageNum = Number(age);
+    if (isNaN(ageNum) || ageNum < 13 || ageNum > 100) {
+      return NextResponse.json(
+        { error: "Age must be a number between 13 and 100" },
+        { status: 400 }
+      );
+    }
+
     // 2️⃣ Check email uniqueness
     const existingEmail = await prisma.user.findUnique({
       where: { email },
@@ -91,10 +100,10 @@ export async function POST(req: Request) {
     const verificationToken = crypto.randomBytes(32).toString("hex");
     const verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
 
-    console.log("Generated token for", email, ":", verificationToken);
+    console.log("Generated student token for", email, ":", verificationToken);
     console.log("Token expires:", verificationTokenExpires);
 
-    // 6️⃣ Create student WITH verification token (single operation)
+    // 6️⃣ Create student WITH verification token (single operation) - FIXED!
     const user = await prisma.user.create({
       data: {
         email,
@@ -103,39 +112,32 @@ export async function POST(req: Request) {
         lastName,
         username,
         nationality,
-        age: Number(age),
+        age: ageNum,
         role: "student",
-        verificationToken,           // ✅ INCLUDED HERE
-        verificationTokenExpires,    // ✅ INCLUDED HERE
+        verificationToken,
+        verificationTokenExpires,
       },
     });
 
-    console.log("User created with ID:", user.id);
+    console.log("Student created with ID:", user.id);
 
+    // 7️⃣ Send verification email
     try {
-      // 7️⃣ Send verification email
       console.log("Attempting to send verification email to:", email);
       await sendVerificationEmail(email, verificationToken);
 
       return NextResponse.json({ 
         success: true,
         message: "Account created! Please check your email to verify your account.",
-        // Don't include token in response for security
       });
       
     } catch (emailError) {
       console.error("Email sending failed:", emailError);
       
-      // Even if email fails, user is created with token
-      // User can request a new verification email later
       return NextResponse.json({ 
         success: true,
-        message: "Account created, but we couldn't send the verification email. Please check your email address or contact support.",
+        message: "Account created, but we couldn't send the verification email.",
         warning: "email_not_sent",
-        // In development, you might want to include the token for testing
-        ...(process.env.NODE_ENV === "development" && {
-          debug: { verificationToken }
-        })
       });
     }
     
@@ -146,6 +148,14 @@ export async function POST(req: Request) {
     if (err instanceof Error) {
       console.error("Error name:", err.name);
       console.error("Error stack:", err.stack);
+      
+      // Handle unique constraint errors
+      if (err.message.includes("Unique constraint")) {
+        return NextResponse.json(
+          { error: "Email or username already exists" },
+          { status: 400 }
+        );
+      }
     }
     
     return NextResponse.json(
