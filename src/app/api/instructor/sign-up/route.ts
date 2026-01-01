@@ -17,6 +17,8 @@ export async function POST(req: Request) {
       username,
       nationality,
       age,
+      affiliation,      // Added - instructors might have affiliation
+      statement,        // Added - instructors might have statement
     } = await req.json();
 
     // 1️⃣ Validate required fields
@@ -31,7 +33,7 @@ export async function POST(req: Request) {
       !age
     ) {
       return NextResponse.json(
-        { error: "All fields are required" },
+        { error: "All required fields must be filled" },
         { status: 400 }
       );
     }
@@ -39,6 +41,32 @@ export async function POST(req: Request) {
     if (password !== passwordConfirm) {
       return NextResponse.json(
         { error: "Passwords do not match" },
+        { status: 400 }
+      );
+    }
+
+    // Validate password strength
+    if (password.length < 8) {
+      return NextResponse.json(
+        { error: "Password must be at least 8 characters long" },
+        { status: 400 }
+      );
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: "Invalid email format" },
+        { status: 400 }
+      );
+    }
+
+    // Validate age
+    const ageNum = Number(age);
+    if (isNaN(ageNum) || ageNum < 18 || ageNum > 100) {
+      return NextResponse.json(
+        { error: "Age must be a number between 18 and 100" },
         { status: 400 }
       );
     }
@@ -70,7 +98,14 @@ export async function POST(req: Request) {
     // 4️⃣ Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // 5️⃣ Create instructor
+    // 5️⃣ Generate verification token BEFORE creating user
+    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
+
+    console.log("Generated instructor token for", email, ":", verificationToken);
+    console.log("Token expires:", verificationTokenExpires);
+
+    // 6️⃣ Create instructor WITH verification token (single operation)
     const user = await prisma.user.create({
       data: {
         email,
@@ -79,59 +114,69 @@ export async function POST(req: Request) {
         lastName,
         username,
         nationality,
-        age: Number(age),
+        age: ageNum,
         role: "instructor",
+        affiliation: affiliation || null,      // Optional field
+        statement: statement || null,          // Optional field
+        verificationToken,           // ✅ INCLUDED HERE
+        verificationTokenExpires,    // ✅ INCLUDED HERE
       },
     });
 
-    // 6️⃣ Generate verification token
-    const token = crypto.randomBytes(32).toString("hex");
-    const expires = new Date(Date.now() + 1000 * 60 * 60 * 24); // 24h
+    console.log("Instructor created with ID:", user.id);
 
-    await prisma.user.update({
-      where: { id: user.id },
-      data: {
-        verificationToken: token,
-        verificationTokenExpires: expires,
-      },
-    });
-
-    // 7️⃣ Try to send verification email (auto-verify if it fails)
+    // 7️⃣ Send verification email
     try {
-      await sendVerificationEmail(email, token);
-      
+      console.log("Attempting to send verification email to:", email);
+      await sendVerificationEmail(email, verificationToken);
+
       return NextResponse.json({ 
         success: true,
-        message: "Instructor account created! Please check your email to verify your account."
+        message: "Instructor account created! Please check your email to verify your account.",
+        userId: user.id,
+        email: user.email,
       });
       
     } catch (emailError) {
-      console.log("Email sending failed, auto-verifying:", emailError);
+      console.error("Email sending failed:", emailError);
       
-      // Auto-verify for testing/development
-      await prisma.user.update({
-        where: { id: user.id },
-        data: {
-          emailVerified: new Date(),
-          verificationToken: null,
-          verificationTokenExpires: null,
-        },
-      });
-      
+      // User is created with token, they can request resend later
+      // OR you could create a resend verification endpoint
       return NextResponse.json({ 
         success: true,
-        message: "Instructor account created successfully! You can now sign in.",
-        warning: "email_auto_verified"
+        message: "Account created, but we couldn't send the verification email. Please check your email or use 'Forgot Password' to verify later.",
+        warning: "email_not_sent",
+        userId: user.id,
+        // In development, include token for debugging
+        ...(process.env.NODE_ENV === "development" && {
+          debug: { verificationToken }
+        })
       });
     }
     
   } catch (err) {
     console.error("Instructor sign-up error:", err);
+    
+    // More detailed error logging
+    if (err instanceof Error) {
+      console.error("Error name:", err.name);
+      console.error("Error stack:", err.stack);
+      
+      // Handle unique constraint errors
+      if (err.message.includes("Unique constraint")) {
+        return NextResponse.json(
+          { error: "Email or username already exists" },
+          { status: 400 }
+        );
+      }
+    }
+    
     return NextResponse.json(
       { 
         error: "Internal server error",
         ...(process.env.NODE_ENV === "development" && { 
-          details: err instanceof Error ? err.message : String(err) 
+          details: err instanceof Error ? err.message : String(err),
+          stack: err instanceof Error ? err.stack : undefined
         })
       },
       { status: 500 }
