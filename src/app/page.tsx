@@ -62,7 +62,7 @@ export default async function HomePage() {
             <div className="flex items-center gap-2.5 mb-2 text-sm">
               <span>📧</span>
               <a href="mailto:parlamas@live.com" className="text-blue-600 no-underline hover:underline">
-                parlamas@live.com
+                mind@horistics.com
               </a>
             </div>
             <div className="flex items-center gap-2.5 mb-2 text-sm">

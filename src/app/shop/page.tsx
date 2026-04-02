@@ -1,5 +1,9 @@
+//src/app/shop/page.tsx
+
 import { prisma } from "@/lib/prisma.server";
 import Link from "next/link";
+
+export const dynamic = "force-dynamic";
 
 export default async function ShopPage() {
   const areas = await prisma.area.findMany({
