@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import SignOutButton from "@/app/admin/SignOutButton";
 
 export default async function AdminLayout({
   children,
@@ -59,8 +60,10 @@ export default async function AdminLayout({
           >
             Orders
           </Link>
+          <SignOutButton />
         </div>
       </div>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
         {children}
       </div>
