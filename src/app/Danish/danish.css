@@ -1,0 +1,268 @@
+/*danish.css*/
+
+
+
+
+.danish-lesson {
+  all: revert; /* Resets all properties to browser defaults */
+  font-family: inherit; /* Uses the default font from globals.css */
+  font-size: calc(10px + 1.5vw);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: calc(8px + 2vw);
+}
+
+/* Rest of your existing CSS below */
+.danish-lesson .dan {
+  background-color: brown;
+  color: beige;
+  font-weight: bold;
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+  font-size: 1.1em;
+  white-space: nowrap;
+}
+
+
+/* Base styles using vw units for true fluidity */
+.danish-lesson {
+  font-size: calc(12px + 0.8vw); /* Smoothly scales from 12px to 24px */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: calc(10px + 1vw);
+}
+
+/* Classes with em units (relative to fluid base) */
+.danish-lesson .dan {
+  background-color: brown;
+  color: beige;
+  font-weight: bold;
+  padding: 0.2em 0.5em;
+  border-radius: 5px;
+  font-size: 1.1em;
+  white-space: nowrap;
+}
+
+.danish-lesson .b {
+  font-weight: bold;
+}
+
+.danish-lesson .r {
+  color: red;
+  font-weight: bold;
+}
+
+.danish-lesson .wow {
+  font-size: 1.1em;
+  color: #4a5568;
+  margin: 1.5em 0;
+}
+
+.danish-lesson .ur {
+  color: #8b4513;
+  font-weight: bold;
+}
+
+.danish-lesson table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.danish-lesson td {
+  padding: 0.5em;
+  vertical-align: top;
+}
+
+.danish-lesson hr {
+  border: 1px solid #ccc;
+  margin: 1.5em 0;
+}
+
+.danish-lesson .copyright {
+  text-align: center;
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 1.5em;
+}
+
+.danish-lesson .pronoun-table {
+  border: 1px solid #ddd;
+  padding: 0.3em;
+  font-size: 0.95em;
+}
+
+.danish-lesson h1 {
+  font-size: calc(30px + 3vw); /* Smoothly scales from 30px to 66px */
+  margin: 0.2em 0;
+  text-align: center;
+}
+
+/* Flag images - scale with viewport */
+.danish-lesson img {
+  width: calc(15px + 1vw);
+  height: calc(15px + 1vw);
+  max-width: 35px;
+  max-height: 35px;
+  vertical-align: middle;
+}
+
+/* Header flex container */
+.danish-lesson .header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: calc(2px + 0.5vw);
+  margin: 1em 0;
+}
+
+/* Portrait mode adjustments */
+@media screen and (orientation: portrait) {
+  .danish-lesson .header-row {
+    flex-direction: column;
+    gap: 0.3em;
+  }
+  
+  .danish-lesson .header-row .www {
+    white-space: normal;
+    text-align: center;
+    width: 100%;
+  }
+  
+  /* Make tables scrollable horizontally */
+  .danish-lesson table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    font-size: 0.95em;
+  }
+  
+  /* Stack pronoun tables */
+  .danish-lesson table table {
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  
+  /* Adjust text in header */
+  .danish-lesson .header-row span:not(.www) {
+    white-space: normal;
+    text-align: center;
+  }
+  
+  /* Better list readability */
+  .danish-lesson li {
+    margin-bottom: 0.8em;
+    line-height: 1.4;
+  }
+  
+  .danish-lesson ol {
+    padding-left: 1.5em;
+  }
+}
+
+/* Ensure tables don't break layout */
+.danish-lesson table table {
+  width: auto;
+  max-width: 100%;
+}
+
+/* Pronoun tables responsiveness */
+.danish-lesson .pronoun-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* For the two pronoun tables side by side on larger screens */
+@media screen and (min-width: 768px) {
+  .danish-lesson table table {
+    display: inline-table;
+    width: auto;
+    margin-right: 0.5em;
+  }
+}
+
+/* Very small screens - just let vw do its job, but prevent text from getting too tiny */
+@media screen and (max-width: 320px) {
+  .danish-lesson {
+    font-size: 14px; /* Minimum floor */
+  }
+}
+
+sub {color:red; font-weight:bold;}
+
+.r {color:red; font-weight:bold;}
+.g {color:gold; font-weight:bold;}
+.l {color:lime; font-weight:bold;}
+.b {color:blue; font-weight:bold;}
+.br {color: brown; font-weight: bold;}
+.ub {border-bottom: 2px solid blue; padding-bottom: 1px;}
+.uur {border-bottom: 2px solid red; padding-bottom: 1px;}
+.llr {border-bottom: 2px solid lime; padding-bottom: 1px;}
+.oor {border-bottom: 2px solid orange; padding-bottom: 1px;}
+.oow {border-bottom: 2px solid white; padding-bottom: 1px;}
+
+.wow {background-color:beige; color:brown; font-weight:bold; padding:2px; border-radius:5px;}
+.regress {background-color:#27f59f; color:black; font-weight:bold; padding:2px; border-radius:5px;}
+.bbb3 {background-color:#b0e0b6; color:black; font-weight:bold; padding:2px; border-radius:5px;}
+.dan {background-color:brown; color:beige; font-weight:bold; padding:2px; border-radius:5px;}
+.dan333 {background-color:brown; color:beige; font-weight:bold; font-size:8pt; padding:2px; border-radius:5px;}
+.green {background-color:brown; color:beige; font-weight:bold; padding:2px; border-radius:5px;}
+.brew123 {background-color:black; color:orange; font-weight:bold; padding:2px; border-radius:5px;}
+.black {background-color:black; color:white; font-weight:bold; padding:2px; border-radius:5px;}
+
+.treat111 {background-color:black; color:yellow; font-weight:bold; padding:2px; border-radius:5px;}
+.treat222 {background-color:black; color:cyan; font-weight:bold; padding:2px; border-radius:5px;}
+.treat333 {background-color:black; color:lime; font-weight:bold; padding:2px; border-radius:5px;}
+.vvv {color:black; font-weight:bold;}
+
+.o123 {
+  position: relative;
+  display: inline-block;
+}
+
+.o123::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background-color: red;
+}
+
+.o123::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background-color: blue;
+}
+
+.olior {
+  position: relative;
+  display: inline-block;
+}
+
+.olior::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background-color: lime;
+}
+
+.olior::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background-color: orange;
+}

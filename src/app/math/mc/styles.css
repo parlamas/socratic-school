@@ -1,0 +1,694 @@
+/*src/app/mc/styles.css*/
+
+.quiz-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.language-toggle {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.lang-btn {
+  padding: 8px 20px;
+  font-size: 1rem;
+  background-color: #8B5A2B;
+  color: #FDF8F2;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(139, 90, 43, 0.2);
+}
+
+.lang-btn:hover {
+  background-color: #6B4A2B;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(107, 74, 43, 0.3);
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+  border-radius: 12px;
+  color: #FDF5E6;
+  box-shadow: 0 4px 6px rgba(101, 67, 33, 0.3);
+}
+
+.progress {
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: rgba(253, 245, 230, 0.15);
+  padding: 5px 15px;
+  border-radius: 20px;
+  color: #FFF8DC;
+}
+
+.category-badge {
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: rgba(253, 245, 230, 0.15);
+  padding: 5px 15px;
+  border-radius: 20px;
+  text-transform: capitalize;
+  color: #FFF8DC;
+}
+
+.score {
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: rgba(253, 245, 230, 0.15);
+  padding: 5px 15px;
+  border-radius: 20px;
+  color: #FFF8DC;
+}
+
+.question-card {
+  background-color: #FFF8F0;
+  border-radius: 16px;
+  padding: 35px;
+  box-shadow: 0 10px 30px rgba(101, 67, 33, 0.15);
+  margin-bottom: 20px;
+  border: 1px solid #DEB887;
+}
+
+.question-card h2 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  color: #5D3A1A;
+  font-size: 1.6rem;
+  line-height: 1.4;
+  font-weight: 600;
+  border-left: 4px solid #CD853F;
+  padding-left: 20px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.option-btn {
+  padding: 18px 25px;
+  text-align: left;
+  background-color: #FAEBD7;
+  border: 2px solid #DEB887;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #5D3A1A;
+}
+
+.option-letter {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: #D2B48C;
+  color: #3E2C1B;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.option-btn:hover:not(:disabled) {
+  background-color: #F5DEB3;
+  border-color: #B8860B;
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+}
+
+.option-btn:hover:not(:disabled) .option-letter {
+  background-color: #B8860B;
+  color: #FAEBD7;
+}
+
+.option-btn.selected {
+  background-color: #F4E4C1;
+  border-color: #B8860B;
+}
+
+.option-btn.selected .option-letter {
+  background-color: #B8860B;
+  color: #FAEBD7;
+}
+
+.option-btn.correct {
+  background-color: #E6D5B8;
+  border-color: #8B7355;
+}
+
+.option-btn.correct .option-letter {
+  background-color: #8B7355;
+  color: #FAEBD7;
+}
+
+.option-btn.incorrect {
+  background-color: #F0DDD0;
+  border-color: #A0522D;
+}
+
+.option-btn.incorrect .option-letter {
+  background-color: #A0522D;
+  color: #FAEBD7;
+}
+
+.option-btn:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+.explanation-box {
+  background: linear-gradient(135deg, #FDF4E3 0%, #F9E9D1 100%);
+  border-left: 4px solid #B87C4B;
+  border-radius: 12px;
+  padding: 20px 25px;
+  margin: 25px 0;
+  box-shadow: 0 2px 8px rgba(184, 124, 75, 0.1);
+}
+
+.explanation-box p {
+  margin: 0;
+  color: #6B4423;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.explanation-box strong {
+  color: #8B5A2B;
+  font-size: 1.1rem;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.nav-btn {
+  padding: 12px 30px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.prev-btn {
+  background-color: #8B7D6B;
+  color: #FDF5E6;
+}
+
+.prev-btn:hover:not(:disabled) {
+  background-color: #6B5A48;
+  transform: translateX(-2px);
+  box-shadow: 0 4px 12px rgba(107, 90, 72, 0.3);
+}
+
+.next-btn {
+  background: linear-gradient(135deg, #B87C4B 0%, #8B5A2B 100%);
+  color: #FDF5E6;
+  box-shadow: 0 4px 15px rgba(139, 90, 43, 0.3);
+}
+
+.next-btn:hover:not(:disabled) {
+  transform: translateX(2px);
+  box-shadow: 0 6px 20px rgba(139, 90, 43, 0.4);
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Results page styles */
+.results-card {
+  background-color: #FFF8F0;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(101, 67, 33, 0.2);
+  text-align: center;
+  border: 1px solid #DEB887;
+}
+
+.results-card h2 {
+  color: #5D3A1A;
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+.results-card h3 {
+  background: linear-gradient(135deg, #B87C4B 0%, #8B5A2B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 3rem;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-weight: 800;
+}
+
+.results-summary {
+  text-align: left;
+  margin: 40px 0;
+  max-height: 600px;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 20px;
+  background-color: #FDF4E3;
+  border: 1px solid #DEB887;
+}
+
+.category-results {
+  margin-bottom: 30px;
+}
+
+.category-results h4 {
+  color: #6B4A2B;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #D2B48C;
+}
+
+.result-item {
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border-left: 4px solid;
+  transition: transform 0.2s ease;
+  background-color: #FAF0E6;
+}
+
+.result-item:hover {
+  transform: translateX(5px);
+}
+
+.result-item.correct {
+  background-color: #F0E6D2;
+  border-left-color: #8B7355;
+}
+
+.result-item.incorrect {
+  background-color: #F5E1D6;
+  border-left-color: #B87C4B;
+}
+
+.result-item p {
+  margin: 8px 0;
+  line-height: 1.5;
+  color: #5D3A1A;
+}
+
+.result-item .explanation {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed #D2B48C;
+  font-style: italic;
+  color: #7B5E3B;
+  font-size: 0.95rem;
+}
+
+.restart-btn {
+  padding: 15px 50px;
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #B87C4B 0%, #8B5A2B 100%);
+  color: #FDF5E6;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(139, 90, 43, 0.3);
+}
+
+.restart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(139, 90, 43, 0.4);
+}
+
+/* Scrollbar styling with brown theme */
+.results-summary::-webkit-scrollbar {
+  width: 8px;
+}
+
+.results-summary::-webkit-scrollbar-track {
+  background: #F5E6D3;
+  border-radius: 10px;
+}
+
+.results-summary::-webkit-scrollbar-thumb {
+  background: #B87C4B;
+  border-radius: 10px;
+}
+
+.results-summary::-webkit-scrollbar-thumb:hover {
+  background: #8B5A2B;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .quiz-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .question-card {
+    padding: 25px;
+  }
+  
+  .question-card h2 {
+    font-size: 1.3rem;
+  }
+  
+  .option-btn {
+    padding: 15px 20px;
+    font-size: 1rem;
+  }
+  
+  .navigation-buttons {
+    flex-direction: column;
+  }
+  
+  .nav-btn {
+    width: 100%;
+  }
+  
+  .results-card {
+    padding: 25px;
+  }
+}
+
+/* Additional brown accents */
+.quiz-container {
+  background-color: #FDF8F2;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(101, 67, 33, 0.1);
+}
+
+/* Add some warm texture to the background */
+body {
+  background-color: #F5E6D3;
+  background-image: radial-gradient(circle at 10% 20%, rgba(210, 180, 140, 0.1) 0%, transparent 20%);
+}
+
+/* Category badges color variations */
+.category-badge.basic {
+  background-color: #D2B48C;
+}
+
+.category-badge.manipulation {
+  background-color: #C3A377;
+}
+
+.category-badge.solving {
+  background-color: #B59263;
+}
+
+.category-badge.advanced {
+  background-color: #A67B4E;
+}
+
+/* Add this to src/app/math/mc/styles.css */
+
+.question-number {
+  display: inline-block;
+  background-color: #4a5568;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* Optional: If you want a different style, you can use this alternative */
+.question-number-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Add to src/app/math/mc/styles.css */
+
+.sign-rule-banner {
+  background: linear-gradient(135deg, #4299e1 0%, #667eea 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sign-rule-text {
+  letter-spacing: 0.5px;
+}
+
+.question-number {
+  display: inline-block;
+  background-color: #4a5568;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.question-text {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  color: #2d3748;
+}
+
+.category-badge {
+  background-color: #edf2f7;
+  color: #4a5568;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Add to src/app/math/mc/styles.css */
+
+/* Breadcrumb navigation */
+.breadcrumb-nav {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.breadcrumb-item {
+  color: #6b7280;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+  content: '/';
+  margin: 0 0.5rem;
+  color: #9ca3af;
+}
+
+.breadcrumb-link {
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumb-link:hover {
+  color: #374151;
+}
+
+.breadcrumb-current {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* Exercise info card */
+.exercise-info {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.exercise-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.exercise-description {
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.exercise-metadata {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Add to your existing styles */
+
+/* Add to src/app/math/mc/styles.css */
+
+/* Pagination styles */
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #e5e7eb;
+  background-color: white;
+  padding: 0.75rem 1.5rem;
+  margin-top: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.page-info {
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+.page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+  background-color: white;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.page-btn.active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-dots {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2rem;
+  height: 2rem;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* Finish button style */
+.finish-btn {
+  background-color: #10b981 !important;
+  color: white !important;
+}
+
+.finish-btn:hover:not(:disabled) {
+  background-color: #059669 !important;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .pagination-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .page-numbers {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+/* Add at the end of the file */
+
+/* Bilingual text styles */
+.bilingual-text {
+  display: inline;
+}
+
+.english-text {
+  font-weight: normal;
+}
+
+.greek-text {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* For option buttons in bilingual mode */
+.option-btn .greek-text {
+  font-size: 0.9em;
+}
+
+/* Language toggle button */
+.lang-toggle {
+  transition: all 0.2s ease;
+}
+
+.lang-toggle:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

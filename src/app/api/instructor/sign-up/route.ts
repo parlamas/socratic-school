@@ -99,7 +99,7 @@ export async function POST(req: Request) {
     const hashedPassword = await bcrypt.hash(password, 12);
 
     // 5️⃣ Generate verification token 
-    const verificationToken = crypto.randomBytes(32).toString("hex");
+    const verificationToken = crypto.randomBytes(24).toString("hex"); // 48 chars
     const verificationTokenExpires = new Date(Date.now() + 1000 * 60 * 60 * 24);
 
     console.log("INSTRUCTOR TOKEN DEBUG - Generated:", verificationToken.substring(0, 20) + "...");

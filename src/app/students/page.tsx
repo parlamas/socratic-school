@@ -59,13 +59,13 @@ export default async function StudentPage() {
               <li className="flex items-center p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <div className="ml-3">
                   <p className="text-gray-800 font-medium">Essay: The Socratic Method</p>
-                  <p className="text-gray-600 text-sm">Due: Dec 15, 2024</p>
+                  <p className="text-gray-600 text-sm">Due: Jan 15, 2026</p>
                 </div>
               </li>
               <li className="flex items-center p-3 bg-blue-50 border border-blue-200 rounded-lg">
                 <div className="ml-3">
                   <p className="text-gray-800 font-medium">Reading: Plato's Republic</p>
-                  <p className="text-gray-600 text-sm">Due: Dec 18, 2024</p>
+                  <p className="text-gray-600 text-sm">Due: Jan 18, 2026</p>
                 </div>
               </li>
             </ul>

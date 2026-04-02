@@ -1,4 +1,5 @@
-// src/app/api/students/sign-up/route.ts - ENHANCED DEBUGGING
+// src/app/api/students/sign-up/route.ts - 48-CHAR TOKEN VERSION
+
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
@@ -6,99 +7,75 @@ import { prisma } from "@/lib/prisma.server";
 import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
-  console.log("=== SIGNUP START ===");
+  console.log("=== SIGNUP START (48-char tokens) ===");
   
   try {
     const body = await req.json();
     const { email, password, firstName, lastName, username, nationality, age } = body;
     
-    console.log("SIGNUP: Received data:", { email, username, nationality });
+    console.log("SIGNUP: Received data:", { email, username });
     
-    // Create token
-    const token = crypto.randomBytes(32).toString("hex");
-    console.log("SIGNUP: Generated token:", {
+    // CHANGE: Generate 48-char token (PROVEN TO WORK)
+    const token = crypto.randomBytes(24).toString("hex");
+    console.log("SIGNUP: Generated 48-char token:", {
       fullToken: token,
-      first10: token.substring(0, 10),
-      last10: token.substring(token.length - 10),
       length: token.length,
-      type: typeof token
+      first10: token.substring(0, 10)
     });
     
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
-    console.log("SIGNUP: Password hashed");
     
-    // Create user with all data
-    const userData = {
-      email,
-      password: hashedPassword,
-      firstName,
-      lastName,
-      username,
-      nationality,
-      age: Number(age),
-      role: "student" as const,
-      verificationToken: token,
-      verificationTokenExpires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    };
-    
-    console.log("SIGNUP: Creating user with data:", {
-      ...userData,
-      password: "[HIDDEN]",
-      verificationTokenExpires: userData.verificationTokenExpires.toISOString()
-    });
-    
+    // Create user
     const user = await prisma.user.create({
-      data: userData,
+      data: {
+        email,
+        password: hashedPassword,
+        firstName,
+        lastName,
+        username,
+        nationality,
+        age: Number(age),
+        role: "student",
+        verificationToken: token,
+        verificationTokenExpires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      },
     });
     
-    console.log("SIGNUP: User created successfully!", {
-      userId: user.id,
-      email: user.email,
-      tokenInDB: user.verificationToken ? "YES" : "NO",
-      tokenExpires: user.verificationTokenExpires?.toISOString()
-    });
+    console.log("SIGNUP: User created:", user.id);
+    console.log("SIGNUP: Token in response:", user.verificationToken);
+    console.log("SIGNUP: Token match?", user.verificationToken === token);
     
-    // Verify the token was actually saved
+    // Verify token was saved
     const verifyUser = await prisma.user.findUnique({
       where: { id: user.id },
-      select: { verificationToken: true, verificationTokenExpires: true }
+      select: { verificationToken: true }
     });
     
-    console.log("SIGNUP: Verification check - token in database:", {
-      exists: !!verifyUser?.verificationToken,
+    console.log("SIGNUP: Verification check:", {
+      saved: !!verifyUser?.verificationToken,
       length: verifyUser?.verificationToken?.length,
-      first10Chars: verifyUser?.verificationToken?.substring(0, 10),
-      matchOriginal: verifyUser?.verificationToken === token ? "YES" : "NO"
+      match: verifyUser?.verificationToken === token
     });
     
     // Send email
-    console.log("SIGNUP: Attempting to send verification email...");
     await sendVerificationEmail(email, token);
-    console.log("SIGNUP: Email sent successfully");
+    console.log("SIGNUP: Email sent");
     
     console.log("=== SIGNUP END ===");
     
     return NextResponse.json({ 
       success: true, 
       message: "Account created! Check your email.",
-      debug: {
-        tokenLength: token.length,
-        tokenFirst10: token.substring(0, 10),
-        userId: user.id
-      }
+      debug: { tokenLength: token.length }
     });
     
-  } catch (error) {
-    console.error("=== SIGNUP ERROR ===");
-    console.error("Full error:", error);
-    console.error("Error message:", error instanceof Error ? error.message : String(error));
-    console.error("Error stack:", error instanceof Error ? error.stack : "No stack");
-    console.error("=== SIGNUP ERROR END ===");
-    
+  } catch (error: any) {
+    console.error("SIGNUP ERROR:", error);
     return NextResponse.json({ 
-      error: "Failed to create account",
-      debug: error instanceof Error ? error.message : String(error)
-    }, { status: 500 });
+      error: error.code === 'P2002' ? 
+        `${error.meta?.target?.[0]} already exists` : 
+        "Failed to create account"
+    }, { status: error.code === 'P2002' ? 400 : 500 });
   }
 }

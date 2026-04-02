@@ -1,0 +1,286 @@
+/*src/app/math/ld/styles.css*/
+
+.student-notebook {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  padding-bottom: 60px;
+  border: 1px solid rgba(44, 62, 80, 0.2);
+  border-radius: 12px;
+}
+
+
+
+.notebook-paper {
+  position: relative;
+  min-height: 100%;
+  transform: translateX(-130px);
+}
+
+
+
+/* ========= Greek long-division frame (CRUCIAL) =========
+   Rule targets:
+   1) vertical line ~3cm
+   2) dividend left, starting ~3mm from top of that line
+   3) divisor right, same height as dividend
+   4) underline under divisor ~1.5cm
+   5) meticulous work on BOTH sides
+*/
+.greek-ld {
+  /* 96dpi approximations: 1mm ≈ 3.78px, 1cm ≈ 37.8px */
+  --mm: 3.78px;
+  --cm: 37.8px;
+
+  --vline-height: calc(3 * var(--cm));     /* ~3cm */
+  --top-offset: calc(3 * var(--mm));       /* ~3mm */
+  --line-x: 460px; /* vertical line position */
+
+  /* spacing relative to the vertical line (Greek convention) */
+    /* both numbers must be exactly 3mm from the vertical line */
+  --gap: calc(3 * var(--mm));
+
+  /* positions anchored to the vertical line (no crossing) */
+  --left-x: calc(var(--line-x) - var(--gap));
+  --right-x: calc(var(--line-x) + var(--gap));
+
+
+  --underline-width: calc((1.5 + 2) * var(--cm));
+
+  --ink: #2c3e50;
+
+  --mono: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Vertical line */
+.greek-ld .vline {
+  position: absolute;
+  left: var(--line-x);
+  top: var(--top-offset);
+  width: 2px;
+  height: var(--vline-height);
+  background: rgba(44, 62, 80, 0.65);
+  border-radius: 2px;
+}
+
+.greek-ld .dividend {
+  position: absolute;
+  right: calc(100% - var(--line-x) + var(--gap));
+  top: var(--top-offset);
+  font-family: var(--mono);
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+
+/* Divisor (right of line, same height) */
+.greek-ld .divisor {
+  position: absolute;
+  left: var(--right-x);
+  top: var(--top-offset);
+  font-family: var(--mono);
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--ink);
+}
+
+/* Underline under divisor (~1.5cm) */
+.greek-ld .divisor-underline {
+  position: absolute;
+  left: var(--line-x);
+  top: calc(var(--top-offset) + 30px);
+  width: calc(var(--underline-width) + var(--gap));
+  height: 2px;
+  background: rgba(44, 62, 80, 0.65);
+  border-radius: 2px;
+}
+
+
+/* Right-side work (quotient + remainder note) under underline */
+.greek-ld .right-work {
+  position: absolute;
+  left: var(--right-x);
+  top: calc(var(--top-offset) + 44px);
+  width: calc(100% - var(--right-x) - 20px);
+  font-family: var(--mono);
+  color: var(--ink);
+}
+
+
+
+.greek-ld .right-line.emph { font-weight: 700; }
+.greek-ld .right-line.muted { opacity: 0.65; }
+
+/* Left-side work (subtractions) starts under dividend */
+.greek-ld .left-work {
+  position: absolute;
+  left: var(--left-x);
+  top: calc(var(--top-offset) + 44px);
+  width: calc(var(--line-x) - var(--left-x) - 14px);
+  font-family: var(--mono);
+  color: var(--ink);
+}
+
+/* Handwritten lines: right-aligned like column subtraction */
+.greek-ld .left-line {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 20px;
+  letter-spacing: 1px;
+  margin: 6px 0;
+  white-space: pre; /* keeps spacing */
+}
+
+.greek-ld .left-line.emph { font-weight: 700; }
+.greek-ld .left-line.muted { opacity: 0.65; }
+
+.greek-ld .left-rule {
+  margin: 10px 0 10px 0;   /* create visible vertical separation */
+  height: 2px;
+  background: rgba(44, 62, 80, 0.65); /* darker so it is clearly visible */
+  border-radius: 2px;
+}
+
+
+/* Explanation block (same pattern as your EKP page likely uses) */
+.step-explanation {
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  background: rgba(0,0,0,0.02);
+}
+
+.step-title {
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* hand */
+.writing-hand {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 26px;
+  pointer-events: none;
+  transition: left 0.35s linear, top 0.35s linear, opacity 0.2s linear;
+  user-select: none;
+}
+
+.ink-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: rgba(44, 62, 80, 0.6);
+  vertical-align: middle;
+}
+
+/* Numbers only (quotient & remainder) in red */
+.greek-ld .ld-number {
+  color: #c0392b;
+  font-weight: 700;
+}
+
+.greek-ld .left-line {
+  font-size: 15px;
+}
+
+.greek-ld .left-line.emph {
+  font-size: 15px;
+}
+
+
+
+/* Bring-down instruction: smaller, secondary */
+.greek-ld .left-line.bring-down {
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+/* Arrow indicating quotient digit source */
+.greek-ld .quotient-digit {
+  position: relative;
+  display: inline-block;
+}
+
+.greek-ld .quotient-digit {
+  position: relative;
+  display: inline-block;
+}
+
+
+.greek-ld .quotient-digit::before {
+  content: "↗";
+  position: absolute;
+  top: -0.75em;   /* lower */
+  left: 0em;  /* more to the right */
+  font-size: 0.75em;
+  color: rgba(44, 62, 80, 0.8);
+}
+
+.greek-ld .quotient-digit::before {
+  content: "↗";
+  position: absolute;
+  top: -0.75em;
+  left: calc(-0.25em + 2mm); /* move arrow 2mm to the right */
+  font-size: 0.75em;
+  color: rgba(44, 62, 80, 0.8);
+}
+
+.notebook-paper {
+  min-height: 100%;
+}
+
+.pre-decimal {
+  color: #1a7f37; /* calm green */
+}
+
+.decimal-digit {
+  color: #1a7f37;
+}
+
+.decimal-step {
+  color: #1a7f37;
+}
+
+.greek-ld .ld-number.decimal-digit {
+  color: #1a7f37;
+}
+
+/* Quotient: label above, digits inline, identical on desktop & mobile */
+.greek-ld .right-line.emph {
+  display: block;
+  font-size: 12px;
+  opacity: 0.75;
+}
+
+.greek-ld .right-line.emph .quotient-label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.greek-ld .right-line.emph .ld-number {
+  display: inline-block;
+  font-size: 20px;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+/* Mobile: prevent quotient digits from wrapping */
+@media (max-width: 768px) {
+  .greek-ld .right-work {
+    white-space: nowrap;
+    overflow-x: auto;
+  }
+}
+
+/* Mobile: widen right-side work area so quotient digits stay visible */
+@media (max-width: 768px) {
+  .greek-ld .right-work {
+    width: calc(100% - var(--right-x) + 60px);
+  }
+}
