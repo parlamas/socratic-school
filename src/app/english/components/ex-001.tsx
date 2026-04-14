@@ -219,7 +219,11 @@ const exercises: ExerciseItem[] = [
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-const Exercise001 = () => {
+const FREE_LIMIT = 3;
+
+type AccessStatus = 'guest' | 'signed-in' | 'purchased';
+
+const Exercise001 = ({ accessStatus }: { accessStatus: AccessStatus }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [showResult, setShowResult] = useState<boolean | null>(null);
@@ -229,6 +233,7 @@ const Exercise001 = () => {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const ex = exercises[currentIndex];
+  const isLocked = accessStatus !== 'purchased' && currentIndex >= FREE_LIMIT;
 
   // Reset answers when exercise changes
   useEffect(() => {
@@ -376,23 +381,58 @@ const Exercise001 = () => {
         ))}
       </div>
 
-      {/* ── Blanks count hint ── */}
+     {/* ── Blanks count hint ── */}
       <div style={{ textAlign: 'center', fontSize: 12, color: '#888', marginBottom: 8 }}>
         {ex.blanks.length === 1 ? '1 blank' : `${ex.blanks.length} blanks`}
       </div>
 
       {/* ── Sentence card ── */}
-      <div style={{
-        background: '#fff',
-        border: '0.5px solid #bbb',
-        borderRadius: 12,
-        padding: '1.25rem 1.5rem',
-        marginBottom: '1rem',
-        fontSize: 15,
-        lineHeight: 2.2,
-        textAlign: 'left',
-      }}>
-        {renderSentence()}
+      <div style={{ position: 'relative' }}>
+        <div style={{
+          background: '#fff',
+          border: '0.5px solid #bbb',
+          borderRadius: 12,
+          padding: '1.25rem 1.5rem',
+          marginBottom: '1rem',
+          fontSize: 15,
+          lineHeight: 2.2,
+          textAlign: 'left',
+          filter: isLocked ? 'blur(4px)' : 'none',
+          userSelect: isLocked ? 'none' : 'auto',
+          pointerEvents: isLocked ? 'none' : 'auto',
+        }}>
+          {renderSentence()}
+        </div>
+
+        {/* ── Gate overlay ── */}
+        {isLocked && (
+          <div style={{
+            position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            justifyContent: 'center', gap: 10, borderRadius: 12,
+            background: 'rgba(255,255,255,0.7)',
+          }}>
+            {accessStatus === 'guest' && (
+              <>
+                <div style={{ fontSize: 14, fontWeight: 500, color: '#333', textAlign: 'center' }}>
+                  Sign in to continue
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <a href="/students/sign-in" style={{ background: '#185FA5', color: '#fff', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Sign in</a>
+                  <a href="/students/sign-up" style={{ background: '#fff', color: '#333', border: '0.5px solid #ccc', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Sign up</a>
+                </div>
+              </>
+            )}
+            {accessStatus === 'signed-in' && (
+              <>
+                <div style={{ fontSize: 14, fontWeight: 500, color: '#333', textAlign: 'center' }}>
+                  Purchase this exercise to continue
+                </div>
+                <a href={`/shop`} style={{ background: '#185FA5', color: '#fff', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Buy now</a>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ── Action buttons ── */}
