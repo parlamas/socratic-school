@@ -127,6 +127,12 @@ export default async function AdminTopicsPage({ searchParams }: Props) {
                 </button>
               </form>
               <Link
+                href={`/admin/topics/${topic.id}`}
+                className="text-xs text-indigo-600 hover:text-indigo-800 no-underline border border-indigo-200 rounded-lg px-3 py-1.5 transition-colors"
+              >
+                Edit
+              </Link>
+              <Link
                 href={`/admin/exercises?topicId=${topic.id}`}
                 className="text-xs text-indigo-600 hover:text-indigo-800 no-underline border border-indigo-200 rounded-lg px-3 py-1.5 transition-colors"
               >
