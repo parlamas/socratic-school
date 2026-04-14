@@ -44,6 +44,14 @@ export default async function AdminTopicsPage({ searchParams }: Props) {
     redirect("/admin/topics");
   }
 
+  async function deleteTopic(formData: FormData) {
+    "use server";
+    const id = formData.get("id") as string;
+    await prisma.topic.delete({ where: { id } });
+    revalidatePath("/admin/topics");
+    redirect("/admin/topics");
+  }
+
   return (
     <div>
       <h1 className="text-2xl font-semibold text-gray-900 mb-8">Topics</h1>
@@ -124,6 +132,15 @@ export default async function AdminTopicsPage({ searchParams }: Props) {
               >
                 Exercises →
               </Link>
+              <form action={deleteTopic} onSubmit={(e) => { if (!confirm(`Delete "${topic.name}"? This will also delete all its exercises.`)) e.preventDefault(); }}>
+                <input type="hidden" name="id" value={topic.id} />
+                <button
+                  type="submit"
+                  className="text-xs text-red-400 hover:text-red-600 border border-red-200 rounded-lg px-3 py-1.5 transition-colors"
+                >
+                  Delete
+                </button>
+              </form>
             </div>
           </div>
         ))}
