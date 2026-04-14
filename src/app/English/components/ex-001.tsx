@@ -32,116 +32,122 @@ const ex = (template: string, blanks: Blank[], note?: string): ExerciseItem => (
 });
 
 // Blank helpers
-const a    = { correct: ['a'] };
-const an   = { correct: ['an'] };
-const some = { correct: ['some'] };
-const no   = { correct: [''] };                        // zero article
-const aAn  = { correct: ['a', 'an'] };
-const someNo = { correct: ['some', ''] };              // some or nothing
-const aNo  = { correct: ['a', ''] };
+const a       = { correct: ['a'] };
+const an      = { correct: ['an'] };
+const some    = { correct: ['some'] };
+const any     = { correct: ['any'] };
+const no      = { correct: ['no'] };                   // "no" as article (e.g. "no idea")
+const the     = { correct: ['the'] };
+const nil     = { correct: [''] };                     // zero article ∅
+const aAn     = { correct: ['a', 'an'] };
+const someAny = { correct: ['some', 'any'] };          // some or any
+const someNil = { correct: ['some', ''] };             // some or ∅
+const anyNil  = { correct: ['any', ''] };              // any or ∅
+const aNil    = { correct: ['a', ''] };                // a or ∅
+const theNil  = { correct: ['the', ''] };              // the or ∅
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
 const exercises: ExerciseItem[] = [
   ex(
-    'My neighbour is ___ photographer; let\'s ask him for ___ advice about colour films.',
-    [a, someNo],
+    'My neighbour is ___ photographer; let\'s ask him for ___ advice about light.',
+    [a, someNil],
   ),
   ex(
-    'We had ___ fish and ___ chips for ___ lunch. ~ That doesn\'t sound ___ very interesting lunch.',
-    [no, no, no, a],
+    '&mdash; We had ___ fish and ___ chips for ___ lunch.<br>&mdash; That doesn\'t sound like ___ very interesting lunch.',
+    [someNil, nil, nil, a],
   ),
   ex(
-    'I had ___ very bad night; I didn\'t sleep ___ wink.',
+    'They had ___ troubled night; They didn\'t sleep ___ wink.',
     [a, a],
   ),
   ex(
-    'He is ___ vegetarian; you won\'t get ___ meat at his house. He\'ll give you ___ nut cutlet. ~ Last time I had ___ nut cutlet I had ___ indigestion.',
-    [a, no, a, a, no],
+    '&mdash; She is ___ vegetarian; you won\'t get ___ meat at her house. She\'ll give you ___ zucchini burger.<br>&mdash; Last time I had ___ zucchini burger, it had ___ most amazing taste.',
+    [a, anyNil, a, a, the],
   ),
   ex(
     '___ travel agent would give you ___ information about ___ hotels.',
-    [a, some, no],
+    [a, some, nil],
     'Hotels is plural countable — no article needed for a general statement.',
   ),
   ex(
-    'We\'d better go by ___ taxi — if we can get ___ taxi at such ___ hour as 2 a.m.',
-    [no, a, an],
+    'We\'d better go by ___ taxi &mdash; if we can get ___ taxi at such ___ hour as 2 a.m.',
+    [nil, a, an],
     '"By taxi" = no article (mode of transport). "Such an hour" is a fixed expression.',
   ),
   ex(
     '___ person who suffers from ___ claustrophobia has ___ dread of being confined in ___ small space, and would always prefer ___ stairs to ___ lift.',
-    [a, no, a, a, no, a],
-    '"Stairs" is plural here used generally — no article.',
+    [a, nil, a, a, nil, a],
+    '"Stairs" is plural here used generally &mdash; no article.',
   ),
   ex(
-    'Do you take ___ sugar in ___ coffee? ~ I used to, but now I\'m on ___ diet. I\'m trying to lose ___ weight.',
-    [no, no, a, no],
+    '&mdash; Do you take ___ sugar in ___ coffee?<br>&mdash; I used to, but now I\'m on ___ diet. I\'m trying to lose ___ weight.',
+    [nil, nil, a, someNil],
   ),
   ex(
     '___ man suffering from ___ shock should not be given anything to drink.',
-    [a, no],
+    [a, nil],
   ),
   ex(
     'You\'ll get ___ shock if you touch ___ live wire with that screwdriver. Why don\'t you get ___ screwdriver with ___ insulated handle?',
     [a, a, a, an],
   ),
   ex(
-    'It costs fifty-five and ___ half pence and I\'ve only got ___ fifty pence piece. ~ You can pay by ___ cheque here. ~ But can I write ___ cheque for ___ fifty-five and ___ half pence?',
-    [a, a, no, a, no, a],
-    '"By cheque" = no article (method of payment).',
+    '&mdash; It costs fifty five and ___ half euros and I\'ve only got ___ fifty-euro bill.<br>&mdash; You can pay by ___ card here.<br>&mdash; But can I get ___ change in cash if I pay sixty euros?',
+    [a, a, nil, a, some],
+    '"By card" = no article (method of payment).',
   ),
   ex(
-    '___ Mr Smith is ___ old customer and ___ honest man. ~ Why do you say that? Has he been accused of ___ dishonesty?',
-    [no, an, an, no],
+    '&mdash; ___ Mr Smith is ___ old customer and ___ honest man.<br>&mdash; Why do you say that? Has he been accused of ___ dishonesty?',
+    [nil, an, an, nil],
     '"Mr Smith" with no article = we know who he is. "Dishonesty" is abstract — no article.',
   ),
   ex(
-    'I\'m not ___ wage-earner; I\'m ___ self-employed man. I have ___ business of my own. ~ Then you\'re not ___ worker; you\'re ___ capitalist!',
+    '&mdash; I\'m not ___ wage-earner; I\'m ___ self-employed man. I have ___ business of my own.<br>&mdash;Then you\'re not ___ worker; you\'re ___ businessman!',
     [a, a, a, a, a],
   ),
   ex(
     'When he was charged with ___ murder he said he had ___ alibi.',
-    [no, an],
+    [nil, an],
     '"Murder" here is used in the abstract sense — no article.',
   ),
   ex(
-    '___ friend of mine is expecting ___ baby. If it\'s ___ girl she\'s going to be called Etheldreda. ~ What ___ name to give ___ girl!',
+    '&mdash; ___ friend of mine is expecting ___ baby. If it\'s ___ girl she\'s going to be called Diotima.<br>&mdash; What ___ beautiful name to give ___ girl!',
     [a, a, a, a, a],
   ),
   ex(
-    'I have ___ hour and ___ half for lunch. ~ I only have ___ half ___ hour — barely ___ time for ___ smoke and ___ cup of coffee.',
-    [an, a, a, an, no, a, a],
+    '&mdash; I have ___ hour and ___ half for lunch.<br>&mdash;I only have ___ half ___ hour &mdash; barely ___ time for ___ smoke and ___ cup of coffee.',
+    [an, a, nil, an, a, a],
     '"An hour" — silent h. "Barely time" = no article (abstract sense).',
   ),
   ex(
-    'I hope you have ___ lovely time and ___ good weather. ~ But I\'m not going for ___ holiday; I\'m going on ___ business.',
-    [a, no, a, no],
+    '&mdash; I hope you have ___ lovely time and ___ good weather.<br>&mdash; But I\'m not going for ___ holiday; I\'m going on ___ business.',
+    [a, nil, a, nil],
     '"On business" = no article (purpose/function expression).',
   ),
   ex(
     'He looked at me with ___ horror when I explained that I was ___ double agent.',
-    [no, a],
+    [nil, a],
     '"With horror" = abstract, no article.',
   ),
   ex(
-    'I wouldn\'t climb ___ mountain for £1,000! I have ___ horror of ___ heights.',
-    [a, a, no],
+    'I wouldn\'t climb ___ mountain for $1,000! I have ___ horror of ___ heights.',
+    [a, a, nil],
     '"Heights" = plural abstract — no article.',
   ),
   ex(
-    'I have ___ headache and ___ sore throat. I think I\'ve got ___ cold. ~ I think you\'re getting ___ flu.',
-    [a, a, a, no],
+    '&mdash; I have ___ headache and ___ sore throat. I think I\'ve got ___ cold.<br>&mdash; I think you\'re getting ___ flu.',
+    [a, a, a, the],
     '"Flu" is used without article in British English.',
   ),
   ex(
     '___ Mr Jones called while you were out. He wants to make ___ complaint about ___ article in the paper. He was in ___ very bad temper.',
-    [no, a, an, a],
-    '"Mr Jones" — neither speaker knows him, yet no article is used with titles + surnames.',
+    [a, a, an, a],
+    '"A Mr Jones" &mdash; he is not known to the speaker.',
   ),
   ex(
     'If you go by ___ train you can have quite ___ comfortable journey, but make sure you get ___ express, not ___ train that stops at all the stations.',
-    [no, a, an, a],
+    [nil, a, the, the],
     '"By train" = no article (mode of transport).',
   ),
   ex(
@@ -150,8 +156,8 @@ const exercises: ExerciseItem[] = [
     '"A few" = a small number (positive sense). "An old" — vowel sound.',
   ),
   ex(
-    'I\'m having ___ few friends in to ___ coffee tomorrow evening. Would you like to come? ~ I\'d love to, but I\'m afraid I\'m going to ___ concert.',
-    [a, no, a],
+    '&mdash; I\'m having ___ few friends in for ___ coffee tomorrow evening. Would you like to come?<br>&mdash; I\'d love to, but I\'m afraid I\'m going to ___ concert.',
+    [a, nil, a],
     '"To coffee" = informal invitation, no article. "A concert" = specific event.',
   ),
   ex(
@@ -160,27 +166,27 @@ const exercises: ExerciseItem[] = [
   ),
   ex(
     'He broke ___ leg in ___ skiing accident. It\'s still in ___ plaster.',
-    [a, a, no],
+    [a, a, nil],
     '"In plaster" = fixed expression, no article.',
   ),
   ex(
     'I want ___ assistant with ___ knowledge of French and ___ experience of ___ office routine.',
-    [an, a, no, no],
+    [an, someNil, someNil, nil],
     '"Experience of office routine" — both are used in a general/abstract sense here.',
   ),
   ex(
     'I see that your house is built of ___ wood. Are you insured against ___ fire?',
-    [no, no],
+    [nil, nil],
     'Both "wood" and "fire" are used in an abstract/material sense.',
   ),
   ex(
-    'The escaping prisoner camped in ___ wood but he didn\'t light ___ fire because ___ smoke rising from the wood might attract ___ attention.',
-    [a, a, no, no],
-    '"A wood" = a specific small forest. "A fire" = a specific fire. "Smoke" and "attention" are abstract here.',
+    '___ prisoner on the run camped in ___ woods but he didn\'t light ___ fire because ___ smoke rising from the wood might attract ___ attention.',
+    [a, the, a, nil, nil],
+    '"Woods" = a forest. "A fire" = a specific fire. "Smoke" and "attention" are abstract here.',
   ),
   ex(
-    'I had ___ amazing experience last night. I saw ___ dinosaur eating ___ meat pie in ___ London park. ~ You mean you had ___ nightmare. Anyway, dinosaurs didn\'t eat ___ meat.',
-    [an, a, a, a, a, no],
+    '&mdash; I had ___ amazing experience last night. I saw ___ dinosaur eating ___ meat pie in ___ Seoul park.<br>&mdash; You mean you had ___ nightmare. Anyway, dinosaurs didn\'t eat ___ meat.',
+    [an, a, someNil, a, a, nil],
   ),
   ex(
     'I\'ll pay you ___ hundred ___ week. It\'s not ___ enormous salary but after all you are ___ completely unskilled man.',
@@ -192,7 +198,7 @@ const exercises: ExerciseItem[] = [
   ),
   ex(
     '___ little is known about the effect of this drug; yet ___ chemist will sell it to you without ___ prescription.',
-    [no, a, a],
+    [nil, a, a],
     '"Little" here = hardly anything (no article). "A chemist" = any chemist.',
   ),
   ex(
@@ -202,11 +208,11 @@ const exercises: ExerciseItem[] = [
   ),
   ex(
     'Would it be ___ trouble to you to buy me ___ newspaper on your way home?',
-    [a, a],
+    [any, a],
   ),
   ex(
     '___ man is ___ reasoning animal.',
-    [no, a],
+    [nil, a],
     '"Man" in the generic philosophical sense takes no article.',
   ),
 ];
