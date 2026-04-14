@@ -428,7 +428,7 @@ const Exercise001 = ({ accessStatus }: { accessStatus: AccessStatus }) => {
                 <div style={{ fontSize: 14, fontWeight: 500, color: '#333', textAlign: 'center' }}>
                   Purchase this exercise to continue
                 </div>
-                <a href={`/shop`} style={{ background: '#185FA5', color: '#fff', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Buy now</a>
+                <a href="/shop/languages/english-articles-possessive-adjectives-one-some-any-no" style={{ background: '#185FA5', color: '#fff', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Buy now</a>
               </>
             )}
           </div>
