@@ -132,7 +132,7 @@ export default async function AdminTopicsPage({ searchParams }: Props) {
               >
                 Exercises →
               </Link>
-              <form action={deleteTopic} onSubmit={(e) => { if (!confirm(`Delete "${topic.name}"? This will also delete all its exercises.`)) e.preventDefault(); }}>
+              <form action={deleteTopic}>
                 <input type="hidden" name="id" value={topic.id} />
                 <button
                   type="submit"
