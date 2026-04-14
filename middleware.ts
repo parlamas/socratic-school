@@ -1,4 +1,5 @@
 //middleware.ts
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
@@ -46,8 +47,8 @@ export async function middleware(req: NextRequest) {
 
   // Logged in, but wrong role
   if (
-    (isStudentRoute && token.role !== "student") ||
-    (isInstructorRoute && token.role !== "instructor")
+    (isStudentRoute && token.role !== "student" && token.role !== "admin") ||
+    (isInstructorRoute && token.role !== "instructor" && token.role !== "admin")
   ) {
     return NextResponse.redirect(new URL("/", req.url));
   }
