@@ -98,9 +98,6 @@ export default async function TopicPage({ params }: Props) {
               </div>
 
               <div className="flex items-center gap-3 shrink-0">
-                <span className="text-sm font-medium text-gray-700">
-                  €{Number(exercise.price).toFixed(2)}
-                </span>
                 {owned ? (
                   <Link
                     href={`/students/exercises/${exercise.id}`}

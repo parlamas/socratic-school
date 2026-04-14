@@ -1,4 +1,4 @@
-// src/app/page.tsx
+//src/app/page.tsx
 
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -7,164 +7,174 @@ import { authOptions } from "@/lib/auth";
 export default async function HomePage() {
   const session = await getServerSession(authOptions);
 
-  // Logged in → redirect by role
   if (session?.user) {
     const role = (session.user as any).role;
-
-    if (role === "student") {
-      redirect("/students");
-    }
-
-    if (role === "instructor") {
-      redirect("/instructor");
-    }
+    if (role === "student") redirect("/students");
+    if (role === "instructor") redirect("/instructor");
   }
 
-  // Not logged in → public landing page
   return (
-    <main className="bg-white min-h-screen flex flex-col items-center pt-0">
-      <div className="max-w-2xl px-6 w-full">
-        {/* Tutor Ad - Now at the very top */}
-        <div className="max-w-full mx-auto mt-4 mb-8 p-5 bg-white rounded-xl shadow-lg border border-gray-200">
-          {/* Philosophical statement */}
-          <div className="text-center mb-4 pb-3 border-b-2 border-gray-100">
-            <div className="wow">
+    <main className="min-h-screen bg-white">
+      {/* Google Fonts */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap');
+        .font-garamond { font-family: 'EB Garamond', serif; }
+        .font-dm { font-family: 'DM Sans', sans-serif; }
+      `}</style>
+
+      <div className="font-dm max-w-xl mx-auto px-6 py-10">
+
+        {/* Site header */}
+        <div className="flex items-center gap-2.5 mb-10">
+          <div className="w-7 h-7 rounded-full border border-gray-900 flex items-center justify-center flex-shrink-0">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1"/>
+              <circle cx="7" cy="7" r="2" fill="currentColor"/>
+            </svg>
+          </div>
+          <span className="text-xs font-medium tracking-widest uppercase text-gray-500">
+            Socratic School
+          </span>
+        </div>
+
+        {/* Tutor card */}
+        <div className="bg-white border border-gray-200 rounded-xl p-8 mb-8">
+
+          {/* Philosophy */}
+          <div className="text-center pb-6 mb-6 border-b border-gray-100">
+            <p className="font-garamond italic text-base leading-relaxed text-gray-500 mb-1">
               Η επιστροφή στην Κλασική Ελλάδα είναι ο δρόμος προς τα εμπρός.
-            </div>
-            <div className="wow">
+            </p>
+            <p className="font-garamond text-sm leading-relaxed text-gray-400">
               Going Back To Classical Greece Is The Way Forward
-            </div>
+            </p>
           </div>
 
-          {/* Socratic Methodology with self-actualization */}
-          <div className="text-center mb-4">
-            <div className="wow1">
+          {/* Methodology */}
+          <div className="text-center mb-6">
+            <p className="font-garamond text-xl font-medium mb-1">
               Σωκρατική Μεθοδολογία
-            </div>
-            <div className="wow1">
+            </p>
+            <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">
               Socratic Methodology
-            </div>
-            <div className="wow33">
+            </p>
+            <p className="text-xs text-gray-400">
               self-actualization — προσωπική καταξίωση
-            </div>
+            </p>
           </div>
 
-          <div className="text-center mb-4 pb-2 border-b-2 border-gray-100">
-            <div className="block text-lg font-semibold text-gray-800 mb-1">
+          <hr className="border-gray-100 mb-6" />
+
+          {/* Name */}
+          <div className="text-center mb-6">
+            <p className="font-garamond text-lg font-medium mb-1">
               Ισίδωρος Παρλαμάς
-            </div>
-            <div className="block text-sm text-gray-600">
+            </p>
+            <p className="text-xs tracking-wide text-gray-500">
               Isidoros Parlamas
-            </div>
+            </p>
           </div>
-          
-          <div className="bg-gray-50 p-3 rounded-lg mb-4">
-            <div className="flex items-center gap-2.5 mb-2 text-sm">
-              <span>📧</span>
-              <a href="mailto:parlamas@live.com" className="text-blue-600 no-underline hover:underline">
+
+          {/* Contact */}
+          <div className="flex flex-col gap-2 mb-6">
+            <div className="flex items-center gap-2.5 text-sm">
+              <svg className="w-4 h-4 text-gray-400 flex-shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
+                <rect x="1" y="3" width="14" height="10" rx="1.5"/>
+                <path d="M1 4.5l7 5 7-5"/>
+              </svg>
+              <a href="mailto:mind@horistics.com" className="text-blue-600 hover:underline">
                 mind@horistics.com
               </a>
             </div>
-            <div className="flex items-center gap-2.5 mb-2 text-sm">
-              <span>📱</span>
-              <a href="tel:+4523950606" className="text-blue-600 no-underline hover:underline">
+            <div className="flex items-center gap-2.5 text-sm">
+              <svg className="w-4 h-4 text-gray-400 flex-shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
+                <rect x="4" y="1" width="8" height="14" rx="1.5"/>
+                <circle cx="8" cy="12" r="0.8" fill="currentColor" stroke="none"/>
+              </svg>
+              <a href="tel:+4523950606" className="text-blue-600 hover:underline">
                 +45 23 95 06 06
               </a>
             </div>
             <div className="flex items-center gap-2.5 text-sm">
-              <span>💼</span>
-              <a href="https://www.linkedin.com/in/horistics/" target="_blank" rel="noopener noreferrer" className="text-blue-600 no-underline hover:underline">
+              <svg className="w-4 h-4 text-gray-400 flex-shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
+                <rect x="1" y="1" width="14" height="14" rx="2"/>
+                <path d="M5 6h.01M5 8v4M8 6v6M8 8a2 2 0 1 1 4 0v4"/>
+              </svg>
+              <a href="https://www.linkedin.com/in/horistics/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                 LinkedIn
               </a>
             </div>
             <div className="flex items-center gap-2.5 text-sm">
-              <span>💼</span>
-              <a href="https://socratic-school.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 no-underline hover:underline">
+              <svg className="w-4 h-4 text-gray-400 flex-shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.2">
+                <circle cx="8" cy="8" r="6"/>
+                <path d="M8 2c-1.5 2-2 3.5-2 6s.5 4 2 6M8 2c1.5 2 2 3.5 2 6s-.5 4-2 6M2 8h12"/>
+              </svg>
+              <a href="https://socratic-school.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                 socratic-school.com
               </a>
             </div>
           </div>
 
-          {/* Experience badge */}
-          <div className="text-center mb-3">
-            <div className="inline-block bg-purple-100 text-purple-800 px-4 py-1.5 rounded-full text-sm font-medium">
-              <span>Πολυετής Πείρα</span>
-              <span className="mx-2">•</span>
-              <span>Many years of professional experience</span>
-            </div>
-          </div>
-
-          <div className="flex justify-center gap-3 mb-4">
-            <span className="bg-green-600 text-white px-4 py-1.5 rounded-full font-semibold text-sm">
-              €50/60min
+          {/* Badges */}
+          <div className="flex flex-wrap justify-center gap-2 mb-6">
+            <span className="text-xs font-medium px-3.5 py-1 rounded-full border border-gray-300 text-gray-700">
+              €50 / 60 min
             </span>
-            <span className="bg-yellow-500 text-gray-800 px-4 py-1.5 rounded-full font-semibold text-sm">
-              ONLINE
+            <span className="text-xs font-medium px-3.5 py-1 rounded-full bg-gray-100 text-gray-600">
+              Online
+            </span>
+            <span className="text-xs font-medium px-3.5 py-1 rounded-full bg-gray-100 text-gray-600">
+              Πολυετής πείρα · Many years of experience
             </span>
           </div>
 
-          <div className="text-center mb-3">
-            <div className="block text-base font-semibold text-gray-800 mb-0.5">
-              ΟΛΑ ΤΑ ΜΑΘΗΜΑΤΑ
-            </div>
-            <div className="block text-sm text-gray-600 uppercase tracking-wide">
-              ALL SUBJECTS
-            </div>
-          </div>
-
-          <div className="text-center text-xs text-gray-500 pt-3 border-t border-gray-200">
-            Από 1η Δημοτικού έως 3η Λυκείου • 1st to 12th Grades
+          {/* Subjects */}
+          <div className="text-center">
+            <p className="font-garamond text-base font-medium mb-1">Όλα τα Μαθήματα</p>
+            <p className="text-xs uppercase tracking-widest text-gray-500 mb-2">All subjects</p>
+            <p className="text-xs text-gray-400">
+              Από 1η Δημοτικού έως 3η Λυκείου · 1st to 12th grades
+            </p>
           </div>
         </div>
 
-        <h1 className="text-2xl font-semibold text-gray-900 mb-3">
-          Socratic School
-        </h1>
+        {/* Intro */}
+        <div className="mb-8">
+          <h1 className="font-garamond text-2xl font-medium mb-3">
+            Socratic School
+          </h1>
+          <p className="text-sm text-gray-600 leading-relaxed mb-2">
+            An online learning environment built around dialogue, inquiry, and disciplined thinking.
+          </p>
+          <p className="text-sm text-gray-600 leading-relaxed">
+            It brings together learners and instructors in a shared space where understanding is developed through questions, discussion, and careful reasoning.
+          </p>
+        </div>
 
-        <p className="text-sm text-gray-700 mb-3">
-          Socratic School is an online learning environment built around
-          dialogue, inquiry, and disciplined thinking.
-        </p>
-
-        <p className="text-sm text-gray-700 mb-6">
-          It brings together learners and instructors in a shared space where
-          understanding is developed through questions, discussion, and careful
-          reasoning.
-        </p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-          <div className="border border-gray-200 rounded-lg p-4">
-            <h2 className="text-base font-medium mb-1.5">Students</h2>
-            <p className="text-xs text-gray-700 mb-2">
-              Join as a student to participate in courses, discussions, and
-              guided learning.
+        {/* Portals */}
+        <div className="grid grid-cols-2 gap-3">
+          <div className="border border-gray-200 rounded-lg p-5">
+            <h2 className="text-sm font-medium mb-1.5">Students</h2>
+            <p className="text-xs text-gray-500 leading-relaxed mb-3">
+              Participate in courses, discussions, and guided learning.
             </p>
             <div className="flex gap-3">
-              <a href="/students/sign-up" className="text-xs underline">
-                Sign up
-              </a>
-              <a href="/students/sign-in" className="text-xs underline">
-                Sign in
-              </a>
+              <a href="/students/sign-up" className="text-xs text-blue-600 hover:underline">Sign up</a>
+              <a href="/students/sign-in" className="text-xs text-blue-600 hover:underline">Sign in</a>
             </div>
           </div>
-
-          <div className="border border-gray-200 rounded-lg p-4">
-            <h2 className="text-base font-medium mb-1.5">Instructors</h2>
-            <p className="text-xs text-gray-700 mb-2">
-              Join as an instructor to design courses, guide dialogue, and lead
-              structured inquiry.
+          <div className="border border-gray-200 rounded-lg p-5">
+            <h2 className="text-sm font-medium mb-1.5">Instructors</h2>
+            <p className="text-xs text-gray-500 leading-relaxed mb-3">
+              Design courses, guide dialogue, and lead structured inquiry.
             </p>
             <div className="flex gap-3">
-              <a href="/instructor/sign-up" className="text-xs underline">
-                Sign up
-              </a>
-              <a href="/instructor/sign-in" className="text-xs underline">
-                Sign in
-              </a>
+              <a href="/instructor/sign-up" className="text-xs text-blue-600 hover:underline">Sign up</a>
+              <a href="/instructor/sign-in" className="text-xs text-blue-600 hover:underline">Sign in</a>
             </div>
           </div>
         </div>
+
       </div>
     </main>
   );

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma.server";
 import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import ExerciseBuilderWrapper from "./ExerciseBuilderWrapper";
 
 interface Props {
   searchParams: Promise<{ topicId?: string }>;
@@ -63,16 +64,6 @@ export default async function AdminExercisesPage({ searchParams }: Props) {
     redirect("/admin/exercises");
   }
 
-  const exampleContent = JSON.stringify({
-    questions: [
-      {
-        question: "Which conjunction means 'but' in Danish?",
-        options: ["og", "men", "eller", "fordi"],
-        correct: 1,
-        explanation: "'Men' means 'but' in Danish.",
-      },
-    ],
-  }, null, 2);
 
   return (
     <div>
@@ -129,13 +120,7 @@ export default async function AdminExercisesPage({ searchParams }: Props) {
             placeholder="Short description (optional)"
             className="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-indigo-400"
           />
-          <textarea
-            name="content"
-            required
-            rows={10}
-            defaultValue={exampleContent}
-            className="border border-gray-200 rounded-lg px-3 py-2 text-sm font-mono focus:outline-none focus:border-indigo-400"
-          />
+          <ExerciseBuilderWrapper />
           <div className="flex justify-end">
             <button
               type="submit"
