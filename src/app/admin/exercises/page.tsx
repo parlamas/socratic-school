@@ -54,6 +54,14 @@ export default async function AdminExercisesPage({ searchParams }: Props) {
     redirect("/admin/exercises");
   }
 
+  async function deleteExercise(formData: FormData) {
+    "use server";
+    const id = formData.get("id") as string;
+    await prisma.exercise.delete({ where: { id } });
+    revalidatePath("/admin/exercises");
+    redirect("/admin/exercises");
+  }
+
   async function toggleExercise(formData: FormData) {
     "use server";
     const id = formData.get("id") as string;
@@ -176,6 +184,15 @@ export default async function AdminExercisesPage({ searchParams }: Props) {
               >
                 Edit
               </Link>
+              <form action={deleteExercise}>
+                <input type="hidden" name="id" value={ex.id} />
+                <button
+                  type="submit"
+                  className="text-xs text-red-400 hover:text-red-600 border border-red-200 rounded-lg px-3 py-1.5 transition-colors"
+                >
+                  Delete
+                </button>
+              </form>
             </div>
           </div>
         ))}
