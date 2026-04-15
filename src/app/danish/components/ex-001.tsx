@@ -1,4 +1,4 @@
-//src/app/Danish/components/ex-001.tsx
+//src/app/danish/components/ex-001.tsx
 // REDESIGNED — Socratic School · Editorial Academic Aesthetic
 
 'use client';

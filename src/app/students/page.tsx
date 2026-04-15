@@ -85,7 +85,7 @@ export default async function StudentPage() {
                     </Link>
                   ) : (
                     <Link
-                      href={`${exercise.id === 'cmnyn65sk0001ky049bomjzqw' ? '/english/ex-001' : exercise.id === 'cmnyph3x70001ju04oqbj0zbz' ? '/english/ex-002' : exercise.id === 'cmnzt75kn0001k004ub64r2sv' ? '/Danish/ex-001' : '/english/ex-001'}`}
+                      href={`${exercise.id === 'cmnyn65sk0001ky049bomjzqw' ? '/english/ex-001' : exercise.id === 'cmnyph3x70001ju04oqbj0zbz' ? '/english/ex-002' : exercise.id === 'cmnzt75kn0001k004ub64r2sv' ? '/danish/ex-001' : '/english/ex-001'}`}
                       className="text-xs font-medium text-gray-600 hover:text-gray-800 no-underline border border-gray-200 rounded-lg px-3 py-1.5 transition-colors shrink-0"
                     >
                       Try
