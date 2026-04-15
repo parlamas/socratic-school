@@ -335,9 +335,10 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
   };
 
   const handleSelect = (mood: Mood) => {
-    setSelected((prev) =>
-      prev.includes(mood) ? prev.filter((m) => m !== mood) : [...prev, mood]
-    );
+    setSelected((prev) => {
+      console.log('prev:', prev, 'mood:', mood);
+      return prev.includes(mood) ? prev.filter((m) => m !== mood) : [...prev, mood];
+    });
     setShowResult(null);
   };
 
