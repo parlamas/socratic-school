@@ -12,7 +12,7 @@ type ExerciseItem = {
   greek: string;
   english: string;
   danish: string;
-  correct: Mood;
+  correct: Mood[];
   explanation: string;
 };
 
@@ -36,14 +36,14 @@ const exercises: ExerciseItem[] = [
     greek: 'Αυτήν τη στιγμή βρέχει έξω.',
     english: 'It is raining outside right now.',
     danish: 'Det regner udenfor lige nu.',
-    correct: 'indicative',
+    correct: ['indicative'],
     explanation: 'This statement presents itself as real.',
   },
   {
     greek: 'Είναι απαραίτητο να φύγουμε τώρα.',
     english: '<span class="uur">It is necessary</span> <span class="ub">that we leave now</span>.',
     danish: '<span class="uur">Det er nødvendigt</span>, <span class="ub">at vi går nu</span>.',
-    correct: 'subjunctive',
+    correct: ['subjunctive'],
     explanation:
       '<span class="uur">It is necessary</span> <span class="ub">that we leave now</span>. The first clause is indicative; the second is subjunctive — it remains invariant and expresses the unverified.',
   },
@@ -51,7 +51,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Μακάρι να είχε έρθει νωρίτερα.',
     english: 'If only he had come earlier.',
     danish: 'Gid han var kommet tidligere.',
-    correct: 'subjunctive',
+    correct: ['subjunctive'],
     explanation:
       'The subjunctive occurs alone here. The sentence expresses the unrealizable — hope cannot refer to the past, so it is not optative.',
   },
@@ -59,21 +59,21 @@ const exercises: ExerciseItem[] = [
     greek: 'Φύγε αμέσως από εδώ!',
     english: 'Leave here immediately!',
     danish: 'Gå væk herfra med det samme!',
-    correct: 'imperative',
+    correct: ['imperative'],
     explanation: 'This sentence presents itself as a command.',
   },
   {
     greek: 'Θα έρθω αύριο στο σχολείο.',
     english: 'I will come to school tomorrow.',
     danish: 'Jeg kommer i skole i morgen.',
-    correct: 'indicative',
+    correct: ['indicative'],
     explanation: 'This statement presents itself as real.',
   },
   {
     greek: 'Παρακαλώ, καθήστε.',
     english: 'Please sit down.',
     danish: 'Vær venlig at sætte dig.',
-    correct: 'optative',
+    correct: ['optative'],
     explanation:
       'A polite request. The speaker hopes that their guest will comply — this is optative, not imperative.',
   },
@@ -81,7 +81,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Kαθήστε (κάτω)! / Κάθησε (κάτω)!',
     english: 'Sit down!',
     danish: 'Sæt dig ned!',
-    correct: 'imperative',
+    correct: ['imperative'],
     explanation:
       'A command, regardless of whether the addressee agrees or refuses to comply.',
   },
@@ -89,7 +89,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Έχουν τελειώσει το φαγητό.',
     english: 'They have finished eating.',
     danish: 'De er færdige med at spise.',
-    correct: 'indicative',
+    correct: ['indicative'],
     explanation:
       'This statement presents itself as real, regardless of whether it is true, accurate, or honest.',
   },
@@ -97,7 +97,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Δεν είμαι βέβαιος ότι τους έχω ξανασυναντήσει.',
     english: 'I am not sure (that) I have met them before.',
     danish: 'Jeg er ikke sikker på, at jeg har mødt dem før.',
-    correct: 'indicative',
+    correct: ['indicative'],
     explanation:
       '<span class="uur">I am not sure</span> <span class="uur">(that) I have met them before</span>. Both clauses present themselves as real — both are indicative.',
   },
@@ -105,7 +105,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Αν ήταν ψηλότερος, θα μπορούσε να παίξει μπάσκετ.',
     english: 'If he were taller, he could play basketball.',
     danish: 'Hvis han var højere, kunne han spille basketball.',
-    correct: 'subjunctive',
+    correct: ['subjunctive'],
     explanation:
       '<span class="ub">If he were taller</span> — <span class="ub">he could play basketball</span>. Two subordinate clauses, neither standing alone. Both are subjunctive: the first expresses the unrealizable, the second the unverified.',
   },
@@ -113,14 +113,14 @@ const exercises: ExerciseItem[] = [
     greek: 'Να δέσετε τη ζώνη ασφαλείας σας όλοι σας!',
     english: 'All of you, fasten your seat belt!',
     danish: 'Alle sammen, spænd sikkerhedsselen!',
-    correct: 'imperative',
+    correct: ['imperative'],
     explanation: 'This sentence presents itself as a command.',
   },
   {
     greek: 'Σου εύχομαι καλή τύχη σε ό,τι κάνεις!',
     english: 'I wish you luck with everything you do!',
     danish: 'Jeg ønsker dig held og lykke med alt, hvad du gør!',
-    correct: 'optative',
+    correct: ['optative'],
     explanation:
       'This expresses a hope for the future. The optative always refers to the future.',
   },
@@ -128,7 +128,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Επέμενε να είναι παρόντες.',
     english: 'He insisted that they be present.',
     danish: 'Han insisterede på, at de er til stede.',
-    correct: 'subjunctive',
+    correct: ['subjunctive'],
     explanation:
       '<span class="uur">He insisted</span> <span class="ub">that they be present</span>. The first clause is indicative; the second is subjunctive — we do not know whether they were actually present.',
   },
@@ -136,7 +136,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Μακάρι να μην μας συμβεί ποτέ αυτό!',
     english: 'May that never happen to us!',
     danish: 'Må det aldrig ske for os!',
-    correct: 'optative',
+    correct: ['optative'],
     explanation:
       'This expresses a hope for the future. The optative always refers to the future.',
   },
@@ -144,7 +144,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Δεν γνωρίζαμε κανέναν που θα παραδεχόταν κάτι τέτοιο.',
     english: 'We were unaware of anyone who would admit such a thing.',
     danish: 'Vi kendte ikke nogen, der ville indrømme sådan noget.',
-    correct: 'subjunctive',
+    correct: ['subjunctive'],
     explanation:
       '<span class="uur">We were unaware of anyone</span> <span class="ub">who would admit such a thing</span>. The first is indicative, the second subjunctive — expressing the unverified.',
   },
@@ -152,7 +152,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Ψάχνω κάποιον που να μπορεί να μεταφράσει αυτό το χειρόγραφο.',
     english: 'I am looking for someone who can translate this manuscript.',
     danish: 'Jeg leder efter nogen, der kan oversætte dette manuskript.',
-    correct: 'subjunctive',
+    correct: ['subjunctive'],
     explanation:
       '<span class="uur">I am looking for someone</span> <span class="ub">who can translate this manuscript</span>. The speaker does not know whether such a person exists — the existence is unverified — so the second clause is subjunctive.',
   },
@@ -160,7 +160,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Αν πρέπει να διακινδυνεύσουμε την ίδια μας τη ζωή, κανένα πρόβλημα.',
     english: 'If we must risk our very lives, so be it.',
     danish: 'Hvis vi må risikere vores egne liv, så må det være sådan.',
-    correct: 'imperative',
+    correct: ['imperative'],
     explanation:
       '<span class="uur">If we must risk our very lives</span>, <span class="oor">so be it</span>. The first clause is a background premise (indicative). The second expresses the speaker\'s self-command to accept the situation stoically — it is imperative.',
   },
@@ -168,7 +168,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Φρόντισε να έρθει στην ώρα του.',
     english: 'See that he arrive on time.',
     danish: 'Sørg for, at han kommer til tiden.',
-    correct: 'optative',
+    correct: ['optative'],
     explanation:
       '<span class="oor">See</span> — <span class="ub">that he arrive on time</span>. Hopefulness, even to a high degree, is optative not imperative. Without unambiguous expectation and command-force, this remains a hope.',
   },
@@ -176,7 +176,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Να χαμηλώσεις τη μουσική!',
     english: 'You had better turn down the music!',
     danish: 'Du må hellere skrue ned for musikken!',
-    correct: 'imperative',
+    correct: ['imperative'],
     explanation:
       '<span class="oor">You had better turn down the music!</span> A clear, unambiguous expectation is present — the mood is imperative.',
   },
@@ -184,7 +184,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Ζήτω η σωκρατική νοοτροπία!',
     english: 'Long live the Socratic mindset!',
     danish: 'Længe leve den sokratiske tankegang!',
-    correct: 'optative',
+    correct: ['optative'],
     explanation:
       '<span class="llr">Long live the Socratic mindset!</span> A clear, unambiguous hope is present — the mood is optative.',
   },
@@ -262,7 +262,7 @@ type AccessStatus = 'guest' | 'signed-in' | 'purchased';
 const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lang, setLang] = useState<Lang>('greek');
-  const [selected, setSelected] = useState<Mood | ''>('');
+  const [selected, setSelected] = useState<Mood[]>([]);
   const [showResult, setShowResult] = useState<boolean | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
@@ -325,6 +325,7 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
     }
   };
 
+  const isLocked = accessStatus !== 'purchased' && currentIndex >= FREE_LIMIT;
   const ex = exercises[currentIndex];
 
   const getText = () => {
@@ -334,13 +335,17 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
   };
 
   const handleSelect = (mood: Mood) => {
-    setSelected(mood);
+    setSelected((prev) =>
+      prev.includes(mood) ? prev.filter((m) => m !== mood) : [...prev, mood]
+    );
     setShowResult(null);
   };
 
   const checkAnswer = () => {
-    if (!selected) return;
-    const ok = selected === ex.correct;
+    if (selected.length === 0) return;
+    const ok =
+      selected.length === ex.correct.length &&
+      selected.every((m) => ex.correct.includes(m));
     setShowResult(ok);
     if (ok && !answered[currentIndex]) {
       const next = [...answered];
@@ -351,7 +356,7 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
   };
 
   const reset = () => {
-    setSelected('');
+    setSelected([]);
     setShowResult(null);
     setShowExplanation(false);
   };
@@ -359,7 +364,8 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
   const goTo = (i: number) => {
     if (i < 0 || i >= exercises.length) return;
     setCurrentIndex(i);
-    setSelected('');
+    setSelected([]);
+
     setShowResult(null);
     setShowExplanation(false);
     setLang('greek');
@@ -579,21 +585,49 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
       </div>
 
       {/* ── Sentence card ── */}
-      <div style={{
-        background: '#fff',
-        border: '0.5px solid #bbb',
-        borderRadius: 12,
-        padding: '1.1rem 1.25rem',
-        marginBottom: '1rem',
-        fontSize: 16,
-        lineHeight: 1.7,
-        textAlign: 'center',
-        minHeight: 64,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-      }}>
-        <DisplayText content={getText()} />
+      <div style={{ position: 'relative' }}>
+        <div style={{
+          background: '#fff',
+          border: '0.5px solid #bbb',
+          borderRadius: 12,
+          padding: '1.1rem 1.25rem',
+          marginBottom: '1rem',
+          fontSize: 16,
+          lineHeight: 1.7,
+          textAlign: 'center',
+          minHeight: 64,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          filter: isLocked ? 'blur(4px)' : 'none',
+          userSelect: isLocked ? 'none' : 'auto',
+          pointerEvents: isLocked ? 'none' : 'auto',
+        }}>
+          <DisplayText content={getText()} />
+        </div>
+        {isLocked && (
+          <div style={{
+            position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+            display: 'flex', flexDirection: 'column', alignItems: 'center',
+            justifyContent: 'center', gap: 10, borderRadius: 12,
+            background: 'rgba(255,255,255,0.7)',
+          }}>
+            {accessStatus === 'guest' ? (
+              <>
+                <div style={{ fontSize: 14, fontWeight: 500, color: '#333', textAlign: 'center' }}>Sign in to continue</div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <a href="/students/sign-in" style={{ background: '#185FA5', color: '#fff', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Sign in</a>
+                  <a href="/students/sign-up" style={{ background: '#fff', color: '#333', border: '0.5px solid #ccc', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Sign up</a>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{ fontSize: 14, fontWeight: 500, color: '#333', textAlign: 'center' }}>Purchase this exercise to continue</div>
+                <a href="/shop/languages/multilingual" style={{ background: '#185FA5', color: '#fff', borderRadius: 8, padding: '7px 18px', fontSize: 13, textDecoration: 'none', fontFamily: "'Source Serif 4', Georgia, serif" }}>Buy now</a>
+              </>
+            )}
+          </div>
+        )}
       </div>
 
       {/* ── Criterion note ── */}
@@ -622,8 +656,8 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
             key={m.key}
             onClick={() => handleSelect(m.key)}
             style={{
-              background: selected === m.key ? moodBg[m.key] : '#fff',
-              border: selected === m.key ? `1.5px solid ${moodColor[m.key]}` : '0.5px solid #ccc',
+              background: selected.includes(m.key) ? moodBg[m.key] : '#fff',
+              border: selected.includes(m.key) ? `1.5px solid ${moodColor[m.key]}` : '0.5px solid #ccc',
               borderRadius: 8,
               padding: '10px 8px',
               cursor: 'pointer',
@@ -633,7 +667,7 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
             }}
           >
             <div style={{ fontSize: 12, color: '#888', fontStyle: 'italic' }}>{m.gr}</div>
-            <div style={{ fontSize: 14, fontWeight: 500, color: selected === m.key ? moodColor[m.key] : '#333' }}>{m.en}</div>
+            <div style={{ fontSize: 14, fontWeight: 500, color: selected.includes(m.key) ? moodColor[m.key] : '#333' }}>{m.en}</div>
             <div style={{ fontSize: 11, color: '#999' }}>{m.da}</div>
           </button>
         ))}
@@ -643,14 +677,14 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
       <div style={{ display: 'flex', gap: 8, justifyContent: 'center', marginBottom: '1rem', flexWrap: 'wrap' }}>
         <button
           onClick={checkAnswer}
-          disabled={!selected}
+          disabled={selected.length === 0}
           style={{
-            background: selected ? '#185FA5' : '#ccc',
+            background: selected.length > 0 ? '#185FA5' : '#ccc',
             border: 'none',
             borderRadius: 8,
             padding: '7px 20px',
             fontSize: 13,
-            cursor: selected ? 'pointer' : 'not-allowed',
+            cursor: selected.length > 0 ? 'pointer' : 'not-allowed',
             color: '#fff',
             fontFamily: "'Source Serif 4', Georgia, serif",
           }}
@@ -685,8 +719,8 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
           border: `0.5px solid ${showResult ? '#3B6D11' : '#A32D2D'}`,
         }}>
           {showResult
-            ? `Correct — ${ex.correct}`
-            : <span>Incorrect. The correct mood is <strong>{ex.correct}</strong>.</span>}
+            ? `Correct — ${ex.correct.join(', ')}`
+            : <span>Incorrect. The correct mood is <strong>{ex.correct.join(', ')}</strong>.</span>}
         </div>
       )}
 
