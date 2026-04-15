@@ -453,7 +453,11 @@ function GrammarNotes() {
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 
-const Exercise001 = () => {
+const FREE_LIMIT = 3;
+
+type AccessStatus = 'guest' | 'signed-in' | 'purchased';
+
+const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }) => {
   const allExerciseSets: ExerciseSet[] = [
     {
       name: 'Det Grundlæggende • The Basics',
@@ -1838,6 +1842,7 @@ const Exercise001 = () => {
   const [completedSets, setCompletedSets] = useState<boolean[]>([]);
   const firstInputRef = useRef<HTMLInputElement | null>(null);
 
+  const isLocked = accessStatus !== 'purchased' && currentSetIndex >= FREE_LIMIT;
   const currentSet = exerciseSets[currentSetIndex];
   const exercises = currentSet.items;
 
@@ -2055,8 +2060,39 @@ const Exercise001 = () => {
           </NavButton>
         </div>
 
+        {/* Gate overlay */}
+        {isLocked && (
+          <div style={{
+            textAlign: 'center',
+            padding: '2rem 1rem',
+            marginBottom: '1rem',
+            borderRadius: '12px',
+            background: 'rgba(255,255,255,0.9)',
+            border: `1px solid ${DS.border}`,
+          }}>
+            {accessStatus === 'guest' ? (
+              <>
+                <div style={{ fontFamily: DS.serif, fontSize: '1rem', fontWeight: 600, color: DS.ink, marginBottom: '1rem' }}>
+                  Sign in to continue
+                </div>
+                <div style={{ display: 'flex', gap: 8, justifyContent: 'center' }}>
+                  <a href="/students/sign-in" style={{ background: DS.rust, color: '#fff', borderRadius: 8, padding: '8px 20px', fontSize: 13, textDecoration: 'none', fontFamily: DS.serif }}>Sign in</a>
+                  <a href="/students/sign-up" style={{ background: '#fff', color: DS.ink, border: `1px solid ${DS.border}`, borderRadius: 8, padding: '8px 20px', fontSize: 13, textDecoration: 'none', fontFamily: DS.serif }}>Sign up</a>
+                </div>
+              </>
+            ) : (
+              <>
+                <div style={{ fontFamily: DS.serif, fontSize: '1rem', fontWeight: 600, color: DS.ink, marginBottom: '1rem' }}>
+                  Purchase this exercise to continue
+                </div>
+                <a href="/shop/languages/danish" style={{ background: DS.rust, color: '#fff', borderRadius: 8, padding: '8px 20px', fontSize: 13, textDecoration: 'none', fontFamily: DS.serif }}>Buy now</a>
+              </>
+            )}
+          </div>
+        )}
+
         {/* Result banner */}
-        {showResults && (
+        {!isLocked && showResults && (
           <div style={{
             textAlign: 'center',
             padding: '10px 16px',
@@ -2094,6 +2130,9 @@ const Exercise001 = () => {
           gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 260px), 1fr))',
           gap: '10px',
           marginBottom: '20px',
+          filter: isLocked ? 'blur(4px)' : 'none',
+          pointerEvents: isLocked ? 'none' : 'auto',
+          userSelect: isLocked ? 'none' : 'auto',
         }}>
           {exercises.map((item, index) => (
             <div
