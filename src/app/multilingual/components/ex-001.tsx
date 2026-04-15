@@ -355,7 +355,7 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
     }
   };
 
-  const reset = () => {
+const reset = () => {
     setSelected([]);
     setShowResult(null);
     setShowExplanation(false);
@@ -365,7 +365,6 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
     if (i < 0 || i >= exercises.length) return;
     setCurrentIndex(i);
     setSelected([]);
-
     setShowResult(null);
     setShowExplanation(false);
     setLang('greek');
@@ -828,3 +827,5 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
 };
 
 export default Exercise001;
+
+
