@@ -97,7 +97,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Δεν είμαι βέβαιος ότι τους έχω ξανασυναντήσει.',
     english: 'I am not sure (that) I have met them before.',
     danish: 'Jeg er ikke sikker på, at jeg har mødt dem før.',
-    correct: ['indicative','indicative'],
+    correct: ['indicative'],
     explanation:
       '<span class="uur">I am not sure</span> <span class="uur">(that) I have met them before</span>. Both clauses present themselves as real — both are in the indicative.',
   },
@@ -105,7 +105,7 @@ const exercises: ExerciseItem[] = [
     greek: 'Αν ήταν ψηλότερος, θα μπορούσε να παίξει μπάσκετ.',
     english: 'If he were taller, he could play basketball.',
     danish: 'Hvis han var højere, kunne han spille basketball.',
-    correct: ['subjunctive','subjunctive'],
+    correct: ['subjunctive'],
     explanation:
       '<span class="ub">If he were taller</span> — <span class="ub">he could play basketball</span>. Two subordinate clauses, neither standing alone. Both are in the subjunctive: the first expresses the unrealizable, the second the unverified.',
   },
