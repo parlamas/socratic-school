@@ -18,7 +18,7 @@ export default function BuyButton({ type, id, label }: Props) {
   const [loading, setLoading] = useState(false);
 
   const handleClick = async () => {
-    if (!session) {
+    if (!session || session.user.role !== 'student') {
       router.push("/students/sign-in");
       return;
     }
