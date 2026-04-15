@@ -45,7 +45,7 @@ const exercises: ExerciseItem[] = [
     danish: '<span class="uur">Det er nødvendigt</span>, <span class="ub">at vi går nu</span>.',
     correct: ['indicative','subjunctive'],
     explanation:
-      '<span class="uur">It is necessary</span> <span class="ub">that we leave now</span>. The first clause is indicative; the second is subjunctive — it remains invariant and expresses the unverified.',
+      '<span class="uur">It is necessary</span> <span class="ub">that we leave now</span>. The first clause is in the indicative; the second is in the subjunctive — it remains invariant and expresses the unverified.',
   },
   {
     greek: 'Μακάρι να είχε έρθει νωρίτερα.',
@@ -53,7 +53,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Gid han var kommet tidligere.',
     correct: ['subjunctive'],
     explanation:
-      'The subjunctive occurs alone here. The sentence expresses the unrealizable — hope cannot refer to the past, so it is not optative.',
+      'The subjunctive occurs alone here. The sentence expresses the unrealizable — hope cannot refer to the past, so it is not in the optative.',
   },
   {
     greek: 'Φύγε αμέσως από εδώ!',
@@ -75,7 +75,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Vær venlig at sætte dig.',
     correct: ['optative'],
     explanation:
-      'A polite request. The speaker hopes that their guest will comply — this is optative, not imperative.',
+      'A polite request. The speaker hopes that their guest will comply — this is in the optative, not in the imperative.',
   },
   {
     greek: 'Kαθήστε (κάτω)! / Κάθησε (κάτω)!',
@@ -97,17 +97,17 @@ const exercises: ExerciseItem[] = [
     greek: 'Δεν είμαι βέβαιος ότι τους έχω ξανασυναντήσει.',
     english: 'I am not sure (that) I have met them before.',
     danish: 'Jeg er ikke sikker på, at jeg har mødt dem før.',
-    correct: ['indicative'],
+    correct: ['indicative','indicative'],
     explanation:
-      '<span class="uur">I am not sure</span> <span class="uur">(that) I have met them before</span>. Both clauses present themselves as real — both are indicative.',
+      '<span class="uur">I am not sure</span> <span class="uur">(that) I have met them before</span>. Both clauses present themselves as real — both are in the indicative.',
   },
   {
     greek: 'Αν ήταν ψηλότερος, θα μπορούσε να παίξει μπάσκετ.',
     english: 'If he were taller, he could play basketball.',
     danish: 'Hvis han var højere, kunne han spille basketball.',
-    correct: ['subjunctive'],
+    correct: ['subjunctive','subjunctive'],
     explanation:
-      '<span class="ub">If he were taller</span> — <span class="ub">he could play basketball</span>. Two subordinate clauses, neither standing alone. Both are subjunctive: the first expresses the unrealizable, the second the unverified.',
+      '<span class="ub">If he were taller</span> — <span class="ub">he could play basketball</span>. Two subordinate clauses, neither standing alone. Both are in the subjunctive: the first expresses the unrealizable, the second the unverified.',
   },
   {
     greek: 'Να δέσετε τη ζώνη ασφαλείας σας όλοι σας!',
@@ -130,7 +130,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Han insisterede på, at de er til stede.',
     correct: ['indicative','subjunctive'],
     explanation:
-      '<span class="uur">He insisted</span> <span class="ub">that they be present</span>. The first clause is indicative; the second is subjunctive — we do not know whether they were actually present.',
+      '<span class="uur">He insisted</span> <span class="ub">that they be present</span>. The first clause is the indicative; the second is subjunctive — we do not know whether they were actually present.',
   },
   {
     greek: 'Μακάρι να μην μας συμβεί ποτέ αυτό!',
@@ -146,7 +146,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Vi kendte ikke nogen, der ville indrømme sådan noget.',
     correct: ['indicative','subjunctive'],
     explanation:
-      '<span class="uur">We were unaware of anyone</span> <span class="ub">who would admit such a thing</span>. The first is indicative, the second subjunctive — expressing the unverified.',
+      '<span class="uur">We were unaware of anyone</span> <span class="ub">who would admit such a thing</span>. The first is in the indicative, the second in the subjunctive — expressing the unverified.',
   },
   {
     greek: 'Ψάχνω κάποιον που να μπορεί να μεταφράσει αυτό το χειρόγραφο.',
@@ -154,7 +154,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Jeg leder efter nogen, der kan oversætte dette manuskript.',
     correct: ['indicative','subjunctive'],
     explanation:
-      '<span class="uur">I am looking for someone</span> <span class="ub">who can translate this manuscript</span>. The speaker does not know whether such a person exists — the existence is unverified — so the second clause is subjunctive.',
+      '<span class="uur">I am looking for someone</span> <span class="ub">who can translate this manuscript</span>. The speaker does not know whether such a person exists — the existence is unverified — so the second clause is in the subjunctive.',
   },
   {
     greek: 'Αν πρέπει να διακινδυνεύσουμε την ίδια μας τη ζωή, δεν υπάρχει κανένα πρόβλημα.',
@@ -162,7 +162,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Hvis vi må risikere vores egne liv, så må det være sådan.',
     correct: ['subjunctive','imperative'],
     explanation:
-      '<span class="uur">If we must risk our very lives</span>, <span class="oor">so be it</span>. The first clause is a background premise (indicative). The second expresses the speaker\'s self-command to accept the situation stoically — it is imperative.',
+      '<span class="uur">If we must risk our very lives</span>, <span class="oor">so be it</span>. The first clause is a background premise (indicative). The second expresses the speaker\'s self-command to accept the situation stoically — it is in the imperative.',
   },
   {
     greek: 'Φρόντισε να έρθει στην ώρα του.',
@@ -170,7 +170,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Sørg for, at han kommer til tiden.',
     correct: ['optative','subjunctive'],
     explanation:
-      '<span class="oor">See</span> — <span class="ub">that he arrive on time</span>. Hopefulness, even to a high degree, is optative not imperative. Without unambiguous expectation and command-force, this remains a hope.',
+      '<span class="oor">See</span> — <span class="ub">that he arrive on time</span>. Hopefulness, even to a high degree, is optative not in the imperative. Without unambiguous expectation and command-force, this remains a hope.',
   },
   {
     greek: 'Να χαμηλώσεις τη μουσική!',
@@ -178,7 +178,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Du må hellere skrue ned for musikken!',
     correct: ['imperative'],
     explanation:
-      '<span class="oor">You had better turn down the music!</span> A clear, unambiguous expectation is present — the mood is imperative.',
+      '<span class="oor">You had better turn down the music!</span> A clear, unambiguous expectation is present — the mood is in the imperative.',
   },
   {
     greek: 'Ζήτω η σωκρατική νοοτροπία!',
@@ -186,7 +186,7 @@ const exercises: ExerciseItem[] = [
     danish: 'Længe leve den sokratiske tankegang!',
     correct: ['optative'],
     explanation:
-      '<span class="llr">Long live the Socratic mindset!</span> A clear, unambiguous hope is present — the mood is optative.',
+      '<span class="llr">Long live the Socratic mindset!</span> A clear, unambiguous hope is present — the mood is in the optative.',
   },
 ];
 
