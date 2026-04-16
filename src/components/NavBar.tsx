@@ -245,13 +245,13 @@ export default function Navbar() {
             </div>
             
             <Link
-              href="/Danish"
+              href="/danish"
               className="flex items-center justify-between text-sm text-gray-700 font-medium py-2.5 px-3 no-underline hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="flex items-center gap-2">
                 <span>🇩🇰</span>
-                <span>Danish</span>
+                <span>danish</span>
               </span>
               <span className="text-xs text-gray-500">Dansk</span>
             </Link>
@@ -261,7 +261,7 @@ export default function Navbar() {
 {/* Danish Sub-lessons */}
 <div className="ml-6 mt-1 mb-2 flex flex-col space-y-1 border-l-2 border-orange-200 pl-2">
   <Link
-    href="/Danish/lesson-001"
+    href="/danish/lesson-001"
     className="flex items-center justify-between text-sm text-gray-600 font-medium py-1.5 px-3 no-underline hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors"
     onClick={() => setMobileMenuOpen(false)}
   >
@@ -272,7 +272,7 @@ export default function Navbar() {
     <span className="text-xs text-gray-400">Introductions</span>
   </Link>
   <Link
-    href="/Danish/lesson-002"
+    href="/danish/lesson-002"
     className="flex items-center justify-between text-sm text-gray-600 font-medium py-1.5 px-3 no-underline hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors"
     onClick={() => setMobileMenuOpen(false)}
   >
@@ -282,8 +282,8 @@ export default function Navbar() {
     </span>
     <span className="text-xs text-gray-400">Articles</span>
   </Link>
-  <Link
-    href="/Danish/ex-001"
+  {/*<Link
+    href="/danish/ex-001"
     className="flex items-center justify-between text-sm text-gray-600 font-medium py-1.5 px-3 no-underline hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors"
     onClick={() => setMobileMenuOpen(false)}
   >
@@ -295,7 +295,7 @@ export default function Navbar() {
   </Link>
 
   <Link
-    href="/Danish/ex-002"
+    href="/danish/ex-002"
     className="flex items-center justify-between text-sm text-gray-600 font-medium py-1.5 px-3 no-underline hover:bg-orange-50 hover:text-orange-600 rounded-lg transition-colors"
     onClick={() => setMobileMenuOpen(false)}
   >
@@ -304,7 +304,7 @@ export default function Navbar() {
       <span>ex-002 • Moods Øvelse</span>
     </span>
     <span className="text-xs text-gray-400">Mood Exercise</span>
-  </Link>
+  </Link>*/}
 </div>
 
             

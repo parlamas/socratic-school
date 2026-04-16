@@ -384,11 +384,11 @@ const Exercise002 = () => {
     <div style={{ maxWidth: 680, margin: '0 auto', padding: '1.5rem 1rem 3rem', fontFamily: "'Source Serif 4', Georgia, serif", color: 'inherit' }}>
 
       {/* ── Header ── */}
-      <div style={{ borderBottom: '1px solid #ccc', paddingBottom: '1rem', marginBottom: '1.25rem', textAlign: 'center' }}>
+      {/*<div style={{ borderBottom: '1px solid #ccc', paddingBottom: '1rem', marginBottom: '1.25rem', textAlign: 'center' }}>
         <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 500, marginBottom: 4 }}>
           Αναγνώρισε την Έγκλιση · Identify the Mood
         </div>
-        <div style={{ fontSize: 13, color: '#666', lineHeight: 1.6 }}>Bestem Modus · Socratic School</div>
+        <div style={{ fontSize: 13, color: '#666', lineHeight: 1.6 }}>Bestem Modus · Socratic School</div>*/}
 
         {/* Clock block */}
         <div style={{ display: 'inline-block', marginTop: 10, textAlign: 'left', background: '#f7f7f7', borderRadius: 8, padding: '10px 18px', border: '0.5px solid #ddd' }}>
