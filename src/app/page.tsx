@@ -27,7 +27,8 @@ export default async function HomePage() {
         {/* Try exercises banner */}
         
           <a href="/students"
-          className="flex items-center justify-between w-full bg-gray-900 rounded-xl px-6 py-4 mb-8 hover:bg-gray-800 transition-colors no-underline"
+          className="flex items-center justify-between w-full rounded-xl px-6 py-4 mb-8 hover:opacity-90 transition-opacity no-underline"
+          style={{ background: '#8b6914' }}
         >
           <div>
             <p className="font-garamond text-lg font-medium text-white mb-0.5">
