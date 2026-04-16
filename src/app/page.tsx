@@ -151,6 +151,26 @@ export default async function HomePage() {
           </p>
         </div>
 
+        {/* Try exercises */}
+        <div className="mb-6">
+          
+            href="/students"
+            className="flex items-center justify-between w-full border border-gray-900 rounded-xl px-6 py-4 hover:bg-gray-50 transition-colors no-underline"
+          >
+            <div>
+              <p className="font-garamond text-lg font-medium text-gray-900 mb-0.5">
+                Try the exercises
+              </p>
+              <p className="text-xs text-gray-500">
+                Get a feel for the material — no account needed for the first few questions.
+              </p>
+            </div>
+            <svg className="w-5 h-5 text-gray-400 flex-shrink-0 ml-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+
         {/* Portals */}
         <div className="grid grid-cols-2 gap-3">
           <div className="border border-gray-200 rounded-lg p-5">

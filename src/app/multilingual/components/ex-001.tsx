@@ -343,9 +343,10 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
 
   const checkAnswer = () => {
     if (selected.length === 0) return;
+    const uniqueCorrect = [...new Set(ex.correct)];
     const ok =
-      selected.length === ex.correct.length &&
-      selected.every((m) => ex.correct.includes(m));
+      selected.length === uniqueCorrect.length &&
+      selected.every((m) => uniqueCorrect.includes(m));
     setShowResult(ok);
     if (ok && !answered[currentIndex]) {
       const next = [...answered];
