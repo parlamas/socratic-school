@@ -406,7 +406,7 @@ const Exercise002 = () => {
         </div>
 
         {/* How link */}
-        <div style={{ marginTop: 8 }}>
+        <div style={{ marginTop: 8, textAlign: 'center' }}>
           <span
             onClick={() => setShowHow((v) => !v)}
             style={{ fontSize: 12, color: '#185FA5', cursor: 'pointer', textDecoration: 'none', textUnderlineOffset: 3, fontFamily: "'Source Serif 4', Georgia, serif" }}
