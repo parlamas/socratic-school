@@ -24,6 +24,24 @@ export default async function HomePage() {
 
       <div className="font-dm max-w-xl mx-auto px-6 py-10">
 
+        {/* Try exercises banner */}
+        
+          href="/students"
+          className="flex items-center justify-between w-full bg-gray-900 rounded-xl px-6 py-4 mb-8 hover:bg-gray-800 transition-colors no-underline"
+        >
+          <div>
+            <p className="font-garamond text-lg font-medium text-white mb-0.5">
+              Try the exercises
+            </p>
+            <p className="text-xs text-gray-400">
+              Get a feel for the material — no account needed for the first few questions.
+            </p>
+          </div>
+          <svg className="w-5 h-5 text-gray-400 flex-shrink-0 ml-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </a>
+
         {/* Site header */}
         <div className="flex items-center gap-2.5 mb-10">
           <div className="w-7 h-7 rounded-full border border-gray-900 flex items-center justify-center flex-shrink-0">
