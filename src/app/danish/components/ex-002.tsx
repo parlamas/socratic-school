@@ -521,7 +521,6 @@ const Exercise002 = () => {
             </div>
           </div>
         )}
-      </div>
 
       {/* ── Language switcher ── */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: '1rem' }}>
