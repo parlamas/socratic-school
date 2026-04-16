@@ -154,9 +154,8 @@ export default async function HomePage() {
         {/* Try exercises */}
         <div className="mb-6">
           
-            href="/students"
-            className="flex items-center justify-between w-full border border-gray-900 rounded-xl px-6 py-4 hover:bg-gray-50 transition-colors no-underline"
-          >
+            <a href="/students"
+            className="flex items-center justify-between w-full border border-gray-900 rounded-xl px-6 py-4 hover:bg-gray-50 transition-colors no-underline">
             <div>
               <p className="font-garamond text-lg font-medium text-gray-900 mb-0.5">
                 Try the exercises
