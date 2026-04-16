@@ -13,15 +13,19 @@ export default async function Page() {
   let accessStatus: 'guest' | 'signed-in' | 'purchased' = 'guest';
 
   if (session?.user?.id) {
-    const access = await prisma.userExercise.findUnique({
-      where: {
-        userId_exerciseId: {
-          userId: session.user.id,
-          exerciseId: EXERCISE_ID,
+    if ((session.user as any).role === 'admin' || (session.user as any).role === 'instructor') {
+      accessStatus = 'purchased';
+    } else {
+      const access = await prisma.userExercise.findUnique({
+        where: {
+          userId_exerciseId: {
+            userId: session.user.id,
+            exerciseId: EXERCISE_ID,
+          },
         },
-      },
-    });
-    accessStatus = access ? 'purchased' : 'signed-in';
+      });
+      accessStatus = access ? 'purchased' : 'signed-in';
+    }
   }
 
   return <Exercise002 accessStatus={accessStatus} />;

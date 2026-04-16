@@ -1,6 +1,6 @@
 'use client';
 
-// src/app/Danish/components/ex-002.tsx
+// src/app/danish/components/ex-002.tsx
 
 import { useState, useEffect, memo } from 'react';
 
