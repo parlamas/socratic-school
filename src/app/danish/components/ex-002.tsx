@@ -391,7 +391,8 @@ const Exercise002 = () => {
         <div style={{ fontSize: 13, color: '#666', lineHeight: 1.6 }}>Bestem Modus · Socratic School</div>*/}
 
         {/* Clock block */}
-        <div style={{ display: 'inline-block', marginTop: 10, textAlign: 'left', background: '#f7f7f7', borderRadius: 8, padding: '10px 18px', border: '0.5px solid #ddd' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 10 }}>
+        <div style={{ display: 'inline-block', textAlign: 'left', background: '#f7f7f7', borderRadius: 8, padding: '10px 18px', border: '0.5px solid #ddd' }}>
           {([
             { label: 'Gregorian', val: gregDate, color: '#333' },
             { label: 'Athenian',  val: athDate,  color: '#185FA5' },
@@ -403,6 +404,7 @@ const Exercise002 = () => {
             </div>
           ))}
           <div style={{ fontFamily: 'monospace', fontSize: 11, color: '#aaa', marginTop: 3 }}>{currentTime}</div>
+        </div>
         </div>
 
         {/* How link */}
