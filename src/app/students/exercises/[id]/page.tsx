@@ -44,6 +44,15 @@ export default async function PracticePage({ params }: Props) {
     },
   });
 
+  const customRoutes: Record<string, string> = {
+    'cmo6yrq130001u4v8wv7kr7yi': '/multilingual/ex-002',
+    'cmnzw6xpd0007lb04g4t233ez': '/multilingual/ex-001',
+  };
+
+  if (customRoutes[exercise.id]) {
+    redirect(customRoutes[exercise.id]);
+  }
+
   return (
     <PracticeClient
       exercise={{
