@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 interface Question {
@@ -46,16 +46,18 @@ export default function PracticeClient({
 
   const current = questions[currentIndex];
   const isAnswered = selected !== null;
-  // Custom exercise routes — bypass the generic quiz
-const customRoutes: Record<string, string> = {
-  'cmo6yrq130001u4v8wv7kr7yi': '/multilingual/ex-002',
-  'cmnzw6xpd0007lb04g4t233ez': '/multilingual/ex-001',
-};
+  const customRoutes: Record<string, string> = {
+    'cmo6yrq130001u4v8wv7kr7yi': '/multilingual/ex-002',
+    'cmnzw6xpd0007lb04g4t233ez': '/multilingual/ex-001',
+  };
 
-if (customRoutes[exercise.id]) {
-  window.location.href = customRoutes[exercise.id];
-  return null;
-}
+  useEffect(() => {
+    if (customRoutes[exercise.id]) {
+      window.location.href = customRoutes[exercise.id];
+    }
+  }, [exercise.id]);
+
+  if (customRoutes[exercise.id]) return null;
   const isLast = currentIndex === questions.length - 1;
 
   const handleSelect = (optionIndex: number) => {
