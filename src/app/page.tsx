@@ -111,7 +111,7 @@ export default async function HomePage() {
                 <circle cx="8" cy="12" r="0.8" fill="currentColor" stroke="none"/>
               </svg>
               <a href="tel:+4523950606" className="text-blue-600 hover:underline">
-                +45 23 95 06 06
+                +45 27 13 44 83
               </a>
             </div>
             <div className="flex items-center gap-2.5 text-sm">
