@@ -25,7 +25,7 @@ interface Props {
     topicName: string;
     areaName: string;
   };
-  userExerciseId: string;
+  userExerciseId: string | null;
   bestScore: number | null;
 }
 
