@@ -121,11 +121,13 @@ export default function PlacementTest() {
             <sup style={{ fontSize: 10, color: '#aaa', marginRight: 1 }}>
               ({displayNumber(blank.id)})
             </sup>
-            <input
+                        <input
               type="text"
               value={answers[blank.id] ?? ''}
               onChange={(e) => handleChange(blank.id, e.target.value)}
-                            placeholder=". . . . . . . . . ."
+              placeholder=". . . . . . . . . ."
+              data-state={correct === null ? 'typing' : correct ? 'correct' : 'incorrect'}
+              className="placement-blank-input"
               style={{
                 width: 130,
                 fontFamily: "'Source Serif 4', Georgia, serif",
@@ -134,7 +136,6 @@ export default function PlacementTest() {
                 border: 'none',
                 borderRadius: 0,
                 background: 'transparent',
-                color: correct === null ? '#1E6FEA' : correct ? '#27500A' : '#A32D2D',
                 fontWeight: correct === null ? 700 : 400,
                 outline: 'none',
                 textAlign: 'center',
@@ -299,9 +300,20 @@ export default function PlacementTest() {
         </div>
       )}
 
-      <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '1.5rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
+            <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '1.5rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
         &copy; 2026 Isidoros Parlamas &middot; parlamas@live.com &middot; socratic-school.com
       </div>
+      <style jsx>{`
+        .placement-blank-input[data-state='typing'] {
+          color: #1E6FEA !important;
+        }
+        .placement-blank-input[data-state='correct'] {
+          color: #27500A !important;
+        }
+        .placement-blank-input[data-state='incorrect'] {
+          color: #A32D2D !important;
+        }
+      `}</style>
     </div>
   );
 }
