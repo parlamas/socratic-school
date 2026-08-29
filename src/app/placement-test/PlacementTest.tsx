@@ -15,6 +15,7 @@ type Token =
   | { type: 'blank'; blank: Blank };
 
 const norm = (s: string) => s.trim().toLowerCase().replace(/\s+/g, ' ');
+const displayNumber = (id: string) => id.replace(/[a-z]+$/i, '');
 
 const t = (value: string): Token => ({ type: 'text', value });
 const b = (id: string, verb: string, correct: string[]): Token => ({
@@ -50,7 +51,7 @@ const tokens: Token[] = [
   t(' also '),
   b('9b', 'give out', ['be giving out']),
   t(' credential cards. When you '),
-  b('10', 'fill', ['fill']),
+    b('10', 'fill', ['fill', 'have filled']),
   t(' them in, place them in your passport. They '),
   b('11', 'collect', ['will be collected']),
   t(' as you '),
@@ -116,7 +117,10 @@ export default function PlacementTest() {
         const answered = answers[blank.id] !== undefined && answers[blank.id] !== '';
         const correct = checked ? isCorrect(blank) : null;
         current.push(
-          <span key={i} style={{ whiteSpace: 'nowrap' }}>
+                    <span key={i} style={{ whiteSpace: 'nowrap' }}>
+            <sup style={{ fontSize: 10, color: '#aaa', marginRight: 1 }}>
+              ({displayNumber(blank.id)})
+            </sup>
             <input
               type="text"
               value={answers[blank.id] ?? ''}
