@@ -177,14 +177,14 @@ export default function PlacementTest() {
           <div
             style={{
               position: 'absolute',
-              bottom: 12,
+              top: 12,
               left: 0,
               right: 0,
               textAlign: 'center',
               color: '#fff',
               fontFamily: "'Playfair Display', serif",
               fontSize: 18,
-              fontWeight: 500,
+              fontWeight: 900,
               textShadow: '0 2px 6px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9)',
               padding: '0 1rem',
             }}
