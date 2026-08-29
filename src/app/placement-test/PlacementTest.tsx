@@ -167,12 +167,31 @@ export default function PlacementTest() {
         color: 'inherit',
       }}
     >
-      <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-                      <img
-          src="/images/your-captain.webp"
-          alt="This is your captain speaking"
-          style={{ maxWidth: '50%', borderRadius: 12, marginBottom: '1rem', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
-        />
+            <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
+        <div style={{ position: 'relative', display: 'inline-block', marginBottom: '1rem' }}>
+          <img
+            src="/images/your-captain.webp"
+            alt="This is your captain speaking"
+            style={{ maxWidth: '50%', borderRadius: 12, display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
+          />
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 12,
+              left: 0,
+              right: 0,
+              textAlign: 'center',
+              color: '#fff',
+              fontFamily: "'Playfair Display', serif",
+              fontSize: 18,
+              fontWeight: 500,
+              textShadow: '0 2px 6px rgba(0,0,0,0.8), 0 0 2px rgba(0,0,0,0.9)',
+              padding: '0 1rem',
+            }}
+          >
+            This is your captain speaking&hellip;
+          </div>
+        </div>
         <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 500, marginBottom: 4 }}>
           Placement Test
         </div>
