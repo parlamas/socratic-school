@@ -5,9 +5,10 @@ import Link from "next/link";
 const exercises = [
   { href: "/english/ex-001", title: "English — Articles", desc: "Fill in the blank: a, an, some, the, any, or nothing" },
   { href: "/english/ex-002", title: "English — Exercise 2", desc: "" },
-  { href: "/danish/lesson-001", title: "Danish — Lesson 1", desc: "" },
+    { href: "/danish/lesson-001", title: "Danish — Lesson 1", desc: "" },
   { href: "/danish/ex-001", title: "Danish — Exercise 1", desc: "" },
   { href: "/danish/lesson-002", title: "Danish — Lesson 2", desc: "" },
+  { href: "/danish/lesson-003", title: "Danish — Lesson 3", desc: "For vs. fordi — cause vs. explanation" },
   { href: "/danish/ex-002", title: "Danish — Exercise 2", desc: "" },
   { href: "/multilingual/ex-001", title: "Multilingual — Exercise 1", desc: "" },
   { href: "/multilingual/ex-002", title: "Multilingual — Exercise 2", desc: "" },
