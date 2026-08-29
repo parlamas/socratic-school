@@ -251,12 +251,27 @@ export default function PlacementTest() {
           <div style={{ fontWeight: 500, marginBottom: 6, fontSize: 12, letterSpacing: '0.05em', textTransform: 'uppercase', color: '#888', fontFamily: 'sans-serif' }}>
             Answer key
           </div>
-          {blanks.map(({ blank }) => (
-            <div key={blank.id} style={{ display: 'flex', gap: 10 }}>
-              <span style={{ fontSize: 11, color: '#aaa', minWidth: 24, fontFamily: 'sans-serif' }}>{blank.id}.</span>
-              <span style={{ fontWeight: 500, color: '#185FA5', fontStyle: 'italic' }}>{blank.correct.join(' / ')}</span>
-            </div>
-          ))}
+                    {blanks.map(({ blank }) => {
+            const userAnswer = answers[blank.id] ?? '';
+            const wasAnswered = userAnswer.trim() !== '';
+            const correct = isCorrect(blank);
+
+            return (
+              <div key={blank.id} style={{ display: 'flex', gap: 10, alignItems: 'baseline', marginBottom: 2 }}>
+                <span style={{ fontSize: 11, color: '#aaa', minWidth: 24, fontFamily: 'sans-serif' }}>{blank.id}.</span>
+                <span>
+                  {wasAnswered && !correct && (
+                    <span style={{ fontWeight: 500, color: '#A32D2D', fontStyle: 'italic', textDecoration: 'line-through', marginRight: 8 }}>
+                      {userAnswer}
+                    </span>
+                  )}
+                  <span style={{ fontWeight: 500, color: correct ? '#3B6D11' : '#A32D2D', fontStyle: 'italic' }}>
+                    {blank.correct.join(' / ')}
+                  </span>
+                </span>
+              </div>
+            );
+          })}
         </div>
       )}
 
