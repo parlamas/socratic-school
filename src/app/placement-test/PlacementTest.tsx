@@ -167,7 +167,7 @@ export default function PlacementTest() {
         <img
           src="/images/your-captain.webp"
           alt="This is your captain speaking"
-          style={{ maxWidth: '100%', borderRadius: 12, marginBottom: '1rem' }}
+          style={{ maxWidth: '50%', borderRadius: 12, marginBottom: '1rem' }}
         />
         <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 500, marginBottom: 4 }}>
           Placement Test
