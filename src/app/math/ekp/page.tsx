@@ -1,4 +1,4 @@
-// app/math/math/page.tsx
+// app/math/ekp/page.tsx
 
 "use client";
 

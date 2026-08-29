@@ -97,8 +97,9 @@ const StudentLCMVisualization: React.FC<StudentLCMVisualizationProps> = ({
       <div className="notebook-paper">
         
         
-        {/* Header with numbers - positioned closer */}
-        <div className="numbers-header" style={{ marginBottom: '1rem', gap: '2rem' }}>
+                {/* Header with numbers - positioned closer */}
+        <div className="numbers-header" style={{ marginBottom: '1rem', gap: '2rem', paddingLeft: '0.5rem' }}>
+          <div className="row-number" style={{ visibility: 'hidden' }}>0.</div>
           {step.numbers.map((num, index) => (
             <div key={index} className="number-column">
               <div className="number-title">{num}</div>
