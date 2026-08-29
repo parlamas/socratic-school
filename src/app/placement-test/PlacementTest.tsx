@@ -164,10 +164,10 @@ export default function PlacementTest() {
       }}
     >
       <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-        <img
+                      <img
           src="/images/your-captain.webp"
           alt="This is your captain speaking"
-          style={{ maxWidth: '50%', borderRadius: 12, marginBottom: '1rem' }}
+          style={{ maxWidth: '50%', borderRadius: 12, marginBottom: '1rem', display: 'block', marginLeft: 'auto', marginRight: 'auto' }}
         />
         <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 500, marginBottom: 4 }}>
           Placement Test
