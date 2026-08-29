@@ -31,8 +31,8 @@ const Lesson003 = () => {
               <ol>
                 <li>
                   Definitions
-                  <p>
-                    A <span className="b">cause</span> is what determines an occurrence.
+                                    <p>
+                    A <span className="b">cause</span> is an occurrence insofar as it is considered in terms of how it determines the characteristics of another occurrence.
                   </p>
                   <p>
                     An <span className="b">explanation</span> is an attempt to reconstruct an occurrence.
@@ -102,8 +102,8 @@ const Lesson003 = () => {
               <ol>
                 <li>
                   Definitioner
-                  <p>
-                    En <span className="b">årsag</span> er det, der bestemmer en hændelse.
+                                    <p>
+                    En <span className="b">årsag</span> er en hændelse, for så vidt den betragtes ud fra, hvordan den bestemmer egenskaberne ved en anden hændelse.
                   </p>
                   <p>
                     En <span className="b">forklaring</span> er et forsøg på at rekonstruere en hændelse.
