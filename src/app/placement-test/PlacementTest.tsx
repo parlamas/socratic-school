@@ -51,7 +51,7 @@ const tokens: Token[] = [
   b('9b', 'give out', ['be giving out']),
   t(' credential cards. When you '),
   b('10', 'fill', ['fill']),
-  t(' in, place them in your passport. They '),
+  t(' them in, place them in your passport. They '),
   b('11', 'collect', ['will be collected']),
   t(' as you '),
   b('12', 'go', ['go']),
