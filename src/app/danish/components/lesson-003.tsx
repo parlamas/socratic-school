@@ -23,137 +23,147 @@ const Lesson003 = () => {
         <tbody>
           <tr>
             <td>
-              <div className="wow">
-                <span className="b">fordi</span> • cause → effect (fordi <span className="ur">determines</span> the effect)
-                <p>
-                  <span className="b">for</span> • effect → explanation (for <span className="ur">reconstructs</span> a reason from the effect)
-                </p>
-              </div>
 
-              <table>
-                <tbody>
-                  <tr>
-                    <td className="b">fordi</td>
-                    <td>cause</td>
-                    <td>effect ← cause</td>
-                    <td>because</td>
-                  </tr>
-                  <tr>
-                    <td className="b">for</td>
-                    <td>explanation</td>
-                    <td>effect → explanation</td>
-                    <td>for / since (speculative)</td>
-                  </tr>
-                </tbody>
-              </table>
-
+              {/* ── ENGLISH ── */}
+              <div className="wow">English</div>
               <p></p>
 
               <ol>
                 <li>
-                  <span className="ur">definitioner</span> • definitions
-                  <br />
-                  <span className="b">årsag</span><sub>1</sub> • <span className="b">forklaring</span><sub>2</sub>
-                  <br />
-                  cause<sub>1</sub> • explanation<sub>2</sub>
+                  Definitions
                   <p>
-                    En <span className="b">årsag</span> er det, der <span className="ur">bestemmer</span> en hændelse.
-                    <br />
-                    A cause is what <span className="ur">determines</span> an occurrence.
+                    A <span className="b">cause</span> is what determines an occurrence.
                   </p>
                   <p>
-                    En <span className="b">forklaring</span> er et <span className="ur">spekulativt forsøg</span> på at rekonstruere en hændelse.
-                    <br />
-                    An explanation is a <span className="ur">speculative attempt</span> to reconstruct an occurrence.
+                    An <span className="b">explanation</span> is an attempt to reconstruct an occurrence.
                   </p>
-                  <p></p>
                 </li>
 
                 <li>
-                  <span className="ur">samme sætning, to læsninger</span> • same sentence, two readings
-                  <br />
-                  <span className="b">
-                    Lyset er slukket<sub>1</sub>, for ingen er hjemme<sub>2</sub>.
-                  </span>
-                  <br />
-                  The light is off<sub>1</sub>, for nobody is home<sub>2</sub>.
+                  Danish resolves the confusion between cause and explanation through the choice of conjunction:
                   <p>
-                    <span className="ur">effekt</span><sub>1</sub> → <span className="ur">forklaring</span><sub>2</sub>: taleren observerer at lyset er slukket, og <span className="ur">gætter</span> at ingen er hjemme.
-                    <br />
-                    <span className="ur">effect</span><sub>1</sub> → <span className="ur">explanation</span><sub>2</sub>: the speaker observes the light is off, and <span className="ur">infers</span> that nobody is home.
+                    <span className="b">fordi</span> → cause: effect ← cause
                   </p>
-
-                  <span className="b">
-                    Lyset er slukket<sub>1</sub>, fordi ingen er hjemme<sub>2</sub>.
-                  </span>
-                  <br />
-                  The light is off<sub>1</sub>, because nobody is home<sub>2</sub>.
                   <p>
-                    <span className="ur">effekt</span><sub>1</sub> ← <span className="ur">årsag</span><sub>2</sub>: at ingen er hjemme er det, der <span className="ur">bestemmer</span> at lyset er slukket.
-                    <br />
-                    <span className="ur">effect</span><sub>1</sub> ← <span className="ur">cause</span><sub>2</sub>: nobody being home is what <span className="ur">determines</span> the light being off.
+                    <span className="b">for</span> → explanation: effect → explanation
                   </p>
-                  <p></p>
                 </li>
 
                 <li>
-                  <span className="ur">test</span> • test
-                  <br />
-                  Spørg: bestemmer det andet led det første (<span className="b">fordi</span>), eller er det andet led talerens <span className="ur">gæt</span> ud fra det første (<span className="b">for</span>)?
-                  <br />
-                  Ask: does the second clause <span className="ur">determine</span> the first (<span className="b">fordi</span>), or is the second clause the speaker&rsquo;s <span className="ur">guess</span> based on the first (<span className="b">for</span>)?
-                  <p></p>
+                  Example
+                  <p>
+                    The light is off, for nobody is home.
+                    <br />
+                    Effect: the light is off. Explanation: nobody is home.
+                  </p>
+                  <p>
+                    The light is off, because nobody is home.
+                    <br />
+                    Effect: the light is off. Cause: nobody being home.
+                  </p>
+                  <p>
+                    The wording of the second clause can be identical in both sentences. The distinction is not carried by the wording &mdash; it is carried entirely by the choice of conjunction, <span className="b">for</span> or <span className="b">because</span>.
+                  </p>
                 </li>
 
                 <li>
-                  <span className="ur">nægtelse: bekræftende</span> • negation: affirmative
-                  <br />
-                  <span className="b">
-                    Hun blev hjemme<sub>1</sub>, for hun var træt<sub>2</sub>.
-                  </span>
-                  <br />
-                  She stayed home<sub>1</sub>, for she was tired<sub>2</sub>.
-                  <br />
-                  <span className="b">
-                    Hun blev hjemme<sub>1</sub>, fordi hun var træt<sub>2</sub>.
-                  </span>
-                  <br />
-                  She stayed home<sub>1</sub>, because she was tired<sub>2</sub>.
+                  Negation &mdash; affirmative
                   <p>
-                    Ordstillingen er identisk i den bekræftende form.
+                    She stayed home, for she was tired.
                     <br />
+                    She stayed home, because she was tired.
+                  </p>
+                  <p>
                     Word order is identical in the affirmative.
                   </p>
-                  <p></p>
                 </li>
 
                 <li>
-                  <span className="ur">nægtelse: benægtende</span> • negation: negative
-                  <br />
-                  <span className="b">
-                    Hun blev til festen<sub>1</sub>, for hun<sub>2</sub> var<sub>3</sub> ikke<sub>4</sub> træt<sub>5</sub>.
-                  </span>
-                  <br />
-                  She stayed at the party<sub>1</sub>, for she<sub>2</sub> was<sub>3</sub> not<sub>4</sub> tired<sub>5</sub>.
+                  Negation &mdash; negative
                   <p>
-                    <span className="ur">ikke</span> følger <span className="b">var</span> → nægter <span className="ur">at være træt</span> (forklaringen selv nægtes).
+                    She stayed at the party, for she<sub>1</sub> was<sub>2</sub> not<sub>3</sub> tired.
                     <br />
-                    <span className="ur">ikke</span> follows <span className="b">var</span> → negates <span className="ur">being tired</span> (the explanation itself is negated).
+                    <span className="ur">not</span> follows <span className="b">was</span> &rarr; negates <span className="ur">being tired</span> (the explanation itself is negated).
                   </p>
-
-                  <span className="b">
-                    Hun blev til festen<sub>1</sub>, fordi hun<sub>2</sub> ikke<sub>3</sub> var<sub>4</sub> træt<sub>5</sub>.
-                  </span>
-                  <br />
-                  She stayed at the party<sub>1</sub>, because she<sub>2</sub> wasn&rsquo;t<sub>3</sub> tired<sub>4/5</sub>.
                   <p>
-                    <span className="ur">ikke</span> følger <span className="b">hun</span> → nægter <span className="ur">den kausale forbindelse</span> til at være træt.
+                    She stayed at the party, because she<sub>1</sub> not<sub>2</sub> was<sub>3</sub> tired.
                     <br />
-                    <span className="ur">ikke</span> follows <span className="b">hun</span> → negates the <span className="ur">causal link</span> to being tired.
+                    <span className="ur">not</span> follows <span className="b">she</span> &rarr; negates the <span className="ur">causal link</span> to being tired.
                   </p>
-                  <p></p>
                 </li>
               </ol>
+
+              <hr />
+
+              {/* ── DANSK ── */}
+              <div className="wow">Dansk</div>
+              <p></p>
+
+              <ol>
+                <li>
+                  Definitioner
+                  <p>
+                    En <span className="b">årsag</span> er det, der bestemmer en hændelse.
+                  </p>
+                  <p>
+                    En <span className="b">forklaring</span> er et forsøg på at rekonstruere en hændelse.
+                  </p>
+                </li>
+
+                <li>
+                  Dansk løser forvirringen mellem årsag og forklaring gennem valget af konjunktion:
+                  <p>
+                    <span className="b">fordi</span> &rarr; årsag: effekt &larr; årsag
+                  </p>
+                  <p>
+                    <span className="b">for</span> &rarr; forklaring: effekt &rarr; forklaring
+                  </p>
+                </li>
+
+                <li>
+                  Eksempel
+                  <p>
+                    Lyset er slukket, for ingen er hjemme.
+                    <br />
+                    Effekt: lyset er slukket. Forklaring: ingen er hjemme.
+                  </p>
+                  <p>
+                    Lyset er slukket, fordi ingen er hjemme.
+                    <br />
+                    Effekt: lyset er slukket. Årsag: at ingen er hjemme.
+                  </p>
+                  <p>
+                    Ordlyden af det andet led kan være identisk i begge sætninger. Forskellen ligger ikke i ordlyden &mdash; den ligger udelukkende i valget af konjunktion, <span className="b">for</span> eller <span className="b">fordi</span>.
+                  </p>
+                </li>
+
+                <li>
+                  Nægtelse &mdash; bekræftende
+                  <p>
+                    Hun blev hjemme, for hun var træt.
+                    <br />
+                    Hun blev hjemme, fordi hun var træt.
+                  </p>
+                  <p>
+                    Ordstillingen er identisk i den bekræftende form.
+                  </p>
+                </li>
+
+                <li>
+                  Nægtelse &mdash; benægtende
+                  <p>
+                    Hun blev til festen, for hun<sub>1</sub> var<sub>2</sub> ikke<sub>3</sub> træt.
+                    <br />
+                    <span className="ur">ikke</span> følger <span className="b">var</span> &rarr; nægter <span className="ur">at være træt</span> (forklaringen selv nægtes).
+                  </p>
+                  <p>
+                    Hun blev til festen, fordi hun<sub>1</sub> ikke<sub>2</sub> var<sub>3</sub> træt.
+                    <br />
+                    <span className="ur">ikke</span> følger <span className="b">hun</span> &rarr; nægter <span className="ur">den kausale forbindelse</span> til at være træt.
+                  </p>
+                </li>
+              </ol>
+
             </td>
           </tr>
         </tbody>
@@ -163,3 +173,5 @@ const Lesson003 = () => {
 };
 
 export default Lesson003;
+
+
