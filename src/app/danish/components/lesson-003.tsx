@@ -39,13 +39,16 @@ const Lesson003 = () => {
                   </p>
                 </li>
 
-                <li>
+                                <li>
                   Danish resolves the confusion between cause and explanation through the choice of conjunction:
                   <p>
                     <span className="b">fordi</span> → cause: effect ← cause
                   </p>
                   <p>
                     <span className="b">for</span> → explanation: effect → explanation
+                  </p>
+                  <p>
+                    Both <span className="b">for</span> and <span className="b">fordi</span> are conjunctions, and conjunctions always introduce subordinate clauses. The relationship between the two clauses is subordinating in both sentences &mdash; this does not change depending on which of the two conjunctions is used.
                   </p>
                 </li>
 
@@ -114,13 +117,16 @@ const Lesson003 = () => {
                   </p>
                 </li>
 
-                <li>
+                                <li>
                   Dansk løser forvirringen mellem årsag og forklaring gennem valget af konjunktion:
                   <p>
                     <span className="b">fordi</span> &rarr; årsag: effekt &larr; årsag
                   </p>
                   <p>
                     <span className="b">for</span> &rarr; forklaring: effekt &rarr; forklaring
+                  </p>
+                  <p>
+                    Både <span className="b">for</span> og <span className="b">fordi</span> er konjunktioner, og konjunktioner indleder altid ledsætninger. Forholdet mellem de to led er underordnende i begge sætninger &mdash; dette ændrer sig ikke afhængigt af, hvilken af de to konjunktioner der bruges.
                   </p>
                 </li>
 
