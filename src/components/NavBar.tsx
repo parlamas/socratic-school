@@ -57,12 +57,18 @@ export default function Navbar() {
           </div>
 
                     {/* Navigation Links - Center (always visible) */}
-          <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden md:flex items-center space-x-8">
             <Link
               href="/exercises"
               className="text-gray-700 hover:text-blue-600 font-medium transition-colors no-underline"
             >
               Exercises
+            </Link>
+            <Link
+              href="/placement-test"
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors no-underline"
+            >
+              Placement Test
             </Link>
           </div>
 
@@ -193,6 +199,14 @@ export default function Navbar() {
     onClick={() => setMobileMenuOpen(false)}
   >
     <span>All exercises</span>
+    <span className="text-xs text-gray-500">Free</span>
+  </Link>
+  <Link
+    href="/placement-test"
+    className="flex items-center justify-between text-sm text-gray-700 font-medium py-2.5 px-3 no-underline hover:bg-indigo-50 hover:text-indigo-600 rounded-lg transition-colors"
+    onClick={() => setMobileMenuOpen(false)}
+  >
+    <span>Placement test</span>
     <span className="text-xs text-gray-500">Free</span>
   </Link>
   <Link
