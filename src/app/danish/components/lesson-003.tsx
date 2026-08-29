@@ -78,17 +78,21 @@ const Lesson003 = () => {
                   </p>
                 </li>
 
-                <li>
+                                <li>
                   Negation &mdash; negative
                   <p>
-                    She stayed at the party, for she<sub>1</sub> was<sub>2</sub> not<sub>3</sub> tired.
+                    Hun blev til festen, for hun var ikke træt.
                     <br />
-                    <span className="ur">not</span> follows <span className="b">was</span> &rarr; negates <span className="ur">being tired</span> (the explanation itself is negated).
+                    She stayed at the party, for she was not tired.
+                    <br />
+                    <span className="ur">ikke</span> follows <span className="b">var</span> (was) &rarr; negates <span className="ur">var</span> directly.
                   </p>
                   <p>
-                    She stayed at the party, because she<sub>1</sub> not<sub>2</sub> was<sub>3</sub> tired.
+                    Hun blev til festen, fordi hun ikke var træt.
                     <br />
-                    <span className="ur">not</span> follows <span className="b">she</span> &rarr; negates the <span className="ur">causal link</span> to being tired.
+                    She stayed at the party &mdash; and why wouldn&rsquo;t she? It is not that she was tired.
+                    <br />
+                    <span className="ur">ikke</span> follows <span className="b">hun</span> (she) &rarr; negates <span className="ur">hun</span>, so the whole proposition &ldquo;she was tired&rdquo; is rejected as the cause, rather than the verb alone.
                   </p>
                 </li>
               </ol>
@@ -149,17 +153,17 @@ const Lesson003 = () => {
                   </p>
                 </li>
 
-                <li>
+                                <li>
                   Nægtelse &mdash; benægtende
                   <p>
-                    Hun blev til festen, for hun<sub>1</sub> var<sub>2</sub> ikke<sub>3</sub> træt.
+                    Hun blev til festen, for hun var ikke træt.
                     <br />
-                    <span className="ur">ikke</span> følger <span className="b">var</span> &rarr; nægter <span className="ur">at være træt</span> (forklaringen selv nægtes).
+                    <span className="ur">ikke</span> følger <span className="b">var</span> &rarr; nægter <span className="ur">var</span> direkte.
                   </p>
                   <p>
-                    Hun blev til festen, fordi hun<sub>1</sub> ikke<sub>2</sub> var<sub>3</sub> træt.
+                    Hun blev til festen, fordi hun ikke var træt.
                     <br />
-                    <span className="ur">ikke</span> følger <span className="b">hun</span> &rarr; nægter <span className="ur">den kausale forbindelse</span> til at være træt.
+                    <span className="ur">ikke</span> følger <span className="b">hun</span> &rarr; nægter <span className="ur">hun</span>, så hele påstanden &mdash;at hun var træt&mdash; afvises som årsag, snarere end blot verbet.
                   </p>
                 </li>
               </ol>
