@@ -47,8 +47,8 @@ const Lesson003 = () => {
                   <p>
                     <span className="b">for</span> → explanation: effect → explanation
                   </p>
-                  <p>
-                    Both <span className="b">for</span> and <span className="b">fordi</span> are conjunctions, and conjunctions always introduce subordinate clauses. The relationship between the two clauses is subordinating in both sentences &mdash; this does not change depending on which of the two conjunctions is used.
+                                    <p>
+                    Both <span className="b">for</span> and <span className="b">fordi</span> are conjunctions, and conjunctions always introduce subordinate clauses in all languages. The relationship between the two clauses is subordinating in both sentences &mdash; this does not change depending on which of the two conjunctions is used. Conjunctions never introduce main clauses.
                   </p>
                 </li>
 
@@ -125,8 +125,8 @@ const Lesson003 = () => {
                   <p>
                     <span className="b">for</span> &rarr; forklaring: effekt &rarr; forklaring
                   </p>
-                  <p>
-                    Både <span className="b">for</span> og <span className="b">fordi</span> er konjunktioner, og konjunktioner indleder altid ledsætninger. Forholdet mellem de to led er underordnende i begge sætninger &mdash; dette ændrer sig ikke afhængigt af, hvilken af de to konjunktioner der bruges.
+                                    <p>
+                    Både <span className="b">for</span> og <span className="b">fordi</span> er konjunktioner, og konjunktioner indleder altid ledsætninger i alle sprog. Forholdet mellem de to led er underordnende i begge sætninger &mdash; dette ændrer sig ikke afhængigt af, hvilken af de to konjunktioner der bruges. Konjunktioner indleder aldrig hovedsætninger.
                   </p>
                 </li>
 
