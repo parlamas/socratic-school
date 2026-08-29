@@ -48,6 +48,17 @@ input, textarea, select {
   border-color: #d1d5db !important;
 }
 
+input.placement-blank-input[data-state='typing'] {
+  color: #1E6FEA !important;
+  font-weight: 700 !important;
+}
+input.placement-blank-input[data-state='correct'] {
+  color: #27500A !important;
+}
+input.placement-blank-input[data-state='incorrect'] {
+  color: #A32D2D !important;
+}
+
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .container {
