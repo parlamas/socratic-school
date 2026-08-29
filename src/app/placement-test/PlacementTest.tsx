@@ -83,7 +83,22 @@ export default function PlacementTest() {
   const isCorrect = (blank: Blank) =>
     blank.correct.includes(norm(answers[blank.id] ?? ''));
 
-  const score = blanks.filter(({ blank }) => isCorrect(blank)).length;
+    const score = blanks.filter(({ blank }) => isCorrect(blank)).length;
+
+  const getVerdict = (correct: number, total: number): 'Beginner' | 'Intermediate' | 'Advanced' => {
+    const pct = correct / total;
+    if (pct < 0.4) return 'Beginner';
+    if (pct < 0.75) return 'Intermediate';
+    return 'Advanced';
+  };
+
+  const verdict = checked ? getVerdict(score, blanks.length) : null;
+
+  const verdictColor: Record<string, { bg: string; text: string; border: string }> = {
+    Beginner: { bg: '#FCEBEB', text: '#791F1F', border: '#A32D2D' },
+    Intermediate: { bg: '#FFF6E0', text: '#8A6100', border: '#D9A400' },
+    Advanced: { bg: '#EAF3DE', text: '#27500A', border: '#3B6D11' },
+  };
 
   const renderTokens = () => {
     const paragraphs: React.ReactNode[][] = [[]];
@@ -113,12 +128,6 @@ export default function PlacementTest() {
                 fontSize: 15,
                 padding: '1px 4px',
                 border: 'none',
-                borderBottom:
-                  correct === null
-                    ? '1.5px solid #185FA5'
-                    : correct
-                    ? '1.5px solid #3B6D11'
-                    : '1.5px solid #E24B4A',
                 borderRadius: 0,
                 background: 'transparent',
                 color: correct === null ? 'inherit' : correct ? '#27500A' : '#A32D2D',
@@ -214,21 +223,24 @@ export default function PlacementTest() {
         </button>
       </div>
 
-      {checked && (
+            {checked && verdict && (
         <div
           style={{
             borderRadius: 8,
-            padding: '0.6rem 1rem',
+            padding: '0.75rem 1rem',
             marginBottom: '0.75rem',
             textAlign: 'center',
-            fontSize: 14,
-            fontWeight: 500,
-            background: score === blanks.length ? '#EAF3DE' : '#FCEBEB',
-            color: score === blanks.length ? '#27500A' : '#791F1F',
-            border: `0.5px solid ${score === blanks.length ? '#3B6D11' : '#A32D2D'}`,
+            background: verdictColor[verdict].bg,
+            color: verdictColor[verdict].text,
+            border: `0.5px solid ${verdictColor[verdict].border}`,
           }}
         >
-          Score: {score} / {blanks.length}
+          <div style={{ fontSize: 14, fontWeight: 500, marginBottom: 2 }}>
+            Score: {score} / {blanks.length}
+          </div>
+          <div style={{ fontSize: 16, fontWeight: 700 }}>
+            Level: {verdict}
+          </div>
         </div>
       )}
 
