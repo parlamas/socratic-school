@@ -106,7 +106,7 @@ export default function PlacementTest() {
               type="text"
               value={answers[blank.id] ?? ''}
               onChange={(e) => handleChange(blank.id, e.target.value)}
-              placeholder="\u2026"
+                            placeholder=". . . . . . . . . ."
               style={{
                 width: 130,
                 fontFamily: "'Source Serif 4', Georgia, serif",
