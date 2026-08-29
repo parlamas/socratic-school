@@ -47,9 +47,9 @@ const Lesson003 = () => {
                   <p>
                     <span className="b">for</span> → explanation: effect → explanation
                   </p>
-                                    <p>
-                    Both <span className="b">for</span> and <span className="b">fordi</span> are conjunctions, and conjunctions always introduce subordinate clauses in all languages. The relationship between the two clauses is subordinating in both sentences &mdash; this does not change depending on which of the two conjunctions is used. Conjunctions never introduce main clauses.
-                  </p>
+                    <div className="wow" style={{ marginTop: 10 }}>
+                    Both <span className="b">for</span> and <span className="b">fordi</span> are conjunctions, and conjunctions always introduce subordinate clauses in all languages. The relationship between the two clauses is subordinating in both sentences &mdash; this does not change depending on which of the two conjunctions is used. Conjunctions never introduce main clauses. Main clauses can stand on their own; subordinate clauses cannot.
+                  </div>
                 </li>
 
                 <li>
@@ -125,9 +125,9 @@ const Lesson003 = () => {
                   <p>
                     <span className="b">for</span> &rarr; forklaring: effekt &rarr; forklaring
                   </p>
-                                    <p>
-                    Både <span className="b">for</span> og <span className="b">fordi</span> er konjunktioner, og konjunktioner indleder altid ledsætninger i alle sprog. Forholdet mellem de to led er underordnende i begge sætninger &mdash; dette ændrer sig ikke afhængigt af, hvilken af de to konjunktioner der bruges. Konjunktioner indleder aldrig hovedsætninger.
-                  </p>
+                    <div className="wow" style={{ marginTop: 10 }}>
+                    Både <span className="b">for</span> og <span className="b">fordi</span> er konjunktioner, og konjunktioner indleder altid ledsætninger i alle sprog. Forholdet mellem de to led er underordnende i begge sætninger &mdash; dette ændrer sig ikke afhængigt af, hvilken af de to konjunktioner der bruges. Konjunktioner indleder aldrig hovedsætninger. Hovedsætninger kan stå alene; ledsætninger kan ikke.
+                  </div>
                 </li>
 
                 <li>
