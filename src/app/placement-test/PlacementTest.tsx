@@ -134,7 +134,7 @@ export default function PlacementTest() {
                 border: 'none',
                 borderRadius: 0,
                 background: 'transparent',
-                                color: correct === null ? '#185FA5' : correct ? '#27500A' : '#A32D2D',
+                color: correct === null ? '#1E6FEA' : correct ? '#27500A' : '#A32D2D',
                 fontWeight: correct === null ? 700 : 400,
                 outline: 'none',
                 textAlign: 'center',
