@@ -46,7 +46,7 @@ const tokens: Token[] = [
   t('In a few moments\u2019 time, the crew '),
   b('8', 'come', ['will be coming']),
   t(' round with duty-free goods. We '),
-  b('9a', 'will', ['will']),
+  b('9a', '', ['will']),
   t(' also '),
   b('9b', 'give out', ['be giving out']),
   t(' credential cards. When you '),
@@ -136,9 +136,11 @@ export default function PlacementTest() {
                 margin: '0 2px',
               }}
             />
-            <span style={{ fontSize: 12, color: '#888', marginRight: 4 }}>
-              ({blank.verb})
-            </span>
+                        {blank.verb && (
+              <span style={{ fontSize: 12, color: '#888', marginRight: 4 }}>
+                ({blank.verb})
+              </span>
+            )}
           </span>
         );
       }
