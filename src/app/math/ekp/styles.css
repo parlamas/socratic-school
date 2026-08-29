@@ -979,6 +979,7 @@
 
 .number-column {
   flex: 1;
+  text-align: center;
 }
 
 .number-title {
