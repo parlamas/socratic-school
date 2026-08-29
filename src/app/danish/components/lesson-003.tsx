@@ -48,7 +48,7 @@ const Lesson003 = () => {
                     <span className="b">for</span> → explanation: effect → explanation
                   </p>
                     <div className="wow" style={{ marginTop: 10 }}>
-                    Both <span className="b">for</span> and <span className="b">fordi</span> are conjunctions, and conjunctions always introduce subordinate clauses in all languages. The relationship between the two clauses is subordinating in both sentences; this does not change depending on which of the two conjunctions is used. Conjunctions never introduce main clauses. Main clauses can stand on their own; subordinate clauses cannot. Moreover, definitions are not formulated to be bent or violated but to be honored in letter and spirit.
+                    Both <span className="b">for</span> and <span className="b">fordi</span> are conjunctions, and conjunctions always introduce subordinate clauses in all languages. The relationship between the two clauses is subordinating in both sentences; this does not change depending on which of the two conjunctions is used. Conjunctions never introduce main clauses. Main clauses can stand on their own; subordinate clauses cannot. Moreover, definitions are not formulated to be bent or violated to accommodate sciolism, but to be honored in letter and spirit.
                   </div>
                 </li>
 
@@ -126,7 +126,7 @@ const Lesson003 = () => {
                     <span className="b">for</span> &rarr; forklaring: effekt &rarr; forklaring
                   </p>
                                       <div className="wow" style={{ marginTop: 10 }}>
-                    Både <span className="b">for</span> og <span className="b">fordi</span> er konjunktioner, og konjunktioner indleder altid underordnede sætninger på alle sprog. Forholdet mellem de to sætninger er underordnende i begge tilfælde; det ændrer sig ikke, afhængigt af hvilken af de to konjunktioner der anvendes. Konjunktioner indleder aldrig hovedsætninger. Hovedsætninger kan stå alene; underordnede sætninger kan ikke. Desuden er definitioner ikke formuleret for at blive bøjet eller tilsidesat, men for at blive overholdt både i bogstav og ånd.
+                    Både <span className="b">for</span> og <span className="b">fordi</span> er konjunktioner, og konjunktioner indleder altid underordnede sætninger på alle sprog. Forholdet mellem de to sætninger er underordnende i begge tilfælde; det ændrer sig ikke, afhængigt af hvilken af de to konjunktioner der anvendes. Konjunktioner indleder aldrig hovedsætninger. Hovedsætninger kan stå alene; underordnede sætninger kan ikke. Desuden er definitioner ikke formuleret for at blive bøjet eller tilsidesat for at imødekomme vidensforstillelse, men for at blive overholdt både i bogstav og ånd.
                   </div>
                 </li>
 
