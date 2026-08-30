@@ -334,9 +334,9 @@ const Exercise001 = ({ accessStatus }: { accessStatus: AccessStatus }) => {
   };
 
   // Build the answer key string for a blank
-  const answerKey = (blank: Blank) => {
+    const answerKey = (blank: Blank) => {
     return blank.correct
-      .map((c) => (c === '' ? '∅' : c))
+      .filter((c) => c !== '')
       .join(' / ');
   };
 

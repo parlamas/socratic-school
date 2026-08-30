@@ -26,6 +26,8 @@ const ex = (template: string, blanks: Blank[], note?: string): ExerciseItem => (
   note,
 });
 
+const a   = { correct: ['a'] };
+const an  = { correct: ['an'] };
 const the = { correct: ['the'] };
 const nil = { correct: [''] };
 
@@ -33,184 +35,173 @@ const nil = { correct: [''] };
 
 const exercises: ExerciseItem[] = [
   ex(
-    '___ youngest boy has just started going to ___ school; ___ eldest boy is at ___ college.',
-    [the, nil, the, nil],
-    '"Go to school/college" = no article (purpose). "The youngest/eldest" = superlative takes the.',
+    'There was ___ knock on ___ door. I opened it and found ___ small dark man in ___ blue overcoat and ___ woollen cap.',
+    [a, the, a, a, a],
   ),
   ex(
-    'She lives on ___ top floor of an old house. When ___ wind blows, all ___ windows rattle.',
-    [the, the, the],
-    '"The top floor" = specific. "The wind", "the windows" = specific to this house.',
+    'He said he was ___ employee of ___ gas company and had come to read ___ meter.',
+    [an, the, the],
   ),
   ex(
-    '___ darkness doesn\'t worry ___ cats; ___ cats can see in ___ dark.',
-    [nil, nil, nil, the],
-    '"Darkness" and "cats" used generically — no article. "In the dark" = fixed expression.',
+    'But I had ___ suspicion that he wasn\'t speaking ___ truth because ___ meter readers usually wear ___ peaked caps.',
+    [a, the, nil, nil],
+    '"Speaking the truth" is a fixed expression. "Meter readers" and "peaked caps" are generic plurals.',
   ),
   ex(
-    'My little boys say that they want to be ___ spacemen, but most of them will probably end up in ___ less dramatic jobs.',
-    [nil, nil],
-    'Both are plural indefinite — no article.',
+    'However, I took him to ___ meter, which is in ___ dark corner under ___ stairs (___ meters are usually in ___ dark corners under ___ stairs).',
+    [the, a, the, nil, nil, the],
+    '"Under the stairs" is idiomatic even when speaking generally. "Meters" and "dark corners" (2nd time) are generic plurals.',
   ),
   ex(
-    'Do you know ___ time? ~ Yes, ___ clock in ___ hall has just struck nine. ~ Then it isn\'t ___ time to go yet.',
-    [the, the, the, nil],
-    '"Do you know the time?" = specific. "Time to go" = abstract, no article.',
+    'I asked if he had ___ torch; he said he disliked torches and always read ___ meters by ___ light of ___ match.',
+    [a, nil, the, a],
+    '"By the light of a match" — fixed pattern. "Meters" here is generic.',
   ),
   ex(
-    'He was sent to ___ prison for ___ six months for ___ shop-lifting. When ___ six months are over he\'ll be released; ___ difficulty then will be to find ___ work. ~ Do you go to ___ prison to visit him?',
-    [nil, nil, nil, the, the, nil, the],
-    '"In prison" = as an institution, no article. "The six months" = the specific period mentioned. "The difficulty" = specific difficulty. "Find work" = abstract.',
+    'I remarked that if there was ___ leak in ___ gaspipe there might be ___ explosion while he was reading ___ meter.',
+    [a, the, an, the],
   ),
   ex(
-    'I went to ___ school to talk to ___ headmistress. I persuaded her to let Ann give up ___ gymnastics and take ___ ballet lessons instead.',
-    [the, the, nil, nil],
-    '"The school" = a specific school. "The headmistress" = specific person. "Gymnastics/ballet lessons" = activities, no article.',
+    'He said, \'As ___ matter of ___ fact, there was ___ explosion in ___ last house I visited; and Mr Smith, ___ owner of ___ house, was burnt in ___ face.\'',
+    [a, nil, an, the, the, the, the],
+    '"As a matter of fact" is a fixed idiom — only one article, before "matter".',
   ),
   ex(
-    '___ ballet isn\'t much use for ___ girls; it is much better to be able to play ___ piano.',
-    [nil, nil, the],
-    '"Ballet" and "girls" = generic, no article. "Play the piano" = fixed expression.',
+    '\'Mr Smith was holding ___ lighted match at ___ time of ___ explosion.\'',
+    [a, the, the],
   ),
   ex(
-    'I am on ___ night duty. When you go to ___ bed, I go to ___ work.',
-    [nil, nil, nil],
-    '"On night duty", "go to bed", "go to work" = all fixed expressions with no article.',
+    'To prevent ___ possible repetition of this accident, I lent him ___ torch.',
+    [a, a],
+    'The second torch is a different, unspecified one — indefinite.',
   ),
   ex(
-    'Peter\'s at ___ office but you could get him on ___ phone. There\'s a telephone box just round ___ corner.',
-    [the, the, the],
-    '"The office" = his specific office. "On the phone" = fixed expression. "Round the corner" = fixed expression.',
+    'He switched on ___ torch, read ___ meter and wrote ___ reading down on ___ back of ___ envelope.',
+    [the, the, the, the, an],
+    '"The torch" — the one just lent to him. "An envelope" — unspecified.',
   ),
   ex(
-    'He got ___ bronchitis and was taken to ___ hospital. I expect they\'ll send him home at ___ end of ___ week. ~ Have you rung ___ hospital to ask how he is?',
-    [nil, nil, the, the, the],
-    '"Bronchitis" = illness, no article. "In hospital" = as institution. "The end of the week" = specific. "The hospital" = the specific one mentioned.',
+    'I said in ___ surprise that ___ meter readers usually put ___ readings down in ___ book.',
+    [nil, nil, nil, a],
+    '"In surprise" — abstract feeling, no article.',
   ),
   ex(
-    'Ann\'s habit of riding a motorcycle up and down ___ road early in ___ morning annoyed ___ neighbours and in ___ end they took her to ___ court.',
-    [the, the, the, the, nil],
-    '"The road/morning/neighbours/end" = all specific. "Took to court" = institution, no article.',
+    'He said that he had had ___ book but that it had been burnt in ___ fire in ___ Mr Smith\'s house.',
+    [a, a, nil],
   ),
   ex(
-    'He first went to ___ sea in a Swedish ship, so as well as learning ___ navigation he had to learn ___ Swedish.',
-    [nil, nil, nil],
-    '"Go to sea" = as a profession, no article. "Navigation" and "Swedish" = subjects/languages, no article.',
+    'By this time I had come to ___ conclusion that he wasn\'t ___ genuine meter reader; and ___ moment he left ___ house I rang ___ police.',
+    [the, a, the, the, the],
+    '"Come to the conclusion" and "the moment he left" are fixed patterns.',
   ),
   ex(
-    '___ family hotels are ___ hotels which welcome ___ parents and ___ children.',
+    'Are John and Mary ___ cousins? ~ No, they aren\'t ___ cousins; they are ___ brother and ___ sister.',
     [nil, nil, nil, nil],
-    'All generic plurals — no article.',
+    'Plural/role complements after "be" — no article.',
   ),
   ex(
-    'On ___ Sundays my father stays in ___ bed till ten o\'clock, reading ___ Sunday papers.',
+    '___ fog was so thick that we couldn\'t see ___ side of ___ road. We followed ___ car in front of us and hoped that we were going ___ right way.',
+    [the, the, the, a, the],
+    '"The right way" is a fixed expression.',
+  ),
+  ex(
+    'I can\'t remember ___ exact date of ___ storm, but I know it was ___ Sunday because everybody was at ___ church. On ___ Monday ___ post didn\'t come because ___ roads were blocked by ___ fallen trees.',
+    [the, the, a, nil, nil, the, the, nil],
+    '"At church" (institution) and day names take no article. "The post" = the mail.',
+  ),
+  ex(
+    'Peter thinks that this is quite ___ cheap restaurant.',
+    [a],
+  ),
+  ex(
+    'There\'s been ___ murder here. ~ Where\'s ___ body?~ There isn\'t ___ body. ~ Then how do you know there\'s been ___ murder?',
+    [a, the, a, a],
+  ),
+  ex(
+    'Number ___ hundred and two, - ___ house next door to us, is for sale. It\'s quite ___ nice house with ___ big rooms. ___ back windows look out on ___ park.',
+    [a, the, a, nil, the, the],
+    '"A hundred and two" — indefinite numeral. "Big rooms" — generic plural.',
+  ),
+  ex(
+    'I don\'t know what ___ price ___ owners are asking. But Dry and Rot are ___ agents. You could give them ___ ring and make them ___ offer.',
+    [the, the, nil, a, an],
+    '"Are agents" — occupation as complement, no article.',
+  ),
+  ex(
+    '___ postman\'s little boy says that he\'d rather be ___ dentist than ___ doctor, because ___ dentists don\'t get called out at ___ night.',
+    [the, a, a, nil, nil],
+  ),
+  ex(
+    'Just as ___ air hostess (there was only one on the plane) was handing me ___ cup of ___ coffee ___ plane gave ___ lurch and ___ coffee went all over ___ person on ___ other side of ___ gangway.',
+    [the, a, nil, the, a, the, the, the, the],
+    'Second "coffee" is definite — it\'s the same coffee just mentioned.',
+  ),
+  ex(
+    'There was ___ collision between ___ car and ___ cyclist at ___ crossroads near ___ my house early in ___ morning. ___ cyclist was taken to ___ hospital with ___ concussion. ___ driver of ___ car was treated for ___ shock. ___ witnesses say that ___ car was going at ___ seventy miles ___ hour.',
+    [a, a, a, a, nil, the, the, nil, nil, the, the, nil, the, the, an],
+    'No article before "my house" — a possessive already precedes it. "Taken to hospital" (institution, BrE) and "an hour" in "miles an hour" are fixed.',
+  ),
+  ex(
+    'Professor Jones, ___ man who discovered ___ new drug that everyone is talking about, refused to give ___ press conference.',
+    [the, the, a],
+  ),
+  ex(
+    'Peter Piper, ___ student in ___ professor\'s college, asked him why he refused to talk to ___ press.',
+    [a, the, the],
+    '"The press" = the media, collective institution.',
+  ),
+  ex(
+    'We\'re going to ___ tea with ___ Smiths today, aren\'t we? Shall we take ___ car? ~ We can go by ___ car if you wash ___ car first. We can\'t go to ___ Mrs Smith\'s in ___ car all covered with ___ mud.',
+    [nil, the, the, nil, the, nil, a, nil],
+    '"Go to tea" and "by car" are fixed expressions. Family surnames take "the" (the Smiths). Least certain: the last "car" — describing a state ("a car all covered with mud") rather than re-identifying it.',
+  ),
+  ex(
+    'He got ___ job in ___ south and spent ___ next two years doing ___ work he really enjoyed.',
+    [a, the, the, the],
+    '"The work he really enjoyed" — the relative clause makes it specific.',
+  ),
+  ex(
+    'It is ___ pleasure to do ___ business with such ___ efficient organization.',
+    [a, nil, an],
+  ),
+  ex(
+    '___ day after ___ day passed without ___ news, and we began to lose ___ hope.',
+    [nil, nil, nil, nil],
+    '"Day after day" is a fixed expression.',
+  ),
+  ex(
+    'Would you like to hear ___ story about ___ Englishman, ___ Irishman and ___ Scotsman? ~ No. I\'ve heard ___ stories about ___ Englishmen, ___ Irishmen and ___ Scotsmen before and they are all ___ same.',
+    [a, an, an, a, nil, nil, nil, nil, the],
+    '"All the same" is fixed.',
+  ),
+  ex(
+    'But mine is not ___ typical story. In my story ___ Scotsman is generous, ___ Irishman is logical and ___ Englishman is romantic. ~ Oh, if it\'s ___ fantastic story I\'ll listen with ___ pleasure.',
+    [a, the, the, the, a, nil],
+    'The nationalities are now specific characters within "my story". "With pleasure" is fixed.',
+  ),
+  ex(
+    'My aunt lived on ___ ground floor of ___ old house on ___ River Thames. She was very much afraid of ___ burglars and always locked up ___ house very carefully before she went to ___ bed. She also took ___ precaution of looking under ___ bed to see if ___ burglar was hiding there.',
+    [the, an, the, nil, the, nil, the, the, a],
+    'Rivers take "the". "Go to bed" is fixed. "Took the precaution of" is a fixed pattern.',
+  ),
+  ex(
+    '\'___ modern burglars don\'t hide under ___ beds,\' said her daughter. I\'ll go on looking just ___ same,\' said my aunt.',
     [nil, nil, the],
-    '"On Sundays" = habitual, no article. "In bed" = fixed expression. "The Sunday papers" = specific papers.',
   ),
   ex(
-    'Then he gets up, puts on ___ old clothes, has ___ breakfast and starts ___ work in ___ garden.',
-    [nil, nil, nil, the],
-    '"Old clothes/breakfast/work" = no article (generic/routine). "The garden" = his specific garden.',
+    'One morning she rang her daughter in ___ triumph. \'I found ___ burglar under ___ bed ___ last night,\' she said, \'and he was quite ___ young man.\'',
+    [nil, a, the, nil, a],
+    '"In triumph" is abstract; "last night" takes no article.',
   ),
   ex(
-    'My mother goes to ___ church in ___ morning, and in ___ afternoon goes to visit ___ friends.',
-    [nil, the, the, nil],
-    '"Go to church" = as institution. "The morning/afternoon" = specific parts of the day. "Friends" = indefinite plural.',
+    '___ apples are sold by ___ pound. These are forty pence ___ pound.',
+    [nil, the, a],
+    '"Sold by the pound" vs "forty pence a pound" — both fixed, different articles.',
   ),
   ex(
-    'Like many women, she loves ___ tea parties and ___ gossip.',
-    [nil, nil],
-    'Both generic — no article.',
-  ),
-  ex(
-    'My parents have ___ cold meat and ___ salad for ___ supper, ___ winter and ___ summer.',
-    [nil, nil, nil, nil, nil],
-    'All generic/routine — no article.',
-  ),
-  ex(
-    'During ___ meal he talks about ___ garden and she tells him ___ village gossip.',
-    [the, the, nil],
-    '"The meal" = the specific meal they are having. "The garden" = their garden. "Village gossip" = generic.',
-  ),
-  ex(
-    'We have a very good train service from here to ___ city centre and most people go to ___ work by train. You can go by ___ bus too, of course, but you can\'t get a season ticket on ___ bus.',
-    [the, nil, nil, the],
-    '"The city centre" = specific. "Go to work" = fixed expression. "By bus" = mode of transport. "On the bus" = the specific bus service.',
-  ),
-  ex(
-    '___ dead no longer need ___ help. We must concern ourselves with ___ living. We must build ___ houses and ___ schools and ___ playgrounds.',
-    [the, nil, the, nil, nil, nil],
-    '"The dead/the living" = collective nouns with the. "Help/houses/schools/playgrounds" = generic.',
-  ),
-  ex(
-    'I\'d like to see ___ Mr Smith please. ~ Do you mean ___ Mr Smith who works in ___ box office or ___ other Mr Smith?',
-    [nil, the, the, the],
-    '"Mr Smith" alone = no article. "The Mr Smith" = identifies which one. "The box office/the other" = specific.',
-  ),
-  ex(
-    'Did you come by ___ air? ~ No, I came by ___ sea. I had a lovely voyage on ___ Queen Elizabeth II.',
-    [nil, nil, the],
-    '"By air/sea" = mode of transport, no article. "The Queen Elizabeth II" = named vessel takes the.',
-  ),
-  ex(
-    '___ most of ___ stories that ___ people tell about ___ Irish aren\'t true.',
-    [nil, the, nil, the],
-    '"Most of the stories" = specific stories referred to. "People" = generic. "The Irish" = nationality group takes the.',
-  ),
-  ex(
-    '___ married couples with ___ children often rent ___ cottages by ___ seaside for ___ summer holidays. ___ men hire boats and go for ___ trips along ___ coast; ___ children spend ___ day on ___ beach and ___ poor mothers spend ___ most of ___ time doing ___ cooking and cleaning.',
-    [nil, nil, nil, the, nil, the, nil, the, the, the, the, the, the, nil, nil],
-    '"The seaside/coast/beach" = specific geographical features. "The men/children/poor mothers" = the specific people in the group. "The day/most of the time" = specific. "Cooking and cleaning" = activities, no article.',
-  ),
-  ex(
-    'It\'s usually safe to walk on ___ sand, but here, when ___ tide is coming in, ___ sand becomes dangerously soft. ___ people have been swallowed up by it.',
-    [the, the, the, nil],
-    '"The sand/tide" = specific to this location. "People" = indefinite, no article.',
-  ),
-  ex(
-    'When ___ Titanic was crossing ___ Atlantic she struck an iceberg which tore a huge hole in her bow. ___ captain ordered ___ crew to help ___ passengers into ___ boats.',
-    [the, the, the, the, the, the],
-    'All take the: named ship, named ocean, specific captain/crew/passengers/boats.',
-  ),
-  ex(
-    'Everywhere ___ man has cut down ___ forests in order to cultivate ___ ground, or to use ___ wood as ___ fuel or as ___ building material.',
-    [nil, nil, the, the, nil, nil],
-    '"Man" = generic mankind. "Forests" = generic plural. "The ground/wood" = specific resources being discussed. "Fuel/building material" = abstract.',
-  ),
-  ex(
-    'But ___ interference with ___ nature often brings ___ disaster. ___ tree-felling sometimes turns ___ fertile land into a dustbowl.',
-    [nil, nil, nil, nil, nil],
-    'All abstract/generic — no article.',
-  ),
-  ex(
-    '___ people think that ___ lead is ___ heaviest metal, but ___ gold is heavier.',
-    [nil, nil, the, nil],
-    '"People/lead/gold" = generic. "The heaviest" = superlative takes the.',
-  ),
-  ex(
-    'Our air hostess said, \'___ rack is only for ___ light articles. ___ heavy things such as ___ bottles must be put on ___ floor.\'',
-    [the, nil, nil, nil, the],
-    '"The rack/floor" = specific. "Light articles/heavy things/bottles" = generic.',
-  ),
-  ex(
-    '___ windows are supposed to let in ___ light; but ___ windows of this house are so small that we have to have ___ electric light on all ___ time.',
-    [nil, nil, the, nil, the],
-    '"Windows" first = generic. "The windows of this house" = specific. "Light/electric light" = abstract. "All the time" = fixed expression.',
-  ),
-  ex(
-    'There\'ll always be a conflict between ___ old and ___ young. ___ young people want ___ change but ___ old people want ___ things to stay ___ same.',
-    [the, the, nil, nil, nil, nil, the],
-    '"The old/the young" = collective groups. "Young/old people" = generic. "The same" = fixed expression.',
-  ),
-  ex(
-    '___ power tends to corrupt and ___ absolute power corrupts absolutely.',
-    [nil, nil],
-    'Both abstract/generic — no article.',
-  ),
-  ex(
-    'You can fool some of ___ people all ___ time, and all ___ people some of ___ time; but you cannot fool all ___ people all ___ time.',
-    [the, the, the, the, the, the],
-    'All take the — referring to specific groups of people in each clause.',
+    'It was ___ windy morning but they hired ___ boat and went for ___ sail along ___ coast. In ___ afternoon ___ wind increased and they soon found themselves in ___ difficulties.',
+    [a, a, a, the, the, the, nil],
+    '"In difficulties" is a fixed expression, no article.',
   ),
 ];
 
@@ -252,8 +243,8 @@ const Exercise003 = () => {
     }
   };
 
-  const answerKey = (blank: Blank) =>
-    blank.correct.map((c) => (c === '' ? '∅' : c)).join(' / ');
+    const answerKey = (blank: Blank) =>
+    blank.correct.filter((c) => c !== '').join(' / ');
 
   const checkAnswer = () => {
     if (answers.some((a) => a === undefined)) return;
@@ -333,8 +324,8 @@ const Exercise003 = () => {
         <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, fontWeight: 500, marginBottom: 4 }}>
           Fill in the Blank
         </div>
-        <div style={{ fontSize: 13, color: '#666', lineHeight: 1.6 }}>
-          Insert <em>the</em> where necessary — otherwise leave the blank empty (∅)
+                <div style={{ fontSize: 13, color: '#666', lineHeight: 1.6 }}>
+          Insert <em>a</em>, <em>an</em> or <em>the</em> where necessary — otherwise leave the blank empty
         </div>
         <div style={{ fontSize: 12, color: '#888', marginTop: 6 }}>
           Type your answer in each blank. Press <kbd style={{ fontFamily: 'monospace', background: '#f0f0f0', padding: '1px 5px', borderRadius: 4, border: '0.5px solid #ccc' }}>Enter</kbd> to move to the next blank or check.

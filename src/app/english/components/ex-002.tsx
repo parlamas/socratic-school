@@ -72,7 +72,7 @@ const exercises: ExerciseItem[] = [
     'Both are plural indefinite — no article.',
   ),
   ex(
-    'Do you know ___ time? ~ Yes, ___ clock in ___ hall has just struck nine. ~ Then it isn\'t ___ time to go yet.',
+        'Do you know ___ time?<br>&mdash; Yes, ___ clock in ___ hall has just struck nine.<br>&mdash; Then it isn\'t ___ time to go yet.',
     [the, the, the, nil],
     '"Do you know the time?" = specific. "Time to go" = abstract, no article.',
   ),
@@ -335,8 +335,8 @@ const Exercise002 = ({ accessStatus }: { accessStatus: AccessStatus }) => {
     ));
   };
 
-  const answerKey = (blank: Blank) =>
-    blank.correct.map((c) => (c === '' ? '∅' : c)).join(' / ');
+    const answerKey = (blank: Blank) =>
+    blank.correct.filter((c) => c !== '').join(' / ');
 
   return (
     <div style={{ maxWidth: 680, margin: '0 auto', padding: '1.5rem 1rem 3rem', fontFamily: "'Source Serif 4', Georgia, serif", color: 'inherit' }}>
