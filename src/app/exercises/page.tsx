@@ -3,8 +3,8 @@
 import Link from "next/link";
 
 const exercises = [
-  { href: "/english/ex-001", title: "English — Exercise 1", desc: "Fill in the blank: a, an, some, the, any, or nothing" },
-  { href: "/english/ex-002", title: "English — Exercise 2", desc: "Insert: the, a, an, some, any, no, or nothing (∅)" },
+  { href: "/english/ex-001", title: "English — Exercise 1", desc: "Fill in the blank: a, an, some, the, any, or leave the blank empty" },
+  { href: "/english/ex-002", title: "English — Exercise 2", desc: "Insert: the, a, an, some, any, no, or leave the blank empty" },
   { href: "/english/ex-003", title: "English — Exercise 3", desc: "Insert an article (a, an, the) where necessary, or leave the blank empty" },
   { href: "/english/ex-004", title: "English — Exercise 4", desc: "Articles or possessives (my, his, her, our, your, their) with body parts and clothing" },
   { href: "/english/ex-005", title: "English — Exercise 5", desc: "Insert a, an, or one where necessary" },
