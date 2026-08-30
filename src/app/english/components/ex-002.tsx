@@ -347,7 +347,7 @@ const Exercise002 = ({ accessStatus }: { accessStatus: AccessStatus }) => {
           Fill in the Blank
         </div>
         <div style={{ fontSize: 13, color: '#666', lineHeight: 1.6 }}>
-          The use of articles · <em>the</em>, <em>a</em>, <em>an</em>, <em>some</em>, <em>any</em>, <em>no</em>, or nothing (∅)
+          The use of articles · <em>the</em>, <em>a</em>, <em>an</em>, <em>some</em>, <em>any</em>, <em>no</em>, or leave the blank empty
         </div>
         <div style={{ fontSize: 12, color: '#888', marginTop: 6 }}>
           Type your answer in each blank. Press <kbd style={{ fontFamily: 'monospace', background: '#f0f0f0', padding: '1px 5px', borderRadius: 4, border: '0.5px solid #ccc' }}>Enter</kbd> to move to the next blank or check.
