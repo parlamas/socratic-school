@@ -105,8 +105,8 @@ export const questions: Question[] = [
     id: 6,
     english: {
       question: "How many terms can an equation have?",
-      options: ["Maximum 2 terms", "Maximum 4 terms", "Maximum 10 terms", "Any number of terms"],
-      explanation: "An equation can have any number of terms. For example: 2x + 3y - 5z + 7 = 4x - 2y + 9 has multiple terms on both sides."
+      options: ["Maximum 2 terms", "Maximum 4 terms", "Maximum 10 terms", "Two or more terms"],
+      explanation: "An equation can have two or more terms. For example: 2x + 3y - 5z + 7 = 4x - 2y + 9 has multiple terms on both sides."
     },
     greek: {
       question: "Πόσους όρους μπορεί να έχει μια εξίσωση;",
