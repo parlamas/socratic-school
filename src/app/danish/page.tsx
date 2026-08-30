@@ -10,7 +10,7 @@ const DanishPage = () => {
     const lessons = [
     { id: '001', title: 'Præsentation • Introductions', description: 'Basic introductions and personal pronouns', path: '/Danish/lesson-001' },
     { id: '002', title: 'Kendeord • Articles', description: 'Definite and indefinite articles', path: '/Danish/lesson-002' },
-    { id: '003', title: 'For / Fordi • Cause vs. Explanation', description: 'Telling apart cause and speculative explanation', path: '/Danish/lesson-003' },
+    { id: '003', title: 'For / Fordi • Explanation vs. Cause', description: 'Telling apart cause and speculative explanation', path: '/Danish/lesson-003' },
     { id: '004', title: 'Artikler Øvelse • Articles Exercise', description: 'Practice Danish articles with interactive exercises', path: '/Danish/ex-001' },
     { id: '005', title: 'Artikler Øvelse • Articles Exercise', description: 'Practice Danish articles with interactive exercises', path: '/Danish/ex-002' }
   ];
