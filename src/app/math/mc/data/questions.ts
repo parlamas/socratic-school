@@ -87,7 +87,7 @@ export const questions: Question[] = [
   {
     id: 5,
     english: {
-      question: "What are the parts of an equation called that are separated by + or - signs?",
+      question: "What are the parts of an equation that are separated by plus (+) or minus (-) signs called?",
       options: ["Factors", "Terms", "Products", "Coefficients"],
       explanation: "The parts of an equation separated by + or - signs are called terms. For example, in 2x + 3y - 5, there are three terms: 2x, 3y, and -5."
     },
