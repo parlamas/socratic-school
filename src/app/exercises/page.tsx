@@ -3,9 +3,9 @@
 import Link from "next/link";
 
 const exercises = [
-  { href: "/english/ex-001", title: "English — Articles", desc: "Fill in the blank: a, an, some, the, any, or nothing" },
-  { href: "/english/ex-002", title: "English — Exercise 2", desc: "" },
-  { href: "/english/ex-003", title: "English — The Definite Article", desc: "Insert \"the\" where necessary, or leave the blank empty" },
+  { href: "/english/ex-001", title: "English — Exercise 1", desc: "Fill in the blank: a, an, some, the, any, or nothing" },
+  { href: "/english/ex-002", title: "English — Exercise 2", desc: "Insert: the, a, an, some, any, no, or nothing (∅)" },
+  { href: "/english/ex-003", title: "English — Exercise 3", desc: "Insert \"the\" where necessary, or leave the blank empty" },
   { href: "/danish/lesson-001", title: "Danish — Lesson 1", desc: "" },
   { href: "/danish/ex-001", title: "Danish — Exercise 1", desc: "" },
   { href: "/danish/lesson-002", title: "Danish — Lesson 2", desc: "" },
