@@ -95,7 +95,7 @@ const Lesson003 = () => {
                     <br />
                     She stayed at the party &mdash; and why wouldn&rsquo;t she? It is not that she was tired.
                     <br />
-                    <span className="ur">ikke</span> follows <span className="b">hun</span> (she) &rarr; negates <span className="ur">hun</span>, so the whole proposition &ldquo;she was tired&rdquo; is rejected as the cause, rather than the verb alone.
+                    <span className="ur">ikke</span> follows <span className="b">hun</span> (she) &rarr; negates <span className="ur">hun</span>, so &ldquo;she&rdquo; being tired is rejected as the cause, rather than the verb.
                   </p>
                 </li>
               </ol>
@@ -169,7 +169,8 @@ const Lesson003 = () => {
                   <p>
                     Hun blev til festen, fordi hun ikke var træt.
                     <br />
-                    <span className="ur">ikke</span> følger <span className="b">hun</span> &rarr; nægter <span className="ur">hun</span>, så hele påstanden &mdash;at hun var træt&mdash; afvises som årsag, snarere end blot verbet.
+
+<span className="ur">ikke</span> følger <span className="b">hun</span> (hun) &rarr; nægter <span className="ur">hun</span>, så at &ldquo;hun&rdquo; var træt afvises som årsagen, snarere end verbet.
                   </p>
                 </li>
               </ol>
