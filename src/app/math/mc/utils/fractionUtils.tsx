@@ -22,8 +22,8 @@ const unicodeFractions: Record<string, string> = {
   '7/8': '⅞',
 };
 
-// Simple regex to find fractions like "2/3"
-const fractionRegex = /(\d+)\/(\d+)/g;
+// Matches numeric fractions like "2/3" as well as simple algebraic ones like "x/4"
+const fractionRegex = /([a-zA-Z]?\d*[a-zA-Z]?)\/(\d+)/g;
 
 export const renderWithFractions = (text: string): React.ReactNode[] => {
   if (!text) return [text];
@@ -44,7 +44,7 @@ export const renderWithFractions = (text: string): React.ReactNode[] => {
       parts.push(text.substring(lastIndex, index));
     }
     
-    // Check if it's a common fraction that has a Unicode character
+        // Check if it's a common fraction that has a Unicode character
     if (unicodeFractions[fractionKey]) {
       parts.push(
         <span key={index} className="unicode-fraction">
@@ -52,11 +52,13 @@ export const renderWithFractions = (text: string): React.ReactNode[] => {
         </span>
       );
     } else {
-      // Use custom Fraction component for uncommon fractions
+      // Use custom Fraction component; numeric numerators render as numbers,
+      // algebraic ones (e.g. "x") render as-is
+      const isNumeric = /^\d+$/.test(numerator);
       parts.push(
         <Fraction 
           key={index} 
-          numerator={parseInt(numerator)} 
+          numerator={isNumeric ? parseInt(numerator) : numerator} 
           denominator={parseInt(denominator)} 
         />
       );

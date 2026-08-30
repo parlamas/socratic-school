@@ -3,8 +3,8 @@
 import React from 'react';
 
 interface FractionProps {
-  numerator: number;
-  denominator: number;
+  numerator: number | string;
+  denominator: number | string;
   className?: string;
 }
 
