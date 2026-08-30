@@ -219,7 +219,7 @@ const exercises: ExerciseItem[] = [
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-const FREE_LIMIT = 3;
+const FREE_LIMIT = 10;
 
 type AccessStatus = 'guest' | 'signed-in' | 'purchased';
 
@@ -288,45 +288,57 @@ const Exercise001 = ({ accessStatus }: { accessStatus: AccessStatus }) => {
     setCurrentIndex(i);
   };
 
-  // Render the sentence with inline inputs
+    // Render the sentence with inline inputs
   const renderSentence = () => {
-    return ex.parts.map((part, i) => (
-      <span key={i}>
-        <span dangerouslySetInnerHTML={{ __html: part }} />
-        {i < ex.blanks.length && (
-          <input
-            ref={(el) => { inputRefs.current[i] = el; }}
-            type="text"
-            value={answers[i] ?? ''}
-            onChange={(e) => handleChange(i, e.target.value)}
-            onKeyDown={(e) => handleKeyDown(e, i)}
-            placeholder="…"
-            style={{
-              width: 52,
-              fontFamily: "'Source Serif 4', Georgia, serif",
-              fontSize: 15,
-              padding: '1px 4px',
-              border: 'none',
-              borderBottom: showResult === null
-                ? '1.5px solid #185FA5'
-                : ex.blanks[i].correct.includes(norm(answers[i] ?? ''))
-                  ? '1.5px solid #3B6D11'
-                  : '1.5px solid #E24B4A',
-              borderRadius: 0,
-              background: 'transparent',
-              color: showResult === null
-                ? 'inherit'
-                : ex.blanks[i].correct.includes(norm(answers[i] ?? ''))
-                  ? '#27500A'
-                  : '#A32D2D',
-              outline: 'none',
-              textAlign: 'center',
-              margin: '0 2px',
-            }}
-          />
-        )}
-      </span>
-    ));
+    return ex.parts.map((part, i) => {
+      const blank = ex.blanks[i];
+      const isWrong = showResult === false && blank && !blank.correct.includes(norm(answers[i] ?? ''));
+
+      return (
+        <span key={i}>
+          <span dangerouslySetInnerHTML={{ __html: part }} />
+          {i < ex.blanks.length && (
+            <>
+              <input
+                ref={(el) => { inputRefs.current[i] = el; }}
+                type="text"
+                value={answers[i] ?? ''}
+                onChange={(e) => handleChange(i, e.target.value)}
+                onKeyDown={(e) => handleKeyDown(e, i)}
+                placeholder="…"
+                style={{
+                  width: 52,
+                  fontFamily: "'Source Serif 4', Georgia, serif",
+                  fontSize: 15,
+                  padding: '1px 4px',
+                  border: 'none',
+                  borderBottom: showResult === null
+                    ? '1.5px solid #185FA5'
+                    : blank.correct.includes(norm(answers[i] ?? ''))
+                      ? '1.5px solid #3B6D11'
+                      : '1.5px solid #E24B4A',
+                  borderRadius: 0,
+                  background: 'transparent',
+                  color: showResult === null
+                    ? 'inherit'
+                    : blank.correct.includes(norm(answers[i] ?? ''))
+                      ? '#27500A'
+                      : '#A32D2D',
+                  outline: 'none',
+                  textAlign: 'center',
+                  margin: '0 2px',
+                }}
+              />
+              {isWrong && (
+                <span style={{ fontSize: 12, color: '#A32D2D', fontStyle: 'italic', marginRight: 2 }}>
+                  ({answerKey(blank)})
+                </span>
+              )}
+            </>
+          )}
+        </span>
+      );
+    });
   };
 
   // Build the answer key string for a blank
