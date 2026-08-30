@@ -307,32 +307,24 @@ const Exercise002 = ({ accessStatus }: { accessStatus: AccessStatus }) => {
       <span key={i}>
         <span dangerouslySetInnerHTML={{ __html: part }} />
         {i < ex.blanks.length && (
-          <input
+                    <input
             ref={(el) => { inputRefs.current[i] = el; }}
             type="text"
             value={answers[i] ?? ''}
             onChange={(e) => handleChange(i, e.target.value)}
             onKeyDown={(e) => handleKeyDown(e, i)}
-            placeholder="…"
+            placeholder=". . . . . . . . . ."
             disabled={isLocked}
+            data-state={showResult === null ? 'typing' : ex.blanks[i].correct.includes(norm(answers[i] ?? '')) ? 'correct' : 'incorrect'}
+            className="exercise-blank-input"
             style={{
-              width: 56,
+              width: 90,
               fontFamily: "'Source Serif 4', Georgia, serif",
               fontSize: 15,
               padding: '1px 4px',
               border: 'none',
-              borderBottom: showResult === null
-                ? '1.5px solid #185FA5'
-                : ex.blanks[i].correct.includes(norm(answers[i] ?? ''))
-                  ? '1.5px solid #3B6D11'
-                  : '1.5px solid #E24B4A',
               borderRadius: 0,
               background: 'transparent',
-              color: showResult === null
-                ? 'inherit'
-                : ex.blanks[i].correct.includes(norm(answers[i] ?? ''))
-                  ? '#27500A'
-                  : '#A32D2D',
               outline: 'none',
               textAlign: 'center',
               margin: '0 2px',
