@@ -301,7 +301,7 @@ export default function PlacementTest() {
       )}
 
             <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '1.5rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
-        &copy; 2026 Isidoros Parlamas &middot; parlamas@live.com &middot; socratic-school.com
+        &copy; 2026 Isidoros Parlamas &middot; mind@horistics.com &middot; socratic-school.com
       </div>
       <style jsx>{`
         .placement-blank-input[data-state='typing'] {
