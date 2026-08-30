@@ -235,7 +235,7 @@ const exercises: ExerciseItem[] = [
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-const FREE_LIMIT = 3;
+const FREE_LIMIT = 10;
 
 type AccessStatus = 'guest' | 'signed-in' | 'purchased';
 
