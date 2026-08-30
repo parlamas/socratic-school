@@ -1491,7 +1491,7 @@ const totalItemsAcrossAllSets = exerciseSets.reduce((total, set) => {
   return (
     <div className="danish-lesson">
       <center>
-        &copy; 2026 Isidoros Parlamas<br />parlamas@live.com<br />socratic-school.com
+        &copy; 2026 Isidoros Parlamas<br />mind@horistics.com<br />socratic-school.com
         <div style={{ fontSize: 'clamp(24px, 6vw, 32px)' }}>Øvelse 1</div>
         
         <div className="header-row" style={{ 

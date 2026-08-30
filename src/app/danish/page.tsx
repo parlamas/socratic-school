@@ -18,7 +18,7 @@ const DanishPage = () => {
   return (
     <div className="danish-lesson">
       <div className="copyright">
-        &copy; 2026 Isidoros Parlamas • parlamas@live.com • socratic-school.com
+        &copy; 2026 Isidoros Parlamas • mind@horistics.com • socratic-school.com
       </div>
       
       <h1>Dansk • Danish</h1>

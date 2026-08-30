@@ -7,7 +7,7 @@ const Lesson001 = () => {
   return (
     <div className="danish-lesson">
       <center>
-        &copy; 2026 Isidoros Parlamas &bull; parlamas@live.com &bull; socratic-school.com
+        &copy; 2026 Isidoros Parlamas &bull; mind@horistics.com &bull; socratic-school.com
         <div style={{ fontSize: '40pt' }}>1</div>
                 
                 <div className="header-row">

@@ -785,7 +785,7 @@ const Exercise002 = () => {
 
       {/* ── Footer ── */}
       <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '1.5rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
-        &copy; 2026 Isidoros Parlamas · parlamas@live.com · socratic-school.com
+        &copy; 2026 Isidoros Parlamas · mind@horistics.com · socratic-school.com
       </div>
     </div>
   );

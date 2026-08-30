@@ -571,7 +571,7 @@ export default function Exercise002({ accessStatus = 'guest' }: { accessStatus?:
 
       {/* Footer */}
       <div style={{ textAlign:'center', fontSize:11, color:'#aaa', marginTop:'1.5rem', paddingTop:'1rem', borderTop:'0.5px solid #eee', fontFamily:'sans-serif', letterSpacing:'0.02em' }}>
-        © 2026 Isidoros Parlamas · parlamas@live.com · socratic-school.com
+        © 2026 Isidoros Parlamas · mind@horistics.com · socratic-school.com
       </div>
     </div>
   );

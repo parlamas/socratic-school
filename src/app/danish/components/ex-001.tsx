@@ -2204,7 +2204,7 @@ const Exercise001 = ({ accessStatus = 'guest' }: { accessStatus?: AccessStatus }
           color: DS.inkMuted,
           letterSpacing: '0.06em',
         }}>
-          © 2026 Isidoros Parlamas · parlamas@live.com · socratic-school.com
+          © 2026 Isidoros Parlamas · mind@horistics.com · socratic-school.com
         </footer>
       </main>
     </div>
