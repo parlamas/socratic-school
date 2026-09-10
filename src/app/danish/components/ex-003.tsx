@@ -224,42 +224,39 @@ export default function Exercise003() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 10, alignItems: 'flex-end' }}>
           {sentence.words.map((_, i) => (
-            <div key={i} style={{ width: 90, textAlign: 'center', minHeight: 28 }}>
-              <div style={{ fontSize: 11, color: '#888' }}>{filled[i]?.role ?? ''}</div>
-              {filled[i]?.hint && (
-                <div style={{ fontSize: 10, color: filled[i] ? colorMap[filled[i]!.color].text : 'inherit', fontWeight: 500 }}>
-                  {filled[i]!.hint}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, minHeight: 56 }}>
-          {sentence.words.map((_, i) => (
-            <div
-              key={i}
-              ref={(el) => { slotRefs.current[i] = el; }}
-              style={{
-                minWidth: 90,
-                width: 'auto',
-                padding: '0 10px',
-                height: 44,
-                borderRadius: 8,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 16,
-                fontWeight: filled[i] ? 500 : 400,
-                border: filled[i] ? 'none' : '1.5px dashed #ddd',
-                background: filled[i] ? colorMap[filled[i]!.color].bg : 'transparent',
-                color: filled[i] ? colorMap[filled[i]!.color].text : 'inherit',
-                transition: 'border-color 0.2s ease',
-              }}
-            >
-              {filled[i]?.danish ?? ''}
+            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 90 }}>
+              <div style={{ minHeight: 28, textAlign: 'center' }}>
+                <div style={{ fontSize: 11, color: '#888' }}>{filled[i]?.role ?? ''}</div>
+                {filled[i]?.hint && (
+                  <div style={{ fontSize: 10, color: filled[i] ? colorMap[filled[i]!.color].text : 'inherit', fontWeight: 500 }}>
+                    {filled[i]!.hint}
+                  </div>
+                )}
+              </div>
+              <div
+                ref={(el) => { slotRefs.current[i] = el; }}
+                style={{
+                  minWidth: 90,
+                  width: 'auto',
+                  padding: '0 10px',
+                  height: 44,
+                  borderRadius: 8,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: 16,
+                  fontWeight: filled[i] ? 500 : 400,
+                  border: filled[i] ? 'none' : '1.5px dashed #ddd',
+                  background: filled[i] ? colorMap[filled[i]!.color].bg : 'transparent',
+                  color: filled[i] ? colorMap[filled[i]!.color].text : 'inherit',
+                  whiteSpace: 'nowrap',
+                  transition: 'border-color 0.2s ease',
+                }}
+              >
+                {filled[i]?.danish ?? ''}
+              </div>
             </div>
           ))}
         </div>
