@@ -35,10 +35,24 @@ const sentences: SentenceItem[] = [
       { text: 'fish.', wordIndex: 3 },
     ],
     words: [
-          { danish: 'Desværre', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The sentence opens with the adverb — this pushes everything else back one slot. Unlike English, Danish doesn\'t put a comma after it.' },
+      { danish: 'Desværre', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The sentence opens with the adverb — this pushes everything else back one slot. Unlike English, Danish doesn\'t put a comma after it.' },
       { danish: 'købte', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish is a V2 language: the finite verb always sits in the second position, no matter what came first.' },
       { danish: 'jeg', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'Because the verb took slot 2, the subject moves after it — the opposite of English word order here.' },
       { danish: 'fisk.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the clause, exactly as in English.' },
+    ],
+  },
+  {
+    englishParts: [
+      { text: 'Yesterday,', wordIndex: 0 },
+      { text: 'I', wordIndex: 2 },
+      { text: 'saw', wordIndex: 1 },
+      { text: 'a movie.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'I går', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'Same pattern: the time adverb opens the sentence, so it takes slot 1 — and again, no comma follows it in Danish.' },
+      { danish: 'så', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb "så" (saw) still has to land in second place, so it jumps ahead of the subject.' },
+      { danish: 'jeg', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject gets pushed to third place — Danish and English disagree here even though both start from the same idea.' },
+      { danish: 'en film.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
     ],
   },
 ];
@@ -182,8 +196,10 @@ export default function Exercise003() {
             <div
               key={i}
               ref={(el) => { slotRefs.current[i] = el; }}
-              style={{
-                width: 90,
+                            style={{
+                minWidth: 90,
+                width: 'auto',
+                padding: '0 10px',
                 height: 44,
                 borderRadius: 8,
                 display: 'flex',
