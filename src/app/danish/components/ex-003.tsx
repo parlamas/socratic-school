@@ -141,7 +141,7 @@ export default function Exercise003() {
 
       <div ref={stageRef} style={{ position: 'relative', background: '#fff', border: '0.5px solid #bbb', borderRadius: 12, padding: '2rem 1.5rem 1.5rem' }}>
 
-        <div style={{ textAlign: 'center', fontSize: 18, marginBottom: '3rem' }}>
+                <div style={{ textAlign: 'center', fontSize: 18, marginBottom: '3rem', color: '#000' }}>
           {sentence.englishParts.map((part) => (
             <span
               key={part.wordIndex}
@@ -155,6 +155,7 @@ export default function Exercise003() {
                 opacity: used[part.wordIndex] ? 0.35 : 1,
                 marginRight: 4,
                 display: 'inline-block',
+                color: '#000',
               }}
             >
               {part.text}
