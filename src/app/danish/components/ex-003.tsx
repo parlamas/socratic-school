@@ -175,7 +175,7 @@ export default function Exercise003() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, minHeight: 56 }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 10, minHeight: 56 }}>
           {sentence.words.map((_, i) => (
             <div
               key={i}
@@ -198,6 +198,10 @@ export default function Exercise003() {
               {filled[i]?.danish ?? ''}
             </div>
           ))}
+        </div>
+
+        <div style={{ textAlign: 'center', fontSize: 12, color: '#999', fontStyle: 'italic', marginTop: 10 }}>
+          paragrammar: word order differs
         </div>
 
         {flying && (
