@@ -7,6 +7,7 @@ import { useState, useRef } from 'react';
 type WordItem = {
   danish: string;
   role: string;
+  hint?: string;
   color: string;
   darkText: string;
   slot: number;
@@ -34,8 +35,8 @@ const sentences: SentenceItem[] = [
       { text: 'fish.', wordIndex: 3 },
     ],
     words: [
-            { danish: 'Desværre', role: 'adverb (no comma)', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The sentence opens with the adverb — this pushes everything else back one slot. Unlike English, Danish doesn\'t put a comma after it.' },
-      { danish: 'købte', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish is a V2 language: the finite verb always sits in the second position, no matter what came first.' },
+          { danish: 'Desværre', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The sentence opens with the adverb — this pushes everything else back one slot. Unlike English, Danish doesn\'t put a comma after it.' },
+      { danish: 'købte', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish is a V2 language: the finite verb always sits in the second position, no matter what came first.' },
       { danish: 'jeg', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'Because the verb took slot 2, the subject moves after it — the opposite of English word order here.' },
       { danish: 'fisk.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the clause, exactly as in English.' },
     ],
@@ -161,10 +162,15 @@ export default function Exercise003() {
           ))}
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 6 }}>
+                <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 6 }}>
           {sentence.words.map((_, i) => (
-            <div key={i} style={{ fontSize: 11, color: '#888', width: 90, textAlign: 'center', minHeight: 14 }}>
-              {filled[i]?.role ?? ''}
+            <div key={i} style={{ width: 90, textAlign: 'center', minHeight: 28 }}>
+              <div style={{ fontSize: 11, color: '#888' }}>{filled[i]?.role ?? ''}</div>
+              {filled[i]?.hint && (
+                <div style={{ fontSize: 10, color: filled[i] ? colorMap[filled[i]!.color].text : 'inherit', fontWeight: 500 }}>
+                  {filled[i]!.hint}
+                </div>
+              )}
             </div>
           ))}
         </div>
