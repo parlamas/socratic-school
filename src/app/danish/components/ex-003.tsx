@@ -55,6 +55,48 @@ const sentences: SentenceItem[] = [
       { danish: 'en film.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
     ],
   },
+  {
+    englishParts: [
+      { text: 'Suddenly,', wordIndex: 0 },
+      { text: 'the dog', wordIndex: 2 },
+      { text: 'bit', wordIndex: 1 },
+      { text: 'him.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'Pludselig', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The adverb "suddenly" opens the sentence and takes slot 1, with no comma after it.' },
+      { danish: 'bed', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: '"Bed" (bit) has to be second — even though "the dog" comes before it in English.' },
+      { danish: 'hunden', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject "the dog" is pushed to third place in Danish.' },
+      { danish: 'ham.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+    ],
+  },
+  {
+    englishParts: [
+      { text: 'Tonight,', wordIndex: 0 },
+      { text: 'she', wordIndex: 2 },
+      { text: 'will read', wordIndex: 1 },
+      { text: 'a book.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'I aften', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The time adverb "tonight" opens the sentence — slot 1, no comma.' },
+      { danish: 'læser', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish doesn\'t need a separate "will" — the present tense verb "læser" alone covers the future here, and it still must be second.' },
+      { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject moves to third place, after the verb.' },
+      { danish: 'en bog.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+    ],
+  },
+  {
+    englishParts: [
+      { text: 'Before you leave home,', wordIndex: 0 },
+      { text: 'you', wordIndex: 2 },
+      { text: 'should', wordIndex: 1 },
+      { text: 'turn the lights off.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'Før du går hjemmefra,', role: 'adverb', hint: 'comma required', color: 'amber', darkText: '#854F0B', slot: 0, note: 'A whole subordinate clause can fill the front position, just like a single adverb — but this time Danish does require a comma, since it\'s a full clause, not just one word.' },
+      { danish: 'bør', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Even after a whole clause up front, the main clause verb still has to be second — right after it, before the subject.' },
+      { danish: 'du', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject is pushed to third place, exactly as with a single-word adverb.' },
+      { danish: 'slukke lyset.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The infinitive "turn off" and its object "the lights" move together to the end of the clause.' },
+    ],
+  },
 ];
 
 export default function Exercise003() {
@@ -133,6 +175,10 @@ export default function Exercise003() {
         </div>
       </div>
 
+      <div style={{ background: '#F7F4EC', border: '0.5px solid #ddd', borderRadius: 8, padding: '0.85rem 1.1rem', marginBottom: '1.5rem', textAlign: 'center', fontSize: 14, color: '#333' }}>
+        In Danish, in main clauses, the verb must occupy the second place.
+      </div>
+
       <div style={{ display: 'flex', justifyContent: 'center', gap: 5, marginBottom: '1.5rem' }}>
         {sentences.map((_, i) => (
           <div
@@ -155,7 +201,7 @@ export default function Exercise003() {
 
       <div ref={stageRef} style={{ position: 'relative', background: '#fff', border: '0.5px solid #bbb', borderRadius: 12, padding: '2rem 1.5rem 1.5rem' }}>
 
-                        <div style={{ textAlign: 'center', fontSize: 18, marginBottom: '3rem', color: '#000' }}>
+        <div style={{ textAlign: 'center', fontSize: 18, marginBottom: '3rem', color: '#000' }}>
           {sentence.englishParts.map((part) => (
             <span
               key={part.wordIndex}
@@ -178,7 +224,7 @@ export default function Exercise003() {
           ))}
         </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 6 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, marginBottom: 6 }}>
           {sentence.words.map((_, i) => (
             <div key={i} style={{ width: 90, textAlign: 'center', minHeight: 28 }}>
               <div style={{ fontSize: 11, color: '#888' }}>{filled[i]?.role ?? ''}</div>
@@ -191,12 +237,12 @@ export default function Exercise003() {
           ))}
         </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 10, minHeight: 56 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: 10, minHeight: 56 }}>
           {sentence.words.map((_, i) => (
             <div
               key={i}
               ref={(el) => { slotRefs.current[i] = el; }}
-                            style={{
+              style={{
                 minWidth: 90,
                 width: 'auto',
                 padding: '0 10px',
