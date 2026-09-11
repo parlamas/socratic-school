@@ -30,7 +30,7 @@ const colorMap: Record<string, { bg: string; text: string }> = {
 };
 
 const MAIN_CLAUSE_RULE = 'In Danish, in main clauses, the verb must occupy the second place.';
-const SUBORDINATE_CLAUSE_RULE = 'In Danish, in subordinate clauses, adverbs are placed after the subject, unless the conjunction is one of the following: så, for, og, men, eller (SFOME), in which case "ikke" is placed after the verb.';
+const SUBORDINATE_CLAUSE_RULE = 'In Danish, in subordinate clauses, adverbs are placed after the subject, unless the conjunction is one of the following: så, for, og, men, eller (SFOME), in which case they are placed after the verb.';
 const AT_OMISSION_NOTE = '"At" can often be omitted, especially after verbs such as tro, mene, synes, håbe, vide, etc.';
 
 const sentences: SentenceItem[] = [
