@@ -32,6 +32,7 @@ const colorMap: Record<string, { bg: string; text: string }> = {
 const MAIN_CLAUSE_RULE = 'In Danish, in main clauses, the verb must occupy the second place.';
 const SUBORDINATE_CLAUSE_RULE = 'In Danish, in subordinate clauses, adverbs are placed after the subject, unless the conjunction is one of the following: så, for, og, men, eller (SFOME), in which case they are placed after the verb.';
 const AT_OMISSION_NOTE = '"At" can often be omitted, especially after verbs such as tro, mene, synes, håbe, vide, etc.';
+const CLAUSE_DEFINITION_NOTE = 'In all languages, all clauses introduced by conjunctions are subordinate clauses, including those introduced by the SFOME conjunctions.';
 
 const sentences: SentenceItem[] = [
   {
@@ -157,7 +158,160 @@ const sentences: SentenceItem[] = [
       { danish: 'han', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Så" (so) is one of the SFOME conjunctions, so the clause that follows keeps main-clause word order: subject first.' },
       { danish: 'ødelagde', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb comes second — the normal main-clause pattern that SFOME conjunctions preserve.' },
       { danish: 'beklageligvis', role: 'adverb', hint: 'after the verb (SFOME)', color: 'amber', darkText: '#854F0B', slot: 2, note: 'Because "så" is SFOME, the adverb "beklageligvis" goes after the verb — not after the subject, as it would in an ordinary subordinate clause. English still fronts it, but Danish doesn\'t.' },
-      { danish: 'sin karriere.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+            { danish: 'sin karriere.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'He stayed home because',
+    daPrefix: 'Han blev hjemme, fordi',
+    englishParts: [
+      { text: 'he', wordIndex: 0 },
+      { text: 'did not', wordIndex: 1 },
+      { text: 'do', wordIndex: 2 },
+      { text: 'his homework.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'han', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Fordi" (because) is not one of the SFOME conjunctions, so ordinary subordinate word order applies: subject first.' },
+      { danish: 'ikke', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: 'The adverb "ikke" goes right after the subject — before the verb, unlike a main clause.' },
+      { danish: 'lavede', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb comes third, after the subject and the adverb.' },
+      { danish: 'sine lektier.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'He was late, for',
+    daPrefix: 'Han kom for sent, for',
+    englishParts: [
+      { text: 'he', wordIndex: 0 },
+      { text: 'probably', wordIndex: 2 },
+      { text: 'forgot', wordIndex: 1 },
+      { text: 'his keys.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'han', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"For" (for/because) is one of the SFOME conjunctions, so the clause that follows keeps main-clause order: subject first, then verb.' },
+      { danish: 'glemte', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb takes second place — the normal main-clause pattern SFOME conjunctions preserve.' },
+      { danish: 'sandsynligvis', role: 'adverb', hint: 'after the verb (SFOME)', color: 'amber', darkText: '#854F0B', slot: 2, note: 'Because "for" is SFOME, the adverb "sandsynligvis" (probably) goes after the verb, not after the subject.' },
+      { danish: 'sine nøgler.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'He went to work, although',
+    daPrefix: 'Han tog på arbejde, selvom',
+    englishParts: [
+      { text: 'he', wordIndex: 0 },
+      { text: 'did not', wordIndex: 1 },
+      { text: 'bring', wordIndex: 2 },
+      { text: 'his laptop.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'han', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Selvom" (although) is not SFOME, so the subject comes first, as usual for a subordinate clause.' },
+      { danish: 'ikke', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: 'The adverb sits right after the subject, before the verb.' },
+      { danish: 'medbragte', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb comes third, after the subject and the adverb.' },
+      { danish: 'sin bærbar.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'She studies every day, and',
+    daPrefix: 'Hun studerer hver dag, og',
+    englishParts: [
+      { text: 'she', wordIndex: 0 },
+      { text: 'always', wordIndex: 2 },
+      { text: 'gets', wordIndex: 1 },
+      { text: 'good grades.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Og" (and) is SFOME, so main-clause order applies: subject, then verb.' },
+      { danish: 'får', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb takes second place, as in a main clause.' },
+      { danish: 'altid', role: 'adverb', hint: 'after the verb (SFOME)', color: 'amber', darkText: '#854F0B', slot: 2, note: 'Because "og" is SFOME, the adverb "altid" (always) goes after the verb.' },
+      { danish: 'gode karakterer.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'You will fail the course, unless',
+    daPrefix: 'Du dumper kurset, medmindre',
+    englishParts: [
+      { text: 'you', wordIndex: 0 },
+      { text: 'still', wordIndex: 1 },
+      { text: 'improve', wordIndex: 2 },
+      { text: 'your grades.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'du', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Medmindre" (unless) is not SFOME, so the subject leads the clause.' },
+      { danish: 'stadig', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: 'The adverb "stadig" (still) sits right after the subject.' },
+      { danish: 'forbedrer', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb comes third, after the subject and the adverb.' },
+      { danish: 'dine karakterer.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'The exam was hard, but',
+    daPrefix: 'Eksamenen var svær, men',
+    englishParts: [
+      { text: 'she', wordIndex: 0 },
+      { text: 'luckily', wordIndex: 2 },
+      { text: 'passed', wordIndex: 1 },
+      { text: 'it.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Men" (but) is SFOME, so subject-verb order is kept, as in a main clause.' },
+      { danish: 'bestod', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb takes second place.' },
+      { danish: 'heldigvis', role: 'adverb', hint: 'after the verb (SFOME)', color: 'amber', darkText: '#854F0B', slot: 2, note: 'Because "men" is SFOME, "heldigvis" (luckily) goes after the verb, not after the subject.' },
+      { danish: 'den.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The pronoun object "den" (it, referring to the exam) closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'You will miss the deadline if',
+    daPrefix: 'Du overskrider fristen, hvis',
+    englishParts: [
+      { text: 'you', wordIndex: 0 },
+      { text: 'do not', wordIndex: 1 },
+      { text: 'send', wordIndex: 2 },
+      { text: 'the report.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'du', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Hvis" (if) is not SFOME, so the subject comes first, before the adverb.' },
+      { danish: 'ikke', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: 'The adverb "ikke" sits right after the subject.' },
+      { danish: 'sender', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb comes third, after the subject and the adverb.' },
+      { danish: 'rapporten.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'Call me now, or',
+    daPrefix: 'Ring til mig nu, eller',
+    englishParts: [
+      { text: 'she', wordIndex: 0 },
+      { text: 'will maybe', wordIndex: 2 },
+      { text: 'forget', wordIndex: 1 },
+      { text: 'your name.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Eller" (or) is SFOME, so main-clause order applies here too.' },
+      { danish: 'glemmer', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb takes second place, as in a main clause.' },
+      { danish: 'måske', role: 'adverb', hint: 'after the verb (SFOME)', color: 'amber', darkText: '#854F0B', slot: 2, note: 'Because "eller" is SFOME, "måske" (maybe) goes after the verb.' },
+      { danish: 'dit navn.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'He passed the test, though',
+    daPrefix: 'Han bestod prøven, skønt',
+    englishParts: [
+      { text: 'he', wordIndex: 0 },
+      { text: 'did not', wordIndex: 1 },
+      { text: 'read', wordIndex: 2 },
+      { text: 'the textbook.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'han', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Skønt" (though) is not SFOME, so the subject leads the clause, before the adverb.' },
+      { danish: 'ikke', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: 'The adverb "ikke" sits right after the subject.' },
+      { danish: 'læste', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb comes third, after the subject and the adverb.' },
+      { danish: 'lærebogen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
     ],
   },
 ];
@@ -240,10 +394,15 @@ export default function Exercise003() {
 
             <div style={{ background: '#F7F4EC', border: '0.5px solid #ddd', borderRadius: 8, padding: '0.85rem 1.1rem', marginBottom: '1.5rem', textAlign: 'center', fontSize: 14, color: '#333' }}>
         <div>{sentence.rule}</div>
-        {sentence.rule === SUBORDINATE_CLAUSE_RULE && (
-          <div style={{ fontSize: 12, color: '#666', marginTop: 8, fontStyle: 'italic' }}>
-            {AT_OMISSION_NOTE}
-          </div>
+                {sentence.rule === SUBORDINATE_CLAUSE_RULE && (
+          <>
+            <div style={{ fontSize: 12, color: '#666', marginTop: 8, fontStyle: 'italic' }}>
+              {CLAUSE_DEFINITION_NOTE}
+            </div>
+            <div style={{ fontSize: 12, color: '#666', marginTop: 6, fontStyle: 'italic' }}>
+              {AT_OMISSION_NOTE}
+            </div>
+          </>
         )}
       </div>
 
