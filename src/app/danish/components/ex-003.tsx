@@ -145,7 +145,7 @@ const sentences: SentenceItem[] = [
   },
   {
     rule: SUBORDINATE_CLAUSE_RULE,
-    enPrefix: 'He did not listen to his mother,',
+    enPrefix: 'He did not listen to his mother, so, ',
     daPrefix: 'Han lyttede ikke til sin mor, så',
     englishParts: [
       { text: 'regrettably,', wordIndex: 2 },
