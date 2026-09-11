@@ -52,7 +52,7 @@ const sentences: SentenceItem[] = [
       { danish: 'I går', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'Same pattern: the time adverb opens the sentence, so it takes slot 1 — and again, no comma follows it in Danish.' },
       { danish: 'så', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb "så" (saw) still has to land in second place, so it jumps ahead of the subject.' },
       { danish: 'jeg', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject gets pushed to third place — Danish and English disagree here even though both start from the same idea.' },
-      { danish: 'en film.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+      { danish: 'en film.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
     ],
   },
   {
@@ -94,7 +94,7 @@ const sentences: SentenceItem[] = [
       { danish: 'Før du går hjemmefra,', role: 'adverb', hint: 'comma required', color: 'amber', darkText: '#854F0B', slot: 0, note: 'A whole subordinate clause can fill the front position, just like a single adverb — but this time Danish does require a comma, since it\'s a full clause, not just one word.' },
       { danish: 'bør', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Even after a whole clause up front, the main clause verb still has to be second — right after it, before the subject.' },
       { danish: 'du', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject is pushed to third place, exactly as with a single-word adverb.' },
-      { danish: 'slukke lyset.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The infinitive "turn off" and its object "the lights" move together to the end of the clause.' },
+      { danish: 'slukke lyset.', role: 'infinitive & its object', color: 'teal', darkText: '#085041', slot: 3, note: 'The infinitive "turn off" and its object "the lights" move together to the end of the clause.' },
     ],
   },
 ];
