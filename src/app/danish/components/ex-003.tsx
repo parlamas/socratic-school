@@ -31,6 +31,7 @@ const colorMap: Record<string, { bg: string; text: string }> = {
 
 const MAIN_CLAUSE_RULE = 'In Danish, in main clauses, the verb must occupy the second place.';
 const SUBORDINATE_CLAUSE_RULE = 'In Danish, in subordinate clauses, adverbs are placed after the subject, unless the conjunction is one of the following: så, for, og, men, eller (SFOME), in which case "ikke" is placed after the verb.';
+const AT_OMISSION_NOTE = '"At" can often be omitted, especially after verbs such as tro, mene, synes, håbe, vide, etc.';
 
 const sentences: SentenceItem[] = [
   {
@@ -139,7 +140,24 @@ const sentences: SentenceItem[] = [
       { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: 'A comma is added before the subordinate clause. Here the conjunction "at" is dropped entirely — common in everyday Danish — but the subordinate word order still applies.' },
       { danish: 'helt sikkert', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: '"Helt sikkert" (certainly) is an adverb phrase. Even though it\'s two words, it still occupies the single adverb slot, right after the subject.' },
       { danish: 'består', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb again comes third — after the subject and the adverb.' },
-      { danish: 'eksamen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+            { danish: 'eksamen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'He did not listen to his mother,',
+    daPrefix: 'Han lyttede ikke til sin mor, så',
+    englishParts: [
+      { text: 'regrettably,', wordIndex: 2 },
+      { text: 'he', wordIndex: 0 },
+      { text: 'ruined', wordIndex: 1 },
+      { text: 'his career.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'han', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Så" (so) is one of the SFOME conjunctions, so the clause that follows keeps main-clause word order: subject first.' },
+      { danish: 'ødelagde', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb comes second — the normal main-clause pattern that SFOME conjunctions preserve.' },
+      { danish: 'beklageligvis', role: 'adverb', hint: 'after the verb (SFOME)', color: 'amber', darkText: '#854F0B', slot: 2, note: 'Because "så" is SFOME, the adverb "beklageligvis" goes after the verb — not after the subject, as it would in an ordinary subordinate clause. English still fronts it, but Danish doesn\'t.' },
+      { danish: 'sin karriere.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
     ],
   },
 ];
@@ -220,8 +238,13 @@ export default function Exercise003() {
         </div>
       </div>
 
-      <div style={{ background: '#F7F4EC', border: '0.5px solid #ddd', borderRadius: 8, padding: '0.85rem 1.1rem', marginBottom: '1.5rem', textAlign: 'center', fontSize: 14, color: '#333' }}>
-        {sentence.rule}
+            <div style={{ background: '#F7F4EC', border: '0.5px solid #ddd', borderRadius: 8, padding: '0.85rem 1.1rem', marginBottom: '1.5rem', textAlign: 'center', fontSize: 14, color: '#333' }}>
+        <div>{sentence.rule}</div>
+        {sentence.rule === SUBORDINATE_CLAUSE_RULE && (
+          <div style={{ fontSize: 12, color: '#666', marginTop: 8, fontStyle: 'italic' }}>
+            {AT_OMISSION_NOTE}
+          </div>
+        )}
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: 5, flexWrap: 'wrap', marginBottom: '1.5rem' }}>
