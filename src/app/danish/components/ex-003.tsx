@@ -248,8 +248,8 @@ const sentences: SentenceItem[] = [
   },
   {
         rule: SUBORDINATE_CLAUSE_RULE,
-    enPrefix: 'The exam was hard, but',
-    daPrefix: 'Eksamenen var svær, men',
+        enPrefix: 'It was hard, but',
+    daPrefix: 'Det var svært, men',
     englishParts: [
       { text: 'she', wordIndex: 0 },
       { text: 'luckily', wordIndex: 2 },
