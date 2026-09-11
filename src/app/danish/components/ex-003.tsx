@@ -15,6 +15,9 @@ type WordItem = {
 };
 
 type SentenceItem = {
+  rule: string;
+  enPrefix?: string;
+  daPrefix?: string;
   englishParts: { text: string; wordIndex: number }[];
   words: WordItem[];
 };
@@ -26,8 +29,12 @@ const colorMap: Record<string, { bg: string; text: string }> = {
   teal:  { bg: '#E1F5EE', text: '#085041' },
 };
 
+const MAIN_CLAUSE_RULE = 'In Danish, in main clauses, the verb must occupy the second place.';
+const SUBORDINATE_CLAUSE_RULE = 'In Danish, in subordinate clauses, adverbs are placed after the subject, unless the conjunction is one of the following: så, for, og, men, eller (SFOME), in which case "ikke" is placed after the verb.';
+
 const sentences: SentenceItem[] = [
   {
+    rule: MAIN_CLAUSE_RULE,
     englishParts: [
       { text: 'Unfortunately,', wordIndex: 0 },
       { text: 'I', wordIndex: 2 },
@@ -38,10 +45,11 @@ const sentences: SentenceItem[] = [
       { danish: 'Desværre', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The sentence opens with the adverb — this pushes everything else back one slot. Unlike English, Danish doesn\'t put a comma after it.' },
       { danish: 'købte', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish is a V2 language: the finite verb always sits in the second position, no matter what came first.' },
       { danish: 'jeg', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'Because the verb took slot 2, the subject moves after it — the opposite of English word order here.' },
-      { danish: 'fisk.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the clause, exactly as in English.' },
+      { danish: 'fisk.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause, exactly as in English.' },
     ],
   },
   {
+    rule: MAIN_CLAUSE_RULE,
     englishParts: [
       { text: 'Yesterday,', wordIndex: 0 },
       { text: 'I', wordIndex: 2 },
@@ -52,10 +60,11 @@ const sentences: SentenceItem[] = [
       { danish: 'I går', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'Same pattern: the time adverb opens the sentence, so it takes slot 1 — and again, no comma follows it in Danish.' },
       { danish: 'så', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb "så" (saw) still has to land in second place, so it jumps ahead of the subject.' },
       { danish: 'jeg', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject gets pushed to third place — Danish and English disagree here even though both start from the same idea.' },
-      { danish: 'en film.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+      { danish: 'en film.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the sentence, same as in English.' },
     ],
   },
   {
+    rule: MAIN_CLAUSE_RULE,
     englishParts: [
       { text: 'Suddenly,', wordIndex: 0 },
       { text: 'the dog', wordIndex: 2 },
@@ -66,10 +75,11 @@ const sentences: SentenceItem[] = [
       { danish: 'Pludselig', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The adverb "suddenly" opens the sentence and takes slot 1, with no comma after it.' },
       { danish: 'bed', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: '"Bed" (bit) has to be second — even though "the dog" comes before it in English.' },
       { danish: 'hunden', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject "the dog" is pushed to third place in Danish.' },
-      { danish: 'ham.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+      { danish: 'ham.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the sentence, same as in English.' },
     ],
   },
   {
+    rule: MAIN_CLAUSE_RULE,
     englishParts: [
       { text: 'Tonight,', wordIndex: 0 },
       { text: 'she', wordIndex: 2 },
@@ -80,10 +90,11 @@ const sentences: SentenceItem[] = [
       { danish: 'I aften', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The time adverb "tonight" opens the sentence — slot 1, no comma.' },
       { danish: 'læser', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish doesn\'t need a separate "will" — the present tense verb "læser" alone covers the future here, and it still must be second.' },
       { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject moves to third place, after the verb.' },
-      { danish: 'en bog.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+      { danish: 'en bog.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the sentence, same as in English.' },
     ],
   },
   {
+    rule: MAIN_CLAUSE_RULE,
     englishParts: [
       { text: 'Before you leave home,', wordIndex: 0 },
       { text: 'you', wordIndex: 2 },
@@ -94,7 +105,41 @@ const sentences: SentenceItem[] = [
       { danish: 'Før du går hjemmefra,', role: 'adverb', hint: 'comma required', color: 'amber', darkText: '#854F0B', slot: 0, note: 'A whole subordinate clause can fill the front position, just like a single adverb — but this time Danish does require a comma, since it\'s a full clause, not just one word.' },
       { danish: 'bør', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Even after a whole clause up front, the main clause verb still has to be second — right after it, before the subject.' },
       { danish: 'du', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject is pushed to third place, exactly as with a single-word adverb.' },
-      { danish: 'slukke lyset.', role: 'infinitive & its object', color: 'teal', darkText: '#085041', slot: 3, note: 'The infinitive "turn off" and its object "the lights" move together to the end of the clause.' },
+      { danish: 'slukke lyset.', role: 'infinitive & its object', color: 'teal', darkText: '#085041', slot: 3, note: 'The infinitive "turn off" and its direct object "the lights" move together to the end of the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'I think',
+    daPrefix: 'Jeg tror, at',
+    englishParts: [
+      { text: 'she', wordIndex: 0 },
+      { text: 'will not', wordIndex: 1 },
+      { text: 'pass', wordIndex: 2 },
+      { text: 'the exam.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: 'A comma is added before the subordinate clause. In a clause introduced by "at", the subject comes first — same as in English.' },
+      { danish: 'ikke', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: '"Ikke" is an adverb. In this subordinate clause it sits right after the subject and before the verb — the opposite order from a main clause.' },
+      { danish: 'består', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb comes third here, after the subject and the adverb — not second, because this is a subordinate clause, not a main clause.' },
+      { danish: 'eksamen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object still closes the clause.' },
+    ],
+  },
+  {
+    rule: SUBORDINATE_CLAUSE_RULE,
+    enPrefix: 'I think',
+    daPrefix: 'Jeg tror,',
+    englishParts: [
+      { text: 'she', wordIndex: 0 },
+      { text: 'will certainly', wordIndex: 1 },
+      { text: 'pass', wordIndex: 2 },
+      { text: 'the exam.', wordIndex: 3 },
+    ],
+    words: [
+      { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: 'A comma is added before the subordinate clause. Here the conjunction "at" is dropped entirely — common in everyday Danish — but the subordinate word order still applies.' },
+      { danish: 'helt sikkert', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: '"Helt sikkert" (certainly) is an adverb phrase. Even though it\'s two words, it still occupies the single adverb slot, right after the subject.' },
+      { danish: 'består', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb again comes third — after the subject and the adverb.' },
+      { danish: 'eksamen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
     ],
   },
 ];
@@ -176,10 +221,10 @@ export default function Exercise003() {
       </div>
 
       <div style={{ background: '#F7F4EC', border: '0.5px solid #ddd', borderRadius: 8, padding: '0.85rem 1.1rem', marginBottom: '1.5rem', textAlign: 'center', fontSize: 14, color: '#333' }}>
-        In Danish, in main clauses, the verb must occupy the second place.
+        {sentence.rule}
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: 5, marginBottom: '1.5rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', gap: 5, flexWrap: 'wrap', marginBottom: '1.5rem' }}>
         {sentences.map((_, i) => (
           <div
             key={i}
@@ -202,6 +247,9 @@ export default function Exercise003() {
       <div ref={stageRef} style={{ position: 'relative', background: '#fff', border: '0.5px solid #bbb', borderRadius: 12, padding: '2rem 1.5rem 1.5rem' }}>
 
         <div style={{ textAlign: 'center', fontSize: 18, marginBottom: '3rem', color: '#000' }}>
+          {sentence.enPrefix && (
+            <span style={{ color: '#000', marginRight: 4 }}>{sentence.enPrefix}</span>
+          )}
           {sentence.englishParts.map((part) => (
             <span
               key={part.wordIndex}
@@ -224,7 +272,13 @@ export default function Exercise003() {
           ))}
         </div>
 
-                        <div className="word-columns" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 10, rowGap: 16, alignItems: 'flex-end' }}>
+        {sentence.daPrefix && (
+          <div style={{ textAlign: 'center', fontSize: 15, color: '#666', marginTop: -32, marginBottom: 24 }}>
+            {sentence.daPrefix}
+          </div>
+        )}
+
+        <div className="word-columns" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 10, rowGap: 16, alignItems: 'flex-end' }}>
           {sentence.words.map((_, i) => (
             <div key={i} className="word-column" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 90 }}>
               <div style={{ minHeight: 28, textAlign: 'center' }}>
@@ -291,7 +345,7 @@ export default function Exercise003() {
         {note}
       </div>
 
-            <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '2rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
+      <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '2rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
         &copy; 2026 Isidoros Parlamas · mind@horistics.com · socratic-school.com
       </div>
       <style jsx>{`
