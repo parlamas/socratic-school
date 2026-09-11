@@ -124,7 +124,7 @@ const sentences: SentenceItem[] = [
       { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: 'A comma is added before the subordinate clause. In a clause introduced by "at", the subject comes first — same as in English.' },
       { danish: 'ikke', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: '"Ikke" is an adverb. In this subordinate clause it sits right after the subject and before the verb — the opposite order from a main clause.' },
       { danish: 'består', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb comes third here, after the subject and the adverb — not second, because this is a subordinate clause, not a main clause.' },
-      { danish: 'eksamen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object still closes the clause.' },
+            { danish: 'eksamenen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object still closes the clause.' },
     ],
   },
   {
@@ -141,7 +141,7 @@ const sentences: SentenceItem[] = [
       { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: 'A comma is added before the subordinate clause. Here the conjunction "at" is dropped entirely — common in everyday Danish — but the subordinate word order still applies.' },
       { danish: 'helt sikkert', role: 'adverb', hint: 'after the subject', color: 'amber', darkText: '#854F0B', slot: 1, note: '"Helt sikkert" (certainly) is an adverb phrase. Even though it\'s two words, it still occupies the single adverb slot, right after the subject.' },
       { danish: 'består', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 2, note: 'The verb again comes third — after the subject and the adverb.' },
-            { danish: 'eksamen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
+            { danish: 'eksamenen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
     ],
   },
   {
@@ -247,20 +247,20 @@ const sentences: SentenceItem[] = [
     ],
   },
   {
-    rule: SUBORDINATE_CLAUSE_RULE,
+        rule: SUBORDINATE_CLAUSE_RULE,
     enPrefix: 'The exam was hard, but',
     daPrefix: 'Eksamenen var svær, men',
     englishParts: [
       { text: 'she', wordIndex: 0 },
       { text: 'luckily', wordIndex: 2 },
       { text: 'passed', wordIndex: 1 },
-      { text: 'it.', wordIndex: 3 },
+      { text: 'the exam.', wordIndex: 3 },
     ],
     words: [
       { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 0, note: '"Men" (but) is SFOME, so subject-verb order is kept, as in a main clause.' },
       { danish: 'bestod', role: 'verb', color: 'coral', darkText: '#993C1D', slot: 1, note: 'The verb takes second place.' },
       { danish: 'heldigvis', role: 'adverb', hint: 'after the verb (SFOME)', color: 'amber', darkText: '#854F0B', slot: 2, note: 'Because "men" is SFOME, "heldigvis" (luckily) goes after the verb, not after the subject.' },
-      { danish: 'den.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The pronoun object "den" (it, referring to the exam) closes the clause.' },
+      { danish: 'eksamen.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The direct object closes the clause.' },
     ],
   },
   {
