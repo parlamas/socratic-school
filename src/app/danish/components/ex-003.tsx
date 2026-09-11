@@ -38,7 +38,7 @@ const sentences: SentenceItem[] = [
       { danish: 'Desværre', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The sentence opens with the adverb — this pushes everything else back one slot. Unlike English, Danish doesn\'t put a comma after it.' },
       { danish: 'købte', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish is a V2 language: the finite verb always sits in the second position, no matter what came first.' },
       { danish: 'jeg', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'Because the verb took slot 2, the subject moves after it — the opposite of English word order here.' },
-      { danish: 'fisk.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the clause, exactly as in English.' },
+      { danish: 'fisk.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the clause, exactly as in English.' },
     ],
   },
   {
@@ -66,7 +66,7 @@ const sentences: SentenceItem[] = [
       { danish: 'Pludselig', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The adverb "suddenly" opens the sentence and takes slot 1, with no comma after it.' },
       { danish: 'bed', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: '"Bed" (bit) has to be second — even though "the dog" comes before it in English.' },
       { danish: 'hunden', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject "the dog" is pushed to third place in Danish.' },
-      { danish: 'ham.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+      { danish: 'ham.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
     ],
   },
   {
@@ -80,7 +80,7 @@ const sentences: SentenceItem[] = [
       { danish: 'I aften', role: 'adverb', hint: 'no comma', color: 'amber', darkText: '#854F0B', slot: 0, note: 'The time adverb "tonight" opens the sentence — slot 1, no comma.' },
       { danish: 'læser', role: 'verb', hint: 'must be in 2nd place', color: 'coral', darkText: '#993C1D', slot: 1, note: 'Danish doesn\'t need a separate "will" — the present tense verb "læser" alone covers the future here, and it still must be second.' },
       { danish: 'hun', role: 'subject', color: 'blue', darkText: '#0C447C', slot: 2, note: 'The subject moves to third place, after the verb.' },
-      { danish: 'en bog.', role: 'object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
+      { danish: 'en bog.', role: 'direct object', color: 'teal', darkText: '#085041', slot: 3, note: 'The object closes the sentence, same as in English.' },
     ],
   },
   {
@@ -224,9 +224,9 @@ export default function Exercise003() {
           ))}
         </div>
 
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 10, alignItems: 'flex-end' }}>
+                        <div className="word-columns" style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 10, rowGap: 16, alignItems: 'flex-end' }}>
           {sentence.words.map((_, i) => (
-            <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 90 }}>
+            <div key={i} className="word-column" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minWidth: 90 }}>
               <div style={{ minHeight: 28, textAlign: 'center' }}>
                 <div style={{ fontSize: 11, color: '#888' }}>{filled[i]?.role ?? ''}</div>
                 {filled[i]?.hint && (
@@ -291,9 +291,19 @@ export default function Exercise003() {
         {note}
       </div>
 
-      <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '2rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
+            <div style={{ textAlign: 'center', fontSize: 11, color: '#aaa', marginTop: '2rem', paddingTop: '1rem', borderTop: '0.5px solid #eee', fontFamily: 'sans-serif', letterSpacing: '0.02em' }}>
         &copy; 2026 Isidoros Parlamas · mind@horistics.com · socratic-school.com
       </div>
+      <style jsx>{`
+        @media (max-width: 480px) {
+          .word-columns {
+            gap: 6px;
+          }
+          .word-column {
+            min-width: 74px !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
