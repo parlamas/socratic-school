@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     ],
     apple: '/favicon.svg',
   },
+  verification: {
+    google: "EVjr7F1k6zxOjOnpv83K5hPeeaXNg9xQfLZh6DrKzmM",
+  },
 };
 
 export const viewport: Viewport = {
